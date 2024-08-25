@@ -9,12 +9,35 @@
 </head>
 <body>
     <div id="Conteiner" class="flex justify-center items-center flex-col bg-slate-400 h-screen gap-5		">
+        <div id="imagem da empresa" class=""><h1>GRUPO CARMAIS </h1></div>
         <p class="text-gray-100 text-6xl uppercase break-words 	">Consulta de funcionario</p>
-        <input type="text" class="h-12	w-96 border-none	rounded-3xl	p-3	" placeholder="Digite nome do funcionario">
+        <input type="text" class="h-12	w-96 border-none	rounded-3xl	p-3	" id="Nome" placeholder="Digite nome do funcionario">
         <div class=" flex gap-5 flex justify-center items-center">
-            <button class="border-solid border-2  p-3 bg-green-500	">CONSULTA</button>
-            <button class="border-solid border-2  p-3">REGISTRA</button>
-        </div>
+            <button class="border-solid border-2  p-3 bg-green-500	" id="Consulta">CONSULTA</button>
+        </div>  
+
+
+        <div id="conteudo" class="w-full h-full absolute bg-black/50 flex justify-center items-center hidden">
+
+            <div id="card" class="w-80 h-80 justify-center  backdrop-blur-sm flex flex-col items-center shadow-2xl rounded-md gap-4	">
+            <!-- <img src="${a.img}" class="rounded-full w-32" alt="foto do funcioanrio">
+            <p>Id  : ${}</p>
+            <p>Nome  :  ${a.nome}</p>
+            <p>Setor :  ${a.setor}</p>
+            <p>Cargo :  ${a.Cargo}</p>
+            <button class=" px-3 w-40 bg-green-400	 rounded-md
+                    ">Registra</button>
+                </div> -->
+       
+    
+        </div>  
+
     </div>
+    <div id="nao">
+       
+
+    </div>
+
+    <script type="module"  src="src/js/index.js"></script>
 </body>
 </html>
