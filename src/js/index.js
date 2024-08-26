@@ -2,12 +2,14 @@ import funcionario from "./dicionario.js";
 const btnConsulta = document.getElementById("Consulta")
 const card = document.getElementById("conteudo")
 const cardConteudo = document.getElementById("card")
+const cardInfor = document.getElementById("cardInfor")
 const n = document.getElementById("nao")
+const btnComeui = document.getElementById("Ja_comeu")
 
 console.log(n);
 
 const hoje = new Date().toDateString()
-const registro = []
+const registro = JSON.parse(localStorage.getItem("ja_comeu"))
 console.log(hoje);
 
 
@@ -25,10 +27,6 @@ console.log(hoje);
             NomeElemento.style.border = "none";
             NomeElemento.style.borderColor = "none";
             })
-
-     
-        
-        
     }else{
        const a = await funcionario.find(f => f.matricula == NomeElemento.value)
        console.log(a);
@@ -47,10 +45,22 @@ console.log(hoje);
    `    
         const btnRegistro = document.getElementById("registro")
         btnRegistro.addEventListener("click", () =>{
-            console.log(`ola mundo`);
+           const valorLocal =  JSON.parse(localStorage.getItem("ja_comeu")) || []
+           const nome_corno = valorLocal.find(f => f.nome == a.nome) 
+           if (nome_corno) {
+                cardInfor.classList.remove("hidden")
+               
+
             
+            
+           }else{
+            console.log(a);
             registro.push(a)
-            localStorage.setItem('ja_comeu', JSON.stringify(registro));
+            localStorage.setItem("ja_comeu", JSON.stringify(registro))
+            
+           }
+      
+           
             
             
         })
@@ -58,7 +68,7 @@ console.log(hoje);
        } else{
         
         n.innerHTML = `
-         <h1 class="text-red-600">Funcionario nao Cadastrado<h1>
+         <h1 class="text-red-600">Funcionario nao Cadastrad<h1>
         `
         NomeElemento.addEventListener("click" , ()=>{
             n.innerHTML = ""
@@ -74,10 +84,16 @@ console.log(hoje);
     
     
 }
-console.log(registro);
+
 
 
 btnConsulta.addEventListener("click", Consulta)
+btnComeui.addEventListener("click", () =>{
+    cardInfor.classList.add("hidden")
+    card.classList.add("hidden")
+
+})
+
 card.addEventListener("click", (event)=> {
     if (event.target == card) {
         console.log(event.target);
