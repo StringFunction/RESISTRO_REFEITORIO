@@ -9,7 +9,7 @@ const btnComeui = document.getElementById("Ja_comeu")
 console.log(n);
 
 const hoje = new Date().toDateString()
-const registro = JSON.parse(localStorage.getItem("ja_comeu"))
+const registro = JSON.parse(localStorage.getItem("ja_comeu")) || []
 console.log(hoje);
 
 
