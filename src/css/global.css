@@ -1,13 +1,21 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: "Dosis", sans-serif;
     
 }
 /* #Conteiner{
-    background-color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: rgb(181,151,97);
+   
+
+}
+#card{
+    background-color:#78716c ;
+    width: 25%;
+    height: 70%;
+}
+#Ja_comeu{
+    background-color: rgb(181,151,97);
+
 
 } */
