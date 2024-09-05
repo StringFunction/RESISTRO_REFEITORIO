@@ -1,57 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Refeitorio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="src/css/global.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="Conteiner" class="flex justify-center items-center flex-col bg-yellow-200		 h-screen gap-5
-    		">
-        <div id="imagem da empresa" class="text-7xl my-12	"><h1>StringFunction </h1></div>
-
-        <p class="text-gray-100 text-6xl uppercase break-words text-gray-900	
-        ">Consulta de funcionario</p>
-        <input type="text" class="h-12	w-96 border-none	rounded-3xl	p-3	" id="Nome" placeholder="Digite nome do funcionario">
-        <div class=" flex gap-5 flex justify-center items-center">
-            <button class="border-solid border-2  p-3 bg-green-500	" id="Consulta">CONSULTA</button>
-        </div>  
-
-
-        <div id="conteudo" class="w-full h-full absolute bg-black/50 flex justify-center items-center hidden">
-
-            <div id="card" class="justify-center  backdrop-blur-sm flex flex-col items-center shadow-2xl rounded-md gap-4 w-1/4	 h-3/4		">
-            <!-- <img src="${a.img}" class="rounded-full w-32" alt="foto do funcioanrio">
-            <p>Id  : ${}</p>
-            <p>Nome  :  ${a.nome}</p>
-            <p>Setor :  ${a.setor}</p>
-            <p>Cargo :  ${a.Cargo}</p>
-            <button class=" px-3 w-40 bg-green-400	 rounded-md
-                    ">Registra</button>
-                </div> -->
-       
-    
-        </div>  
-
-    </div>
-    <div id="nao">
-    </div>
-    <div class="absolute  w-80 h-40  bg-yellow-200	 flex flex-col justify-center items-center gap-4  rounded-md backdrop-blur-sm
-    shadow-lg
-
-    " id="cardInfor">
-        <div>
-            <p class="italic">Ja registrado</p>
-        </div>
-        
-        <div><button id="Ja_comeu" class=" p-1 w-32 bg-green-500">OK</button></div>
-    </div>
-
-    <script type="module"  src="src/js/index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/public/img/download.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grupo Carmais</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
