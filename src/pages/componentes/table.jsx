@@ -6,9 +6,9 @@ function table(){
             <p className="text-5xl text-cyan-500">Historicos de Registro</p>
             <p className="text-white">Aqui você irá visualizar as suas últimas solicitações registradas no sistema</p>
         </div>
-        <div>
-        <table className="bg-teal-500 w-full rounded-t-md  ">
-            <thead className="text-white">
+        <div className="overflow-auto h-36 rounded-t-md">
+        <table className=" w-full rounded-t-md  text-center text-white ">
+            <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0">
                 <tr>
                     <th>MATRICULA</th>
                     <th>NOME</th>
@@ -16,8 +16,52 @@ function table(){
                     <th>CARGO</th>
                     <th>STATUS</th>
                 </tr>
-
             </thead>
+            <tbody>
+                <tr>
+                <td >12345</td>
+                <td >João Silva</td>
+                <td >Financeiro</td>
+                <td >Analista</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+            
+            </tbody>
         </table>
         </div>
         </div>

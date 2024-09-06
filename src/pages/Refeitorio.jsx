@@ -14,7 +14,7 @@ function Refeitorio() {
             <div className=" bg-cardB gap-5 w-f h-96 rounded-md	mt-12 shadow-2xl shadow-black text-red-50 flex justify-center items-center flex-col">
                 <h1 className="text-4xl">Matricula </h1>
                 <div className="flex flex-col justify-center items-center gap-8">
-                <input type="text" className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center"/>
+                <input type="number" className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center" max="6"/>
                 <button className="w-36  h-10 bg-green-700" >Consulta </button>
                 </div>            
             </div>
