@@ -1,5 +1,7 @@
 import { useState } from "react"
 import CardFun from "./componentes/CardFuncionario"
+import Styles from "../layout/Conteiner"
+import Table from "./componentes/table"
 function Refeitorio() {
 const [matricula, setMatricula] = useState("")
 const [resultado, setS] = useState("")
@@ -10,34 +12,23 @@ const dados = [
     
 ]
 
-function MOSTRA(){
- const resulta = dados.find(dado => dado.matricula == matricula)
+ 
+    
 
- if (resulta){
-     setS(JSON.stringify(resulta)) 
-     console.log(resulta);
-    
- }else{
-    setS("USUARIO N ENCONTRADO ");
-    
- }
-    
-    
-}
     return (
         <>
-        <div className="flex  flex-col gap-9 items-center justify-center bg-gray-300 h-96">
-
-            <h1 className="text-5xl">CONDO DO FORRO </h1>   
-            <div className="flex flex-col gap-9"> 
-                <input className="w-96 text-center h-12 rounded-lg border-none	"  id="nome"type="text" onChange={(e) => setMatricula(e.target.value)} placeholder="DIGITE MATRICULA DO FUNCIONARIO" />
-                <button className="border-solid bg-lime-600 h-12" type="button" onClick={MOSTRA}>Consulta</button>
-                <CardFun user = {resultado}/>
-              
+        <div className="bg-fundoF flex h-q justify-center items-center flex-col"> 
+            <div className=" bg-cardB gap-5 w-f h-96 rounded-md	mt-12 shadow-2xl shadow-black text-red-50 flex justify-center items-center flex-col">
+                <h1 className="text-4xl">Matricula </h1>
+                <div className="flex flex-col justify-center items-center gap-8">
+                <input type="text" className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center"/>
+                <button className="w-36  h-10 bg-green-700" >Consulta </button>
+                </div>            
             </div>
-            <div>
-            </div>
+            <Table></Table>
         </div>
+        
+        
         </>
     )
 }
