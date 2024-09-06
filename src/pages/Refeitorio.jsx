@@ -1,35 +1,29 @@
 import { useState } from "react"
 import CardFun from "./componentes/CardFuncionario"
+import Styles from "../layout/Conteiner"
+import Table from "./componentes/table"
 function Refeitorio() {
 
-    return (
-    <>
-    <div>
-        <div>
-            <input type="text"  placeholder="DIGITE MATRICULA"/>
-            <button>Consulta</button>
-        </div>
-        <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>NOME</td>
-                    <td>SETOR</td>
-                    <td>CARGO</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>francisc</td> 
-                    <td>sei</td> 
-                    <td>conde</td> 
-                </tr>
-            </tbody>
-        </table>
-        </div>
 
-    </div>
-    </>
+ 
+    
+
+    return (
+        <>
+        <div className="bg-fundoF flex h-q justify-center items-center flex-col"> 
+            <div className=" bg-cardB gap-5 w-f h-96 rounded-md	mt-12 shadow-2xl shadow-black text-red-50 flex justify-center items-center flex-col">
+                <h1 className="text-4xl">Matricula </h1>
+                <div className="flex flex-col justify-center items-center gap-8">
+                <input type="text" className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center"/>
+                <button className="w-36  h-10 bg-green-700" >Consulta </button>
+                </div>            
+            </div>
+            <Table></Table>
+        </div>
+        
+        
+        </>
+
     )
 }
 
