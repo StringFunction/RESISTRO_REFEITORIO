@@ -3,14 +3,7 @@ import CardFun from "./componentes/CardFuncionario"
 import Styles from "../layout/Conteiner"
 import Table from "./componentes/table"
 function Refeitorio() {
-const [matricula, setMatricula] = useState("")
-const [resultado, setS] = useState("")
-const dados = [
-    {"matricula" : "123", "nome" : "clecio"},
-    {"matricula" : "456", "nome" : "silva"},
-    {"matricula" : "789", "nome" : "lima"},
-    
-]
+
 
  
     
@@ -30,6 +23,7 @@ const dados = [
         
         
         </>
+
     )
 }
 
