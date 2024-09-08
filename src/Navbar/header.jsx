@@ -10,13 +10,17 @@ const btnMenu = () =>{
 
         console.log("deu certo");
     
-            btn.classList.remove("opacity-0")
-            btn.classList.add("opacity-100")
-            
+        
+        btn.classList.remove("opacity-0")    
+        btn.classList.add("opacity-100")    
+        btn.classList.add("top-[100px]")
+        
+        
     }else{
         console.log('deu bomn ');
-        btn.classList.remove("opacity-100")
-        btn.classList.add("opacity-0")
+            btn.classList.add("opacity-0")    
+            btn.classList.remove("top-[100px]")
+            btn.classList.remove("opacity-100")
     }
     
  
@@ -47,8 +51,8 @@ function MenuNavegacao(){
             <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-11 flex justify-center items-center top-9 hover:cursor-pointer"></BsJustify>
         </div>
 
-        <div id="menu" className="md:h-full  md:bg-transparent md:w-80 md:flex md:justify-center md:items-center md:relative md:opacity-100 opacity-0  absolute w-full
-            transition-all ease-in duration-500  md:transition-none"
+        <div id="menu" className="md:h-full  md:bg-transparent md:w-80 md:flex md:justify-center md:items-center md:relative md:opacity-100 opacity-0 absolute w-full
+            top-[-400px] transition-all ease-in duration-500  md:transition-none"
 >
             <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0
                           flex  flex-col bg-white w-full   pt-10 text-black h-[400px]  ">
