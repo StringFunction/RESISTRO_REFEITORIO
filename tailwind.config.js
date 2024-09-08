@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       height : {
-        q: "600px"
+        q: "600px",
+        menu : "1500px"
 
       },
       width : {
