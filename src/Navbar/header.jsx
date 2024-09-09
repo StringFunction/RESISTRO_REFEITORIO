@@ -55,16 +55,16 @@ function MenuNavegacao(){
             top-[-400px] transition-all ease-in duration-500  md:transition-none"
 >
             <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0
-                          flex  flex-col bg-white w-full   pt-10 text-black h-[400px]  ">
+                          flex  flex-col bg-white w-full   pt-10 text-slate-300  h-[400px]  ">
 
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
-               hover:bg-blue-400 w-full text-center h-full flex items-center justify-center text-2xl  tracking-widest
+               hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl  tracking-widest
                 ">
                 <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
                 </li>
           
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
-               hover:bg-blue-400 w-full text-center h-full flex items-center justify-center text-2xl tracking-widest
+               hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest
                 ">
                 <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
                 </li>

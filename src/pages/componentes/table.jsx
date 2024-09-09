@@ -7,9 +7,11 @@ function table(){
                 <p className="text-white">Aqui você irá visualizar as suas últimas solicitações registradas no sistema</p>
             </div>
 
-        <div className="overflow-auto md:h-40 md:w-full rounded-t-md w-full h-28">
+        <div className="overflow-auto md:h-40 md:w-full rounded-t-md w-full h-40 flex justify-center shadow-2xl shadow-black
+
+    ">
         <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs ">
-            <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0">
+            <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12">
                 <tr>
                     <th>MATRICULA</th>
                     <th>NOME</th>
