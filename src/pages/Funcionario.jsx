@@ -1,7 +1,8 @@
+import PaginaDesenvolviment from "./componentes/paginaOff"
 function Funcionario() {
     return (
         <>
-        <h1>Ola pagina funciomarios</h1>
+        <PaginaDesenvolviment infor="FUNCIONARIO"></PaginaDesenvolviment>
         </>
     )
 }

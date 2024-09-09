@@ -48,10 +48,10 @@ function MenuNavegacao(){
             <h1><Link to="/Home">Grupo Carmais</Link></h1>
         </div>
         <div id="menuBar">
-            <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-11 flex justify-center items-center top-9 hover:cursor-pointer"></BsJustify>
+            <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-5 flex justify-center items-center top-9 hover:cursor-pointer"></BsJustify>
         </div>
 
-        <div id="menu" className="md:h-full  md:bg-transparent md:w-80 md:flex md:justify-center md:items-center md:relative md:opacity-100 opacity-0 absolute w-full
+        <div id="menu" className="md:h-full  md:bg-transparent md:w-80 md:flex md:justify-center md:items-center md:static md:opacity-100 opacity-0 absolute w-full 
             top-[-400px] transition-all ease-in duration-500  md:transition-none"
 >
             <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0
@@ -60,13 +60,13 @@ function MenuNavegacao(){
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
                hover:bg-blue-400 w-full text-center h-full flex items-center justify-center text-2xl  tracking-widest
                 ">
-                <Link to="/Funcionario">Funcionario</Link>
+                <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
                 </li>
           
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
                hover:bg-blue-400 w-full text-center h-full flex items-center justify-center text-2xl tracking-widest
                 ">
-                <Link to="/Refeitorio">Refeitorio</Link>
+                <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
                 </li>
 
             </ul>
