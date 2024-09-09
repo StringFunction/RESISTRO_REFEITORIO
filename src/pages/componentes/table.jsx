@@ -7,7 +7,7 @@ function table(){
                 <p className="text-white">Aqui você irá visualizar as suas últimas solicitações registradas no sistema</p>
             </div>
 
-        <div className="overflow-auto md:h-24 rounded-t-md w-[400px]">
+        <div className="overflow-auto md:h-40 md:w-full rounded-t-md w-full h-28">
         <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs ">
             <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0">
                 <tr>
@@ -24,6 +24,34 @@ function table(){
                 <td >João Silva</td>
                 <td >Financeiro</td>
                 <td >Analista</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
+                <td >Ativo</td>
+                </tr>
+                <tr>
+                <td >67890</td>
+                <td >Maria Souza</td>
+                <td >RH</td>
+                <td >Coordenadora</td>
                 <td >Ativo</td>
                 </tr>
                 <tr>
