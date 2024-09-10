@@ -7,8 +7,10 @@ import { BsFillPersonFill } from "react-icons/bs";
 function Login(){
 const [matricula , setmatricula] = useState("")
 const [senha , setsenha] = useState("")
+const [is , setis] = useState(false)
 const entrar = (e) =>{
     e.preventDefault()
+    setis(false)
     console.log(matricula);
     console.log(senha);
     
@@ -30,7 +32,14 @@ const entrar = (e) =>{
                     </div>
                     <form onSubmit={entrar} className="flex flex-col tracking-widest 	">
                         <label htmlFor="">Matricula</label>
-                        <input type="number" onChange={(e) => {setmatricula(e.target.value)}} className="border-solid border  bg-transparent md:border-white  h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Matricula"/>
+                        <input type="number" disabled={is} onChange={(e) => {
+                            if(e.target.value.length == 6){
+                                setmatricula(e.target.value)
+                                setis(true)
+                                
+                            }
+                        }
+                        } className="border-solid border  bg-transparent md:border-white  h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Matricula" max="999999"/>
                         <label htmlFor="" className="mt-1">Senha :</label>
                         <input type="password" onChange={(e) => {setsenha(e.target.value)}} className="border-solid border  bg-transparent md:border-white h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Senha"/>
                         <input type="submit" className="mt-10 border p-4   rounded-2xl text-lg cursor-pointer hover:bg-green-400 hover:text-black duration-200 " value="Entra"/>
