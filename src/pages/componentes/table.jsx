@@ -11,7 +11,7 @@ function table(){
 
     ">
         <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs ">
-            <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12">
+            <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12 md:w-auto">
                 <tr>
                     <th>MATRICULA</th>
                     <th>NOME</th>
@@ -20,7 +20,7 @@ function table(){
                     <th>STATUS</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="md:text-[20px]">
                 <tr>
                 <td >12345</td>
                 <td >João Silva</td>

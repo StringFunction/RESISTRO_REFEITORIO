@@ -5,6 +5,7 @@ import Refeitorio from "./pages/Refeitorio"
 import Home from "./pages/Home"
 import Footer from "./Navbar/footer"
 import Container from "./layout/Conteiner"
+import Login from "./pages/Login"
 function App() {
   
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/Home" element={<Home></Home>}></Route>
       <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
       <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>
+      <Route path="/Login" element={<Login></Login>}></Route>
     </Routes>
     </Container>
     <Footer></Footer>

@@ -2,7 +2,19 @@ import { useState } from "react"
 import CardFun from "./componentes/CardFuncionario"
 import Styles from "../layout/Conteiner"
 import Table from "./componentes/table"
+
+
 function Refeitorio() {
+    const [matricula, setmatricula] = useState("")
+async function  btnConsulta(){
+    console.log(matricula);
+    // const response = await fetch("http://localhost:3000/v1/funcionario")
+    // const dados = await response.json()
+    
+    // console.log(dados);
+    
+    
+}
 
 
  
@@ -17,10 +29,10 @@ function Refeitorio() {
             ">
                 <h1 className="text-4xl">Matricula </h1>
                 <div className="flex flex-col justify-center items-center gap-8">
-                <input type="number" className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center rounded-lg
+                <input type="number" onChange={(e) => setmatricula(e.target.value)} className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center rounded-lg
 
 " max="6"/>
-                <button className="w-36  h-10 bg-green-700 rounded-3xl" >Consulta </button>
+                <button onClick={btnConsulta} className="w-36  h-10 bg-green-700 rounded-3xl" >Consulta </button>
                 </div>            
             </div>
             <Table></Table>
