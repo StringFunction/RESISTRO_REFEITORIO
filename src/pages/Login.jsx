@@ -1,7 +1,9 @@
 
 import { useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
-import consulta from "../service/authService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import autenticacao from "../service/authService";
 
 
 
@@ -14,14 +16,43 @@ const entrar = async (e) =>{
     
     e.preventDefault()
     setis(false)
+
+    if (!e.target.matricula.value || !e.target.senha.value){
+        console.log();
+        
+        if (!e.target.matricula.value && !e.target.senha.value){
+            console.log("aqui");
+        //    e.target.querySelectorAll('input')[0].classList.add("md:border-red-800")
+        //    e.target.querySelectorAll('input')[0].classList.add("md:border-red-800")
+           
+           e.target.querySelectorAll('input')[0].classList.add("border-red-800")
+           e.target.querySelectorAll('input')[1].classList.add("border-red-800")
+            toast.warning("CHUCHU MEGA ATOMICO NUCLEAR!")
+        }
+        return (console.log('ola mundo')
+        )
+    }
+    // console.log(dados);
+
+    e.target.matricula.value = ""
+    e.target.senha.value = ""
+    
     const dados = {
         matricula,
         senha
     }
-    const dado = await consulta(dados)
     console.log(dados);
-    e.target.matricula.value = ""
-    e.target.senha.value = ""
+    
+    const dado = await autenticacao(dados)
+   
+    
+    if (dado){
+        toast.info("deu bom")
+        console.log(dado);
+        
+    }else{
+        toast.error("Usuario ou Senha incorreta ")
+    }
     
     
     
@@ -42,21 +73,15 @@ const entrar = async (e) =>{
                     </div>
                     <form onSubmit={entrar} className="flex flex-col tracking-widest 	">
                         <label htmlFor="">Matricula</label>
-                        <input type="number" disabled={is} onChange={(e) => {
-                            if(e.target.value.length == 6){
-                                setmatricula(e.target.value)
-                                setis(true)
-                                
-                            }
-                        }
-                        } name="matricula"className="border-solid border  bg-transparent md:border-white  h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Matricula" max="999999"/>
+                        <input type="number" disabled={is} onChange={(e) => {if(e.target.value.length == 6){setmatricula(e.target.value)
+                            setis(true)}}} onClick={(e) => e.target.classList.remove('border-red-800')} name="matricula"className="border-solid border  bg-transparent border-white m  h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Matricula" max="999999"/>
                         <label htmlFor="" className="mt-1">Senha :</label>
-                        <input type="password" name="senha" onChange={(e) => {setsenha(e.target.value)}} className="border-solid border  bg-transparent md:border-white h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Senha"/>
-                        <input type="submit" className="mt-10 border p-4   rounded-2xl text-lg cursor-pointer hover:bg-green-400 hover:text-black duration-200 " value="Entra"/>
+                        <input type="password" name="senha" onChange={(e) => {setsenha(e.target.value)}} onClick={(e) => e.target.classList.remove('border-red-800')} className="border-solid border  bg-transparent border-white h-10 w-[250px] rounded-2xl mt-4 text-center" placeholder="Digite Senha"/>
+                        <input type="submit" className="mt-10 border p-4    rounded-2xl text-lg cursor-pointer hover:bg-green-400 hover:text-black duration-200 " value="Entra"/>
                     </form>
                 </div>
             </div>
-         
+            <ToastContainer></ToastContainer>
         </div>
        
     )

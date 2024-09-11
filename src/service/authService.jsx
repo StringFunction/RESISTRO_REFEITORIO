@@ -1,13 +1,17 @@
  import api from "./api";
 
 
- async function consulta(dados){
-    const response = await api.get("/user", dados)
+ async function autenticacao(dados){
+   console.log(dados.matricula);
+    try{
+    const response = await api.post("/Login/user", dados)
     return response
-    
+    } catch {
+      return false
+    }
 
 
 
  }
 
- export default consulta
+ export default autenticacao
