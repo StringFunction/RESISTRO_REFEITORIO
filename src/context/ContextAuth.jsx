@@ -10,24 +10,23 @@ const ProviderApp = ({children}) => {
     const [usuario, setusuario] = useState(null)
 
     async function autenticacao(dados){
-        console.log("aquiiii");
-        
-        const response =  await api.post("Login/user", dados)
 
-        if (response.data.erro) return (false);
+        try{
+        const response =  await api.post("Login/user", dados)
+        if (response.data.erro){
+            return false   
+        };
 
         console.log(response.data);
         setlogado(true)
         return (response.data)
+     
+    } catch (erro) {
+        return (erro)
         
-
-
-
-
-     
-     
       }
 
+    }
 
 
     return (

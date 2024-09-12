@@ -1,10 +1,26 @@
 import PaginaDesenvolviment from "./componentes/paginaOff"
+import useAppContext from "../hooks/UseAppContext"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 function Home(){
+    const navigate = useNavigate()
+    const {isLogado} = useAppContext()
+
+    useEffect(() => {
+        if (!isLogado) {
+            navigate("/Login");
+        }
+    }, [isLogado, navigate]);
+
+ 
+    
     return (
         <>
-            <PaginaDesenvolviment infor="HOME"></PaginaDesenvolviment>
+             <PaginaDesenvolviment infor="HOME"></PaginaDesenvolviment> 
+        
         </>
     )
+
 }
 
 export default Home
