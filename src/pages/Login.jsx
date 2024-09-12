@@ -3,7 +3,8 @@ import { useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import autenticacao from "../service/authService";
+import useAppContext from "../hooks/UseAppContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -11,7 +12,10 @@ function Login(){
 const [matricula , setmatricula] = useState("")
 const [senha , setsenha] = useState("")
 const [is , setis] = useState(false)
+const { autenticacao, islogado } = useAppContext()
+const navigate = useNavigate()
 const entrar = async (e) =>{
+
     
     
     e.preventDefault()
@@ -37,18 +41,18 @@ const entrar = async (e) =>{
     e.target.matricula.value = ""
     e.target.senha.value = ""
     
-    const dados = {
-        matricula,
-        senha
-    }
-    console.log(dados);
+    const dados = { matricula,senha }
+   
     
     const dado = await autenticacao(dados)
    
     
     if (dado){
-        toast.info("deu bom")
-        console.log(dado);
+    navigate("/")
+       
+       
+        
+      
         
     }else{
         toast.error("Usuario ou Senha incorreta ")
@@ -59,7 +63,7 @@ const entrar = async (e) =>{
 }
     return (
       
-        <div className="w-full  flex justify-center items-center bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[600px] ">
+        <div className="w-full  flex justify-center items-center bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[900px] ">
             <div className="md:w-[700px] md:bg-transparent text-white md:p-8 md:h-[400px] md:flex md:justify-center md:flex-row md:items-center md:gap-20 md:relative md:mt-4 md:-top-20 md:rounded-3xl md:shadow-[0px_14px_28px_rgba(0,0,0,0.25),0px_10px_10px_rgba(0,0,0,0.22)] md:shadow-black md:backdrop-blur-sm	border-white border
             flex flex-col justify-center items-center w-[400px] rounded-t-3xl gap-5 p-6 -mt-12
             "> 

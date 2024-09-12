@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom"
 import { BsJustify } from "react-icons/bs";
+import useAppContext from "../hooks/UseAppContext";
+import { useEffect } from "react";
+
 
 
 const btnMenu = () =>{
@@ -28,9 +31,12 @@ const btnMenu = () =>{
 
 
 function MenuNavegacao(){
+ 
+    const {isLogado} = useAppContext()
+  
     return (
     <>
-    {true
+    {isLogado
      &&
     <div className="
     md:flex
