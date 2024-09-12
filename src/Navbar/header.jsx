@@ -2,9 +2,39 @@ import { Link } from "react-router-dom"
 import { BsJustify } from "react-icons/bs";
 import useAppContext from "../hooks/UseAppContext";
 import { useEffect } from "react";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 
 
+
+
+function MenuNavegacao(){
+    
+    const {isLogado, setlogado} = useAppContext()
+    const sair = () =>{
+        setlogado(false)
+
+    }
+
+    
+    const btnFechar = ()=>{
+        console.log("Munbdo");
+        const user = document.getElementById("user")
+
+        user.classList.add("md:-top-[400px]")
+        
+    }
+    
+    const btnUser = () => {
+        const user = document.getElementById("user")
+        console.log("mundo");
+        console.log(user);
+        
+        user.classList.remove("md:-top-[400px]")
+        user.classList.add("md:top-[0px]")
+
+}
 const btnMenu = () =>{
     const btn = document.getElementById("menu")
  
@@ -28,11 +58,8 @@ const btnMenu = () =>{
     
  
 }
-
-
-function MenuNavegacao(){
  
-    const {isLogado} = useAppContext()
+   
   
     return (
     <>
@@ -58,10 +85,10 @@ function MenuNavegacao(){
             <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-5 flex justify-center items-center top-9 hover:cursor-pointer"></BsJustify>
         </div>
 
-        <div id="menu" className="md:h-full  md:bg-transparent md:w-80 md:flex md:justify-center md:items-center md:static md:opacity-100 opacity-0 absolute w-full 
+        <div id="menu" className="md:h-full    md:w-[500px] md:flex md:justify-center md:items-center md:static md:opacity-100 opacity-0 absolute w-full 
             top-[-400px] transition-all ease-in duration-500  md:transition-none"
 >
-            <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0
+            <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0 md:p-2
                           flex  flex-col bg-white w-full   pt-10 text-slate-300  h-[400px]  ">
 
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
@@ -75,8 +102,19 @@ function MenuNavegacao(){
                 ">
                 <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
                 </li>
+                <li className="ml-3" onClick={btnUser}>
+                    <FaRegUserCircle  className="md:text-[50px] md:flex md:hover:text-white md:hover:cursor-pointer "></FaRegUserCircle>
+                </li>
 
             </ul>
+
+            <div id="user" className="absolute md:right-2 md:backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300">
+                <div id="fechar" onClick={btnFechar} className="absolute top-0 right-0 p-5 md:cursor-pointer"><IoMdCloseCircleOutline className="text-[30px]"></IoMdCloseCircleOutline></div>
+                <FaRegUserCircle className="text-[90px]"></FaRegUserCircle>
+                <p>Matricula : 000000</p>
+                <p>Nome : 0000000</p>
+                <button onClick={sair} className="md:border md:p-2 md:w-[70px] md:rounded-2xl md:hover:bg-slate-500 md:duration-200 md:hover:cursor-pointer text-center">sair</button>
+            </div>
         </div>
     </div>
 }

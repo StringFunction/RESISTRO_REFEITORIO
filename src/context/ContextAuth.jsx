@@ -11,26 +11,27 @@ const ProviderApp = ({children}) => {
 
     async function autenticacao(dados){
 
-        try{
+        console.log("aui");
+        
         const response =  await api.post("Login/user", dados)
+        console.log('passei');
+        
         if (response.data.erro){
-            return false   
+            console.log('ola mun');
+            
+            return (false)   
         };
 
         console.log(response.data);
         setlogado(true)
         return (response.data)
      
-    } catch (erro) {
-        return (erro)
-        
-      }
-
+  
     }
 
 
     return (
-    <Contextapp.Provider value={{usuario, autenticacao,isLogado}}>
+    <Contextapp.Provider value={{usuario, autenticacao,isLogado,setlogado}}>
         {children}
     </Contextapp.Provider>
     )

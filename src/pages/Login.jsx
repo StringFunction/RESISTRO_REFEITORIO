@@ -20,7 +20,7 @@ const entrar = async (e) =>{
     setis(false)
 
     if (![...e.target.querySelectorAll('input')].every(input => input.value)) {
-        // Itera sobre todos os inputs e adiciona a classe vermelha onde o valor está vazio
+
         e.target.querySelectorAll('input').forEach(input => {
             if (!input.value) {
                 input.classList.add("border-red-800");
@@ -38,6 +38,8 @@ const entrar = async (e) =>{
    
     setspin(true)
     const response = await autenticacao(dados)
+    console.log(response);
+    
     setspin(false)
     e.target.matricula.value = ""
     e.target.senha.value = ""
@@ -45,10 +47,18 @@ const entrar = async (e) =>{
    
     
     if (response == "AxiosError: Network Error"){
+
        toast.error("ERRO SERVIDOR")
           
+    }
+    if (response) {
+        navigate("/")
+        
+    
+        
     }else{
         toast.error("Usuario ou Senha incorreta ")
+        
     }
     
     
