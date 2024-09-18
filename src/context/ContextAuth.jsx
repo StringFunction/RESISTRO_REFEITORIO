@@ -9,12 +9,22 @@ const ProviderApp = ({children}) => {
 
   const [isLogado, setlogado] = useState(false)
   const [usuario, setusuario] = useState(null)
-    useEffect(() =>{
-      if(localStorage.getItem("token")){
-        setlogado(true)
-      }
-    }, [])
+  const [matricula, setmatricula] = useState(null)
 
+    useEffect(() =>{
+        const loadingStoreData = async () => {
+            console.log("Verificando");
+            
+            const StoreLocalToken = await localStorage.getItem("token")
+            const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
+            setmatricula(tokenDecodicador.matricula)
+            setusuario(tokenDecodicador.nome)
+
+            if (StoreLocalToken) return setlogado(true)
+        } 
+    loadingStoreData()
+    }, [])
+   
     async function autenticacao(dados){
 
         
@@ -25,7 +35,10 @@ const ProviderApp = ({children}) => {
         
         const token = resposta.data.token
         localStorage.setItem("token", token)
-        setlogado(localStorage.getItem("token"))
+        const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
+        setmatricula(tokenDecodicador.matricula)
+        setusuario(tokenDecodicador.nome)
+        setlogado(true)
         return(resposta)
         
       } catch(erro) {
@@ -35,10 +48,19 @@ const ProviderApp = ({children}) => {
       }
   
     }
-
+    const deslogar = () =>{
+        localStorage.removeItem("token")
+        setlogado(false)
+    }
 
     return (
-    <Contextapp.Provider value={{usuario, autenticacao,isLogado,setlogado}}>
+    <Contextapp.Provider value={{
+        usuario, 
+        matricula,
+        autenticacao,
+        isLogado,
+        setlogado,
+        deslogar}}>
         {children}
     </Contextapp.Provider>
     )

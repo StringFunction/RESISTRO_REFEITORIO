@@ -4,7 +4,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAppContext from "../hooks/UseAppContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import logo_carmais from "/img/carmais-logo.png"
 
 
@@ -12,7 +12,7 @@ function Login(){
 const [matricula , setmatricula] = useState("")
 const [senha , setsenha] = useState("")
 const [is , setis] = useState(false)
-const { autenticacao, islogado } = useAppContext()
+const { autenticacao, isLogado } = useAppContext()
 const navigate = useNavigate()
 const [spin , setspin] = useState(false)
 const entrar = async (e) =>{
@@ -64,6 +64,10 @@ const entrar = async (e) =>{
     
     
 }
+    console.log("valor do corno " + isLogado);
+    
+    if (isLogado) return <Navigate to="/Home"></Navigate> 
+
     return (
       
         <div className="w-full  flex justify-center items-center bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[900px] ">

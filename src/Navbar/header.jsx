@@ -11,11 +11,12 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 function MenuNavegacao(){
     
-    const {isLogado, setlogado} = useAppContext()
+    const {isLogado, setlogado,deslogar, usuario,matricula} = useAppContext()
     const sair = () =>{
-        setlogado(false)
+        deslogar()
 
     }
+
 
     
     const btnFechar = ()=>{
@@ -111,8 +112,8 @@ const btnMenu = () =>{
             <div id="user" className="absolute md:right-2 md:backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300">
                 <div id="fechar" onClick={btnFechar} className="absolute top-0 right-0 p-5 md:cursor-pointer"><IoMdCloseCircleOutline className="text-[30px]"></IoMdCloseCircleOutline></div>
                 <FaRegUserCircle className="text-[90px]"></FaRegUserCircle>
-                <p>Matricula : 000000</p>
-                <p>Nome : 0000000</p>
+                <p>Matricula : {matricula ? matricula : "carregando..." }</p>
+                <p>Nome : {usuario ? usuario : "carregando..." }</p>
                 <button onClick={sair} className="md:border md:p-2 md:w-[70px] md:rounded-2xl md:hover:bg-slate-500 md:duration-200 md:hover:cursor-pointer text-center">sair</button>
             </div>
         </div>

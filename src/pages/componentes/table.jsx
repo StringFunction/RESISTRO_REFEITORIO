@@ -1,6 +1,32 @@
+import { useEffect } from "react"
+import api from "../../service/api"
+
 function table(){
+    useEffect(() => {
+       
+        
+        async function dados(){
+
+            console.log("calccika");
+            try {
+                console.log(localStorage.getItem("token"));
+                
+                const resposta = await api.get("/v1/funcionario", {
+                  headers: {
+                   ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
+                  }
+                });
+                console.log(resposta);
+              } catch (error) {
+                console.error("Erro ao fazer a requisição:", error);
+              }
+        }
+        dados()
+
+    }, [])
     return (
         <>
+        
         <div className="w-full p-14 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
                 <p className="text-5xl text-cyan-500">Historicos de Registro</p>

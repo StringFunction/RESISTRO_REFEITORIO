@@ -6,13 +6,9 @@ function Home(){
     const navigate = useNavigate()
     const {isLogado} = useAppContext()
 
-    // useEffect(() => {
-    //     if (!isLogado) {
-    //         navigate("/Login");
-    //     }
-    // }, [isLogado, navigate]);
 
-    if(isLogado){
+
+   
     
     return (
         <>
@@ -20,9 +16,7 @@ function Home(){
         
         </>
     )
-}else{
-   return navigate("/Login");
-}
+
 
 }
 
