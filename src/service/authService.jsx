@@ -1,11 +1,13 @@
- import api from "./api";
+import api from "./api";
 
 
  async function autenticacao(dados){
    console.log(dados.matricula);
     try{
     const response = await api.post("/Login/user", dados)
-    return response
+    const token = response.data.token
+    localStorage.setItem("token", token)
+    return true
     } catch {
       return false
     }
