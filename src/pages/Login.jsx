@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAppContext from "../hooks/UseAppContext";
 import { useNavigate } from "react-router-dom";
-
+import logo_carmais from "/img/carmais-logo.png"
 
 
 function Login(){
@@ -67,16 +67,21 @@ const entrar = async (e) =>{
     return (
       
         <div className="w-full  flex justify-center items-center bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[900px] ">
-            <div className="md:w-[700px] md:bg-transparent text-white md:p-8 md:h-[400px] md:flex md:justify-center md:flex-row md:items-center md:gap-20 md:relative md:mt-4 md:-top-20 md:rounded-3xl md:shadow-[0px_14px_28px_rgba(0,0,0,0.25),0px_10px_10px_rgba(0,0,0,0.22)] md:shadow-black md:backdrop-blur-sm	border-white border
+            
+            <div className="md:w-[780px] md:bg-transparent text-white md:p-0 md:h-[450px] md:flex md:justify-center md:flex-row md:items-center md:gap-20 md:relative  md:-top-20 md:rounded-3xl shadow-[0px_14px_28px_rgba(0,0,0,0.25),0px_10px_10px_rgba(0,0,0,0.22)] md:shadow-black md:backdrop-blur-sm	
             flex flex-col justify-center items-center w-[400px] rounded-t-3xl gap-5 p-6 -mt-12 h-[700px]
             "> 
-                <div className="md:w-48 md:h-48 md:border-solid md:border md:border-white md:flex md:justify-center md:items-center md:rounded-full md:bg-transparent md:relative md:top-1">
+                <div className="md:w-[50%] md:h-full   md:relative md:top-1 md:bg-black md:flex md:justify-center md:items-center">
+                    <div className="md:w-48 md:h-48 md:border-solid md:border md:border-white md:rounded-full md:flex md:justify-center md:items-center">
+
                     <BsFillPersonFill className="text-[150px] md:text-white md:border-none md:p-0 border rounded-full p-5"></BsFillPersonFill>
+
+                    </div>
                 </div>
 
-                <div id="FORMULARIO" className="flex  flex-col justify-center items-center gap-2">
+                <div id="FORMULARIO" className="flex  flex-col justify-center items-center gap-2  md:h-[450px]">
                     <div>
-                     <h1 className="md:text-[40px]">Login</h1>
+                        <img src={logo_carmais} alt="logo-empresa" className="w-[400px]" />
                     </div>
                     <form onSubmit={entrar} className="flex flex-col tracking-widest 	">
                         <label htmlFor="">Matricula</label>
