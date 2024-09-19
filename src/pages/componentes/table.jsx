@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
 import api from "../../service/api"
 
-function table(){
-    const [passagens, setpassagnes] = useState("")
+function table({matricula}
+){
+    const [passagens, setpassagnes] = useState(matricula)
+    console.log("matricula do safado" + passagens);
+    
+
     useEffect(() => {
        
         
@@ -19,12 +23,15 @@ function table(){
                 });
                 setpassagnes(resposta.data)
               } catch (error) {
-                console.error("Erro ao fazer a requisição:", error);
+                console.error(error);
               }
         }
-        dados()
+        const interval = setInterval(() => {
+          dados();
+        }, 3000);
+      
 
-    })
+    },[])
 
     return (
         <>
