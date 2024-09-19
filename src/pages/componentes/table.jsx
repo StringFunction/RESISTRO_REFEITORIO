@@ -1,7 +1,8 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import api from "../../service/api"
 
 function table(){
+    const [passagens, setpassagnes] = useState("")
     useEffect(() => {
        
         
@@ -11,19 +12,20 @@ function table(){
             try {
                 console.log(localStorage.getItem("token"));
                 
-                const resposta = await api.get("/v1/funcionario", {
+                const resposta = await api.get("/v1/passagem/Registro", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
                   }
                 });
-                console.log(resposta);
+                setpassagnes(resposta.data)
               } catch (error) {
                 console.error("Erro ao fazer a requisição:", error);
               }
         }
         dados()
 
-    }, [])
+    })
+
     return (
         <>
         
@@ -47,76 +49,17 @@ function table(){
                 </tr>
             </thead>
             <tbody className="md:text-[20px]">
-                <tr>
-                <td >12345</td>
-                <td >João Silva</td>
-                <td >Financeiro</td>
-                <td >Analista</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
-                <tr>
-                <td >67890</td>
-                <td >Maria Souza</td>
-                <td >RH</td>
-                <td >Coordenadora</td>
-                <td >Ativo</td>
-                </tr>
+            {!!passagens && 
+      passagens.map((e, index) => (
+        <tr key={index}>
+          <td>{e.matricula}</td>
+          <td>{e.nome}</td>
+          <td>{e.setor}</td>
+          <td>{e.cargo}</td>
+          <td>{e.status}</td>
+        </tr>
+      ))
+    }
             
             </tbody>
         </table>

@@ -10,6 +10,7 @@ const ProviderApp = ({children}) => {
   const [isLogado, setlogado] = useState(false)
   const [usuario, setusuario] = useState(null)
   const [matricula, setmatricula] = useState(null)
+  const [nivel, setnivel] = useState(null)
 
     useEffect(() =>{
         const loadingStoreData = async () => {
