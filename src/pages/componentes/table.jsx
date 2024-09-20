@@ -5,16 +5,14 @@ function table({mt}){
     const [passagens, setpassagnes] = useState(mt)
     console.log("matricula do safado" + passagens);
     
+   
 
     useEffect(() => {
         async function dados(){
 
            
-            console.log("executando useeffe da table " + mt);
             
             try {
-              
-                
                 const resposta = await api.get("/v1/passagem/Registro", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
@@ -28,7 +26,7 @@ function table({mt}){
      
       dados()
 
-    },[])
+    },[mt])
 
     return (
         <>
