@@ -2,16 +2,32 @@ import { useEffect, useState } from "react"
 import api from "../../service/api"
 
 function table({mt}){
-    const [passagens, setpassagnes] = useState(mt)
+    const [passagens, setpassagnes] = useState("")
+    const [isLodinng, setLoding] = useState(false)
+
     console.log("matricula do safado" + passagens);
     
-   
+   async function FINALIZAR(){
+    setLoding(true)
+    try {
+      const resposta = await api.delete("/v1/passagem/Registro", {
+        headers: {
+         ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
+        }
+      });
+      setpassagnes(resposta.data)
+      setpassagnes("")
+    } catch (error) {
+      console.error(error);
+    }
+    setLoding(false)
+
+    }
 
     useEffect(() => {
         async function dados(){
-
-           
-            
+          console.log("boiiiiiiiiiiiii");
+          
             try {
                 const resposta = await api.get("/v1/passagem/Registro", {
                   headers: {
@@ -19,15 +35,16 @@ function table({mt}){
                   }
                 });
                 setpassagnes(resposta.data)
+                console.log("conde do forro maquina" + passagens);
+                
               } catch (error) {
                 console.error(error);
               }
         }
-     
       dados()
-
     },[mt])
-
+    console.log(passagens);
+    
     return (
         <>
         
@@ -40,6 +57,7 @@ function table({mt}){
         <div className="overflow-auto md:h-40 md:w-full rounded-t-md w-full h-40 flex justify-center shadow-2xl shadow-black
 
     ">
+      {passagens.length > 0  ?
         <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs ">
             <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12 md:w-auto">
                 <tr>
@@ -65,8 +83,21 @@ function table({mt}){
             
             </tbody>
         </table>
+        : <h1>Sem dados ....</h1>
+
+}
         </div>
+          
+        {isLodinng ?         
+                        <div className="w-36  h-10 flex justify-center items-center">
+                            <div className="w-10 h-10 border-white border-[10px] rounded-full border-t-transparent animate-spin"></div>
+                        </div>
+                        :
+                        <button onClick={FINALIZAR} className="w-36  h-10 bg-green-700 rounded-3xl" >Finalizar</button>
+}
         </div>
+
+                
         </>
     )
 }
