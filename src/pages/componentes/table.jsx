@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react"
 import api from "../../service/api"
 
-function table({matricula}
-){
-    const [passagens, setpassagnes] = useState(matricula)
+function table({mt}){
+    const [passagens, setpassagnes] = useState(mt)
     console.log("matricula do safado" + passagens);
     
 
     useEffect(() => {
-       
-        
         async function dados(){
 
-            console.log("calccika");
+           
+            console.log("executando useeffe da table " + mt);
+            
             try {
-                console.log(localStorage.getItem("token"));
+              
                 
                 const resposta = await api.get("/v1/passagem/Registro", {
                   headers: {
@@ -26,10 +25,8 @@ function table({matricula}
                 console.error(error);
               }
         }
-        const interval = setInterval(() => {
-          dados();
-        }, 3000);
-      
+     
+      dados()
 
     },[])
 
