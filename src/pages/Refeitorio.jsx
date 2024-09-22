@@ -49,22 +49,29 @@ function Refeitorio() {
     async function btnConsulta() {
         setLoding(true)
         try{
-            const resposta = await api.get("/v2/funcionario/user/" + matricula, {
+            const resposta = await api.get("/v1/funcionario/" + matricula, {
                 headers: {
                  ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
                 }
                 
               });
               if(!!resposta.data){
-                console.log("passei");
-                    console.log("pois toma esse token" + localStorage.getItem("token"));
-                    
+               
+                   
                   const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
                 headers: {
                  ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
                 }
 
               })
+              if (resposta.data.status != "ativo") {
+                console.log("entrei dentro disso aqui");
+                
+                setatualizar(matricula)
+              
+                toast.info("Funcionario sem permissao")
+                
+              }
               if(registraPassagem.status == 200){
                 setatualizar(matricula)
                

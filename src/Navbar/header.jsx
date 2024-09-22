@@ -23,7 +23,7 @@ function MenuNavegacao(){
         console.log("Munbdo");
         const user = document.getElementById("user")
 
-        user.classList.add("md:-top-[400px]")
+        user.classList.remove("md:top-[0px]")
         
     }
     

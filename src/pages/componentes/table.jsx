@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import api from "../../service/api"
 
+
+
+
 function table({mt}){
     const [passagens, setpassagnes] = useState("")
     const [isLodinng, setLoding] = useState(false)
@@ -71,7 +74,7 @@ function table({mt}){
             <tbody className="md:text-[20px]">
             {!!passagens && 
       passagens.map((e, index) => (
-        <tr key={index}>
+        <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700' : ""}>
           <td>{e.matricula}</td>
           <td>{e.nome}</td>
           <td>{e.setor}</td>

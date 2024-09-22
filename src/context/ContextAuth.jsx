@@ -31,7 +31,7 @@ const ProviderApp = ({children}) => {
         
         
       try{
-        const resposta = await api.post("/Loginbd", dados)
+        const resposta = await api.post("/Login", dados)
         console.log(resposta);
         
         const token = resposta.data.token
