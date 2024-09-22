@@ -2,20 +2,50 @@ import { useEffect, useState } from "react"
 import CardFun from "./componentes/CardFuncionario"
 import Styles from "../layout/Conteiner"
 import Table from "./componentes/table"
+import {Html5QrcodeScanner as qrcode} from "html5-qrcode";
 
 import api from "../service/api";
 import { ToastContainer, toast } from 'react-toastify';
+import { BsQrCodeScan } from "react-icons/bs";
+
+
+const condedo = document.getElementById("matricula")
 
 function Refeitorio() {
-
-
-
-
-
     const [matricula, setmatricula] = useState("")
     const [atualizar, setatualizar] = useState("")
     const [isLodinng, setLoding] = useState(false)
+    async function  ScannnerCode() {
+    
+        
+        const Scanner = new qrcode("reader", {
+            qrbox : {
+                width :200,
+                height : 200
+            },
+            fps : 5
+        })
+        console.log("estou aqui");
+        
+       Scanner.render(sucesso)
+       
+        console.log("passei aqui");
+        
+        function sucesso(result){
+            setmatricula(matricula)
+          btnConsulta()
+           
 
+
+        }
+    
+        
+        
+        
+    } 
+
+    // console.log("passei pelo if  " + matricula);
+    
     async function btnConsulta() {
         setLoding(true)
         try{
@@ -37,6 +67,7 @@ function Refeitorio() {
               })
               if(registraPassagem.status == 200){
                 setatualizar(matricula)
+               
                 toast.info("Funcionario Registrado")
               
               }
@@ -65,8 +96,17 @@ function Refeitorio() {
             h-auto w-[400px] p-10 mt-6
             ">
                     <h1 className="text-4xl">Matricula</h1>
+                    <div id="reader" width="600px"></div>
                     <div className="flex flex-col justify-center items-center gap-8">
-                        <input type="number" onChange={(e) => setmatricula(e.target.value)} className="bg-transparent border-solid border-2 border-indigo-60 w-80 h-10 text-center rounded-lg" max="6" /> 
+                        <div id="pesquisa" className="flex items-center">
+                        <input type="text" id="matricula" onChange={(e) => setmatricula(e.target.value)} className="bg-transparent border-solid border-2 md:border-indigo-60 w-80 h-10  text-center md:rounded-lg  rounded-l-lg" max="6" /> 
+                        <div id="scanner" className="border-solid border-2 h-10 flex items-center border-l-transparent md:hidden">
+                            <button onClick={ScannnerCode}><BsQrCodeScan className="text-[40px]"></BsQrCodeScan> </button>
+                            
+                        </div>
+                        </div>
+
+                       
                         {isLodinng ?         
                         <div className="w-36  h-10 flex justify-center items-center">
                             <div className="w-10 h-10 border-white border-[10px] rounded-full border-t-transparent animate-spin"></div>
@@ -77,8 +117,8 @@ function Refeitorio() {
 
                     </div>
                 </div>
-                {console.log("matricula do corno " + atualizar)
-                }
+             
+           
                 <Table mt={atualizar}></Table>
             </div>
         <ToastContainer></ToastContainer>
