@@ -25,11 +25,12 @@ function Refeitorio() {
             },
             fps : 5
         })
-        console.log("estou aqui");
+  
         
        Scanner.render(sucesso)
        
-        console.log("passei aqui");
+     
+       
         
         function sucesso(result){
             setmatricula(matricula)
@@ -44,10 +45,11 @@ function Refeitorio() {
         
     } 
 
-    // console.log("passei pelo if  " + matricula);
     
     async function btnConsulta() {
         setLoding(true)
+  
+
         try{
             const resposta = await api.get("/v1/funcionario/" + matricula, {
                 headers: {
@@ -56,8 +58,7 @@ function Refeitorio() {
                 
               });
               if(!!resposta.data){
-               
-                   
+                
                   const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
                 headers: {
                  ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
@@ -65,33 +66,34 @@ function Refeitorio() {
 
               })
               if (resposta.data.status != "ativo") {
-                console.log("entrei dentro disso aqui");
-                
-                setatualizar(matricula)
               
                 toast.info("Funcionario sem permissao")
+                setatualizar(matricula)
+                
                 
               }
               if(registraPassagem.status == 200){
-                setatualizar(matricula)
-               
                 toast.info("Funcionario Registrado")
+                setatualizar(matricula)
               
               }
               }
               
+              
+        
+             
         }catch(erro){
             if(erro.status == 404) {
                 toast.error("FUNCIONARIO NAO ENCONTRADO")
             }
             if(erro.status == 302){
                 toast.info("Funcionario ja comeu")
+            }else{
+                toast.error("Erro no servidor")
             }
         }
         setLoding(false)
     }
-
-
 
 
 

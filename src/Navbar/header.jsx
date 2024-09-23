@@ -31,8 +31,7 @@ function MenuNavegacao(){
         const user = document.getElementById("user")
         console.log("mundo");
         console.log(user);
-        
-        user.classList.remove("md:-top-[400px]")
+       
         user.classList.add("md:top-[0px]")
 
 }
