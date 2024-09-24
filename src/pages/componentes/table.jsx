@@ -5,7 +5,7 @@ import api from "../../service/api"
 
 
 function table({mt}){
-    const [passagens, setpassagnes] = useState("")
+    const [passagens, setpassagnes] = useState([])
     const [isLodinng, setLoding] = useState(false)
     const [isatualiza, setisatualiza] = useState(false)
 
@@ -30,23 +30,20 @@ function table({mt}){
     }
 
     useEffect(() => {
-   
         async function dados(){
           setisatualiza(true)
           console.log(1);
-          
-          
             try {
           console.log(2);
 
-                const resposta = await api.get("/v1/passagem/Registro", {
+                const respostaa = await api.get("/v1/passagem/Registro", {
                   headers: {
-                   ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
+                   ["x-access-token"]:  `${localStorage.getItem("token")}` 
                   }
                 });
-          console.log(3);
+                console.log(3);
 
-                setpassagnes(resposta.data)
+                setpassagnes(respostaa.data)
           
                 
               } catch (error) {
