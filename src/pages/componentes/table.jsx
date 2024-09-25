@@ -3,15 +3,13 @@ import api from "../../service/api"
 
 
 
-
 function table({mt}){
-    const [passagens, setpassagnes] = useState([])
-    const [isLodinng, setLoding] = useState(false)
-    const [isatualiza, setisatualiza] = useState(false)
 
-
-    
-   async function FINALIZAR(){
+  const [isLodinng, setLoding] = useState(false)
+  const [passagens, setpassagnes] = useState([])
+  const [isatualiza, setisatualiza] = useState(false)
+  
+  async function FINALIZAR(){
     setLoding(true)
     setisatualiza(true)
     try {
@@ -25,10 +23,17 @@ function table({mt}){
     } catch (error) {
       console.error(error);
     }
-    setLoding(false)
+    setTimeout(() => {
+  
+      setLoding(false)
     setisatualiza(false)
-
+  
+    },3000)
+  
+  
     }
+    
+   
 
     useEffect(() => {
         async function dados(){
@@ -51,8 +56,9 @@ function table({mt}){
                 console.error(error);
               }
               setisatualiza(false)
+           
         }
-        const timeoutId = setTimeout(dados, 6000); // Aguarda 6 segundos antes de executar
+        const timeoutId = setTimeout(dados, 3000); // Aguarda 6 segundos antes de executar
 
         // Limpeza para evitar problemas com múltiplos timeouts quando a dependência [tnc] muda
     
