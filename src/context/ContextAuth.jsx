@@ -27,11 +27,8 @@ const ProviderApp = ({children}) => {
     }, [])
    
     async function autenticacao(dados){
-
-        
-        
       try{
-        const resposta = await api.post("/Login", dados)
+        const resposta = await api.post("/v1/Login", dados)
         console.log(resposta);
         
         const token = resposta.data.token
@@ -43,12 +40,12 @@ const ProviderApp = ({children}) => {
         return(resposta)
         
       } catch(erro) {
-        console.log(erro);
-        
+       if(erro.status == 404){
         return false
-      }
+       }
   
     }
+  }
     const deslogar = () =>{
         localStorage.removeItem("token")
         setlogado(false)

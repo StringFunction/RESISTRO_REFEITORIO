@@ -36,7 +36,7 @@ function table({mt}){
             try {
           console.log(2);
 
-                const respostaa = await api.get("/v1/passagem/Registro", {
+                const respostaa = await api.get("/v1/passagem", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` 
                   }
