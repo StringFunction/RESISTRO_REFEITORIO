@@ -45,7 +45,6 @@ function Refeitorio() {
             });
             if (!!resposta.data) {
                 console.log("Registrando Passagem");
-                
                 const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
                     headers: {
                         ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization

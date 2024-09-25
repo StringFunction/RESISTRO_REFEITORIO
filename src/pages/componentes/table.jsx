@@ -9,6 +9,7 @@ function table({mt}){
     const [isLodinng, setLoding] = useState(false)
     const [isatualiza, setisatualiza] = useState(false)
 
+
     
    async function FINALIZAR(){
     setLoding(true)
@@ -51,7 +52,10 @@ function table({mt}){
               }
               setisatualiza(false)
         }
-      dados()
+        const timeoutId = setTimeout(dados, 6000); // Aguarda 6 segundos antes de executar
+
+        // Limpeza para evitar problemas com múltiplos timeouts quando a dependência [tnc] muda
+    
     },[mt])
   
     
