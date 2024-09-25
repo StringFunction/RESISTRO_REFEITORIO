@@ -20,7 +20,7 @@ function MenuNavegacao(){
 
     
     const btnFechar = ()=>{
-        console.log("Munbdo");
+   
         const user = document.getElementById("user")
 
         user.classList.remove("md:top-[0px]")
@@ -29,8 +29,8 @@ function MenuNavegacao(){
     
     const btnUser = () => {
         const user = document.getElementById("user")
-        console.log("mundo");
-        console.log(user);
+   
+    
        
         user.classList.add("md:top-[0px]")
 
@@ -41,7 +41,7 @@ const btnMenu = () =>{
     
     if (btn.classList.contains("opacity-0")){    
 
-        console.log("deu certo");
+    
     
         
         btn.classList.remove("opacity-0")    
@@ -50,7 +50,7 @@ const btnMenu = () =>{
         
         
     }else{
-        console.log('deu bomn ');
+     
             btn.classList.add("opacity-0")    
             btn.classList.remove("top-[100px]")
             btn.classList.remove("opacity-100")

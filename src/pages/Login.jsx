@@ -38,7 +38,7 @@ const entrar = async (e) =>{
    
     setspin(true)
     const response = await autenticacao(dados)
-    console.log(response);
+ 
     
     setspin(false)
     e.target.matricula.value = ""
@@ -64,7 +64,7 @@ const entrar = async (e) =>{
     
     
 }
-    console.log("valor do corno " + isLogado);
+ ;
     
     if (isLogado) return <Navigate to="/Home"></Navigate> 
 

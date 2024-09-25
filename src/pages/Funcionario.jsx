@@ -10,9 +10,9 @@ import api from "../service/api";
     const [status,setstatus] = useState("Todos")
     const [Matricula_Nome,setMatricua_Nome] = useState("")
     const [Emrpesa,setEmpresa] = useState("Todos")
-    console.log(localStorage.getItem("token"));
+ ;
     const filtrar = () => {
-        console.log(Emrpesa);
+      
         
         return funcionario.filter((e) => {
           const matchesMatriculaNome = e.matricula.includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
@@ -25,7 +25,7 @@ import api from "../service/api";
 
     useEffect(()=>{
         async function consulta(){
-                console.log("banco de teste");
+                
                 
                 try{
                     
@@ -35,7 +35,7 @@ import api from "../service/api";
                                }
                         })
                         setfuncionario(resposta.data)
-                        console.log(resposta);
+                      
                         
                       
                     }catch(erro){

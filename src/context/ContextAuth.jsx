@@ -14,7 +14,6 @@ const ProviderApp = ({children}) => {
 
     useEffect(() =>{
         const loadingStoreData = async () => {
-            console.log("Verificando");
             
             const StoreLocalToken = await localStorage.getItem("token")
             const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
@@ -29,7 +28,7 @@ const ProviderApp = ({children}) => {
     async function autenticacao(dados){
       try{
         const resposta = await api.post("/v1/Login", dados)
-        console.log(resposta);
+        
         
         const token = resposta.data.token
         localStorage.setItem("token", token)

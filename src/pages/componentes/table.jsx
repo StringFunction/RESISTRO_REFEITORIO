@@ -21,7 +21,7 @@ function table({mt}){
       setpassagnes(resposta.data)
       setpassagnes("")
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
     setTimeout(() => {
   
@@ -38,16 +38,16 @@ function table({mt}){
     useEffect(() => {
         async function dados(){
           setisatualiza(true)
-          console.log(1);
+          
             try {
-          console.log(2);
+       
 
                 const respostaa = await api.get("/v1/passagem", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` 
                   }
                 });
-                console.log(3);
+               
 
                 setpassagnes(respostaa.data)
           

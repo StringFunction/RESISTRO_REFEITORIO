@@ -17,6 +17,7 @@ function Refeitorio() {
     const [matricula, setmatricula] = useState("")
     const [atualizar, setatualizar] = useState("")
     const [isLodinng, setLoding] = useState(false)
+
     async function ScannnerCode() {
         const Scanner = new qrcode("reader", {
             qrbox: {
@@ -28,9 +29,11 @@ function Refeitorio() {
 
 
         Scanner.render(sucesso)
+
         function sucesso(result) {
-            setmatricula(matricula)
-            btnregistra()
+            setmatricula(result)
+            if (matricula != result)
+                btnregistra()
 
         }
 
