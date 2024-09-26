@@ -18,13 +18,22 @@ function App() {
     <Routes>
       <Route path="/" element={<PrivateRota></PrivateRota>}>
 
-      <Route path="/" element={<Navigate to="/Home" />}></Route>
-      <Route path="/Home" element={<Home></Home>}></Route>
-      <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
-      <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>
+
+            <Route path="/Home" element={<Home></Home>}></Route>
+            <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
+            <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>
       </Route>
+      
+
+
+
+
+
+
+
       <Route path="/Login" element={<Login></Login>}></Route>
     </Routes>
+    
     </Container>
     <Footer></Footer>
     </BrowserRouter>

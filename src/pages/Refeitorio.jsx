@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import CardFun from "./componentes/CardFuncionario";
-import Styles from "../layout/Conteiner";
+
 import Table from "./componentes/table";
 import { Html5QrcodeScanner as qrcode } from "html5-qrcode";
 import api from "../service/api";

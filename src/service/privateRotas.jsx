@@ -5,11 +5,12 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function PrivateRota(){
   const {isLogado} = useContext(Contextapp)
-  console.log("Valor do isLogado" + isLogado);
+  console.log("aqui estou mais um");
+  
   
 
 
-  return isLogado ? <Outlet></Outlet> : <Navigate to="/Login"></Navigate>
+  return isLogado ? <Outlet /> : <Navigate to="/Login"></Navigate>
 
 }
 
