@@ -52,6 +52,11 @@ function Refeitorio() {
             });
 
             if (!!resposta.data) {
+                const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
+                    headers: {
+                        "x-access-token": `${localStorage.getItem("token")}`,
+                    },
+                });
                 if (resposta.data.status !== "ativo") {
                     toast.info("Funcionário sem permissão");
                     setatualizar(matricula); // Atualiza a tabela
@@ -59,11 +64,6 @@ function Refeitorio() {
                     return;
                 }
 
-                const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
-                    headers: {
-                        "x-access-token": `${localStorage.getItem("token")}`,
-                    },
-                });
 
                 if (registraPassagem.status === 200) {
                     toast.success("Funcionário registrado com sucesso");
