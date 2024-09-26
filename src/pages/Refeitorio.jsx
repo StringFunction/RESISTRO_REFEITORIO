@@ -54,6 +54,7 @@ function Refeitorio() {
             if (!!resposta.data) {
                 if (resposta.data.status !== "ativo") {
                     toast.info("Funcionário sem permissão");
+                    setatualizar(matricula); // Atualiza a tabela
                     setLoading(false);
                     return;
                 }
