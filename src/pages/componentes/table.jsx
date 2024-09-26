@@ -19,6 +19,9 @@ function table({mt}){
         }
       });
       setpassagnes(resposta.data)
+      console.log("vericando que tipo de respostem " + passagens);
+      
+
       setpassagnes("")
     } catch (error) {
       console.log(error);
@@ -64,6 +67,7 @@ function table({mt}){
     
     },[mt])
   
+    console.log("Vericando pq disso" + passagens);
     
     return (
         <>
@@ -80,7 +84,8 @@ function table({mt}){
       </div> 
         
       :
-     
+   
+      
       passagens.length > 0  ?
         <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs ">
             <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12 md:w-auto">

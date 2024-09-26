@@ -99,6 +99,7 @@ function Refeitorio() {
                     <div className="flex flex-col justify-center items-center gap-8">
                         <div id="pesquisa" className="flex items-center">
                             <input type="text" id="matricula" onChange={(e) => setmatricula(e.target.value)} className="bg-transparent border-solid border-2 md:border-indigo-60 w-80 h-10  text-center md:rounded-lg  rounded-l-lg" max="6" />
+                            
                             <div id="scanner" className="border-solid border-2 h-10 flex items-center border-l-transparent md:hidden">
                                 <button onClick={ScannnerCode}><BsQrCodeScan className="text-[40px]"></BsQrCodeScan> </button>
 
