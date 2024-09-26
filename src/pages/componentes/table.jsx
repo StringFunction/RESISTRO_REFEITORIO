@@ -3,7 +3,7 @@ import api from "../../service/api"
 
 
 
-function table({mt}){
+function table({mt,setmt}){
 
   const [isLodinng, setLoding] = useState(false)
   const [passagens, setpassagnes] = useState([])
@@ -40,8 +40,6 @@ function table({mt}){
           setisatualiza(true)
           
             try {
-       
-
                 const respostaa = await api.get("/v1/passagem", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` 
@@ -56,6 +54,7 @@ function table({mt}){
                 console.error(error);
               }
               setisatualiza(false)
+              setmt("")
            
         }
         const timeoutId = setTimeout(dados, 3000); // Aguarda 6 segundos antes de executar
