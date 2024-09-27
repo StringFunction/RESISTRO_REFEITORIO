@@ -15,6 +15,7 @@ const [is , setis] = useState(false)
 const { autenticacao, isLogado } = useAppContext()
 const navigate = useNavigate()
 const [spin , setspin] = useState(false)
+
 const entrar = async (e) =>{
     e.preventDefault()
     setis(false)
@@ -32,7 +33,7 @@ const entrar = async (e) =>{
     }
     // console.log(dados);
 
-
+  
     
     const dados = { matricula,senha }
    
@@ -45,16 +46,15 @@ const entrar = async (e) =>{
     e.target.senha.value = ""
     
    
-    
     if (response == "AxiosError: Network Error"){
 
        toast.error("ERRO SERVIDOR")
           
     }
     if (response) {
+     
         navigate("/")
         
-    
         
     }else{
         toast.error("Usuario ou Senha incorreta ")

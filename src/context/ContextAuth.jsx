@@ -1,5 +1,6 @@
 import { Children, createContext, useEffect, useState } from "react";
 import {jwtDecode} from "jwt-decode"
+import { Navigate } from "react-router-dom";
 import api from "../service/api";
 
 
@@ -14,13 +15,11 @@ const ProviderApp = ({children}) => {
 
     useEffect(() =>{
         const loadingStoreData = async () => {
-            
             const StoreLocalToken = await localStorage.getItem("token")
             const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
             setmatricula(tokenDecodicador.matricula)
             setusuario(tokenDecodicador.nome)
-
-            if (StoreLocalToken) return setlogado(true)
+            if (!!StoreLocalToken) return setlogado(true)
         } 
     loadingStoreData()
     }, [])
@@ -46,8 +45,15 @@ const ProviderApp = ({children}) => {
     }
   }
     const deslogar = () =>{
+      
         localStorage.removeItem("token")
         setlogado(false)
+        console.log("Saindo do Sistema");
+        
+        window.location.reload();
+        
+   
+      
     }
 
     return (

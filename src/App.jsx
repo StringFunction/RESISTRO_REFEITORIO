@@ -19,7 +19,9 @@ function App() {
       <Route path="/" element={<PrivateRota></PrivateRota>}>
 
 
+        
             <Route path="/Home" element={<Home></Home>}></Route>
+            <Route path="/" element={<Navigate to="Home"></Navigate>}></Route>
             <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
             <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>
       </Route>

@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link , Outlet} from "react-router-dom"
 import { BsJustify } from "react-icons/bs";
 import useAppContext from "../hooks/UseAppContext";
 import { useEffect } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
 
@@ -11,39 +12,25 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 function MenuNavegacao(){
     
-    const {isLogado, setlogado,deslogar, usuario,matricula} = useAppContext()
+    const {isLogado, deslogar, usuario,matricula} = useAppContext()
     const sair = () =>{
         deslogar()
+       
 
     }
-
-
-    
     const btnFechar = ()=>{
-   
         const user = document.getElementById("user")
-
         user.classList.remove("md:top-[0px]")
-        
     }
     
     const btnUser = () => {
         const user = document.getElementById("user")
-   
-    
-       
         user.classList.add("md:top-[0px]")
 
 }
 const btnMenu = () =>{
     const btn = document.getElementById("menu")
- 
-    
     if (btn.classList.contains("opacity-0")){    
-
-    
-    
-        
         btn.classList.remove("opacity-0")    
         btn.classList.add("opacity-100")    
         btn.classList.add("top-[100px]")
@@ -57,7 +44,8 @@ const btnMenu = () =>{
     }
     
  
-}
+}   
+
  
    
   
@@ -118,6 +106,7 @@ const btnMenu = () =>{
         </div>
     </div>
 }
+
     </>
     )
 }
