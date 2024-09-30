@@ -13,15 +13,19 @@ const ProviderApp = ({children}) => {
   const [matricula, setmatricula] = useState(null)
   const [nivel, setnivel] = useState(null)
 
-    useEffect(() =>{
+    useEffect(async () =>{
         const loadingStoreData = async () => {
-            const StoreLocalToken = await localStorage.getItem("token")
-            const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
-            setmatricula(tokenDecodicador.matricula)
-            setusuario(tokenDecodicador.nome)
-            if (!!StoreLocalToken) return setlogado(true)
+            const StoreLocalToken = localStorage.getItem("token")
+            if(!!StoreLocalToken){
+              console.log("vamos ver se eu to aui");
+              
+              const tokenDecodicador = jwtDecode(StoreLocalToken)
+              setmatricula(tokenDecodicador.matricula)
+              setusuario(tokenDecodicador.nome)
+              return setlogado(true)
+            }
         } 
-    loadingStoreData()
+    await loadingStoreData()
     }, [])
    
     async function autenticacao(dados){

@@ -5,10 +5,10 @@ import './index.css'
 import { ProviderApp } from './context/ContextAuth'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
     <ProviderApp>
     <App />
     </ProviderApp>
 
-  </StrictMode>
+
 )

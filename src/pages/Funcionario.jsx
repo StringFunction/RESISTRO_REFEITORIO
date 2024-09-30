@@ -1,8 +1,9 @@
-import PaginaDesenvolviment from "./componentes/paginaOff";
-import useAppContext from "../hooks/UseAppContext";
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
+import { BsFillPersonFill } from "react-icons/bs";
+
 import api from "../service/api";
+
 
 
  function Funcionario() {
@@ -10,7 +11,21 @@ import api from "../service/api";
     const [status,setstatus] = useState("Todos")
     const [Matricula_Nome,setMatricua_Nome] = useState("")
     const [Emrpesa,setEmpresa] = useState("Todos")
+    const [DadosAtualiza, setAt] = useState({
+        nome : "",
+        matricula : ""
+    })
  ;
+    function btnAtualizar (id){
+        const CardFuncionario = document.getElementById("CardFuncionario")
+        const infor = funcionario[id];
+        setAt(infor)
+        CardFuncionario.classList.remove("hidden")
+      
+        
+        
+
+    }
     const filtrar = () => {
       
         
@@ -48,7 +63,7 @@ import api from "../service/api";
                 },[])
     
    
-
+                console.log("conde " + DadosAtualiza.matricula);
 
     // Renderiza a página se o usuário estiver logado
 
@@ -79,6 +94,32 @@ import api from "../service/api";
                        
                     </div>
 
+                    <div id="CardFuncionario" className="md:w-[450px] md:h-[350px] md:border md:p-5 flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB hidden">
+                        <div id="titulo card" className="text-center">Atualizacao</div>
+                        <div className="border rounded-full overflow-hidden md:p-1"><BsFillPersonFill className="md:text-[100px] md:text-white md:border-none md:p-0 border rounded-full p-5"></BsFillPersonFill></div>
+                        <div id="Indeticacao" className="flex flex-col justify-center items-center">
+                            <p>Matricula : {DadosAtualiza.matricula} </p>
+                            <p>Nome : {DadosAtualiza.nome} </p>
+                            <p>Empresa : maquina do sucesso</p>
+                        </div>
+                        <div className="">
+                            <form action="" className="flex flex-col gap-2 "> 
+                                <label htmlFor="opt">Optante pelo Refeitorio</label>
+                                <select name="" id="">
+                                    <option value="Sim">Sim</option>
+                                    <option value="Nao">Nao</option>
+                                </select>
+                                <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600"/>
+                            </form>
+                        </div>
+
+                      
+
+                        
+
+
+                    </div>
+
                     <div className="overflow-scroll bg-cardB gap-5 md:w-f md:h-[350px] md:p-0 md:rounded-md shadow-2xl shadow-black text-red-50 flex flex-col
                     h-[250px] w-[400px] mt-6">
                 <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs h-56 ">
@@ -86,9 +127,9 @@ import api from "../service/api";
                 <tr>
                     <th>MATRICULA</th>
                     <th>NOME</th>
-                    <th>SETOR</th>
-                    <th>CARGO</th>
+                    <th>EMPRESA</th>
                     <th>STATUS</th>
+                    <th colSpan="2" >OPCOES</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,9 +140,10 @@ import api from "../service/api";
                 <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700 text-[20px]' : "text-[20px] mb-5 "}>
                   <td>{e.matricula}</td>
                   <td>{e.nome}</td>
-                  <td>{e.setor}</td>
-                  <td>{e.cargo}</td>
                   <td>{e.status}</td>
+                  <th>ativo</th>
+                  <th><button onClick={() => btnAtualizar(index)}>Atualizar</button></th>
+                  <th><button>Deleta</button></th>
                 </tr>
               ))
             }

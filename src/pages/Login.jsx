@@ -16,6 +16,16 @@ const { autenticacao, isLogado } = useAppContext()
 const navigate = useNavigate()
 const [spin , setspin] = useState(false)
 
+
+
+
+if (!!isLogado) {
+     
+    navigate("/")
+    
+    
+}
+
 const entrar = async (e) =>{
     e.preventDefault()
     setis(false)
@@ -51,12 +61,7 @@ const entrar = async (e) =>{
        toast.error("ERRO SERVIDOR")
           
     }
-    if (response) {
-     
-        navigate("/")
-        
-        
-    }else{
+    else{
         toast.error("Usuario ou Senha incorreta ")
         
     }
