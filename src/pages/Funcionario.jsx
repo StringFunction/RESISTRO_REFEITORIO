@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from "react";
-import { BsFillPersonFill } from "react-icons/bs";
+import useAppContext from "../hooks/UseAppContext";
+import { BsFillPersonFill, BsArrowClockwise } from "react-icons/bs";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 import api from "../service/api";
 
@@ -15,16 +17,46 @@ import api from "../service/api";
         nome : "",
         matricula : ""
     })
+    const [isSpin, setSpin] = useState(false)
+    const CardFuncionario = document.getElementById("CardFuncionario")
+    const {deslogar} = useAppContext()
+    useEffect(()=>{
+        async function consulta(){
+                
+                try{    
+                    setSpin(true)
+                        const resposta = await api.get("/v1/funcionario" ,  {
+                            headers: {
+                                ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
+                               }
+                        })
+                        setfuncionario(resposta.data) 
+                    setSpin(false)   
+                    }catch(erro){
+                            if (erro.status == 498) {
+                                alert("Sessao Expirada")
+                                deslogar()
+                                return
+   
+                                
+                            }
+                
+                        }
+                    }
+                    consulta()
+                   
+                },[])
+                console.log("conde " + DadosAtualiza.matricula);
  ;
     function btnAtualizar (id){
-        const CardFuncionario = document.getElementById("CardFuncionario")
+        
         const infor = funcionario[id];
         setAt(infor)
         CardFuncionario.classList.remove("hidden")
-      
+    }
+    function closeCard() {
+        CardFuncionario.classList.add("hidden")
         
-        
-
     }
     const filtrar = () => {
       
@@ -38,32 +70,6 @@ import api from "../service/api";
       };
 
 
-    useEffect(()=>{
-        async function consulta(){
-                
-                
-                try{
-                    
-                        const resposta = await api.get("/v1/funcionario" ,  {
-                            headers: {
-                                ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
-                               }
-                        })
-                        setfuncionario(resposta.data)
-                      
-                        
-                      
-                    }catch(erro){
-                            console.log("erro ao tenta");
-                
-                        }
-                    }
-                    consulta()
-                
-                },[])
-    
-   
-                console.log("conde " + DadosAtualiza.matricula);
 
     // Renderiza a página se o usuário estiver logado
 
@@ -94,7 +100,8 @@ import api from "../service/api";
                        
                     </div>
 
-                    <div id="CardFuncionario" className="md:w-[450px] md:h-[350px] md:border md:p-5 flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB hidden">
+                    <div id="CardFuncionario" className="md:w-[450px] md:h-[350px] md:border md:p-5  flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white hidden">
+                        <div className="flex text-[30px] fixed right-[470px] top-[250px] md:hover:cursor-pointer" onClick={closeCard}><IoMdCloseCircleOutline></IoMdCloseCircleOutline></div>
                         <div id="titulo card" className="text-center">Atualizacao</div>
                         <div className="border rounded-full overflow-hidden md:p-1"><BsFillPersonFill className="md:text-[100px] md:text-white md:border-none md:p-0 border rounded-full p-5"></BsFillPersonFill></div>
                         <div id="Indeticacao" className="flex flex-col justify-center items-center">
@@ -105,11 +112,11 @@ import api from "../service/api";
                         <div className="">
                             <form action="" className="flex flex-col gap-2 "> 
                                 <label htmlFor="opt">Optante pelo Refeitorio</label>
-                                <select name="" id="">
-                                    <option value="Sim">Sim</option>
-                                    <option value="Nao">Nao</option>
+                                <select name="" id="" className="bg-transparent border-b-2 ">
+                                    <option value="Sim" className="text-black">Sim</option>
+                                    <option value="Nao" className="text-black">Nao</option>
                                 </select>
-                                <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600"/>
+                                <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600 md:rounded-2xl" />
                             </form>
                         </div>
 
@@ -122,6 +129,8 @@ import api from "../service/api";
 
                     <div className="overflow-scroll bg-cardB gap-5 md:w-f md:h-[350px] md:p-0 md:rounded-md shadow-2xl shadow-black text-red-50 flex flex-col
                     h-[250px] w-[400px] mt-6">
+
+                {!!isSpin ? <div className="flex justify-center items-center  h-96 animate-spin"><BsArrowClockwise className="text-[110px]" ></BsArrowClockwise></div> :
                 <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs h-56 ">
                     <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12 md:w-auto">
                 <tr>
@@ -129,7 +138,7 @@ import api from "../service/api";
                     <th>NOME</th>
                     <th>EMPRESA</th>
                     <th>STATUS</th>
-                    <th colSpan="2" >OPCOES</th>
+                    <th>OPCOES</th>
                 </tr>
             </thead>
             <tbody>
@@ -142,15 +151,20 @@ import api from "../service/api";
                   <td>{e.nome}</td>
                   <td>{e.status}</td>
                   <th>ativo</th>
-                  <th><button onClick={() => btnAtualizar(index)}>Atualizar</button></th>
-                  <th><button>Deleta</button></th>
+                  <th rowSpan="1" className="flex items-center justify-center gap-2">
+                    <button onClick={() => btnAtualizar(index)} className="md:border md:p-2 md:bg-slate-600 text-white">Atualizar</button>
+                    <button onClick={console.log("ola mundo")} className="md:border md:p-2 md:bg-slate-600 text-white">Excluir</button>
+                  </th>
+                  
                 </tr>
               ))
             }
                 
 
             </tbody>
-            </table>
+            </table> 
+
+}
                         
 
 
