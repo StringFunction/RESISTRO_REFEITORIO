@@ -13,7 +13,7 @@ const ProviderApp = ({children}) => {
   const [matricula, setmatricula] = useState(null)
   const [nivel, setnivel] = useState(null)
 
-    useEffect(async () =>{
+    useEffect(() =>{
         const loadingStoreData = async () => {
             const StoreLocalToken = localStorage.getItem("token")
             if(!!StoreLocalToken){
@@ -22,10 +22,11 @@ const ProviderApp = ({children}) => {
               const tokenDecodicador = jwtDecode(StoreLocalToken)
               setmatricula(tokenDecodicador.matricula)
               setusuario(tokenDecodicador.nome)
-              return setlogado(true)
+              setlogado(true)
+              return 
             }
         } 
-    await loadingStoreData()
+    loadingStoreData()
     }, [])
    
     async function autenticacao(dados){
@@ -53,11 +54,7 @@ const ProviderApp = ({children}) => {
         localStorage.removeItem("token")
         setlogado(false)
         console.log("Saindo do Sistema");
-        
         window.location.reload();
-        
-   
-      
     }
 
     return (

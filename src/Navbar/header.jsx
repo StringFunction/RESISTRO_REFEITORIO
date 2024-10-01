@@ -33,13 +33,13 @@ const btnMenu = () =>{
     if (btn.classList.contains("opacity-0")){    
         btn.classList.remove("opacity-0")    
         btn.classList.add("opacity-100")    
-        btn.classList.add("top-[100px]")
+        btn.classList.add("top-[110px]")
         
         
     }else{
      
             btn.classList.add("opacity-0")    
-            btn.classList.remove("top-[100px]")
+            btn.classList.remove("top-[110px]")
             btn.classList.remove("opacity-100")
     }
     
@@ -69,39 +69,43 @@ const btnMenu = () =>{
         <div className="md:text-3xl	md:mr-1 md:pl-6	 p-9 text-4xl text-center">
             <h1><Link to="/Home">Grupo Carmais</Link></h1>
         </div>
+
         <div id="menuBar">
-            <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-5 flex justify-center items-center top-9 hover:cursor-pointer"></BsJustify>
+            <BsJustify onClick={btnMenu} className="md:hidden text-5xl absolute right-5 flex justify-center items-center top-9 hover:cursor-pointer z-[100]"></BsJustify>
         </div>
 
         <div id="menu" className="md:h-full    md:w-[500px] md:flex md:justify-center md:items-center md:static md:opacity-100 opacity-0 absolute w-full 
-            top-[-400px] transition-all ease-in duration-500  md:transition-none"
+            top-[-600px] transition-all ease-in duration-500  md:transition-none z-50"
 >
             <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-around md:relative md:gap-0 md:flex-row md:pt-0 md:p-2
-                          flex  flex-col bg-white w-full   pt-10 text-slate-300  h-[400px]  ">
-
+                          flex  flex-col bg-black w-full   pt-10 text-slate-300  h-[400px]  ">
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
                hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl  tracking-widest
                 ">
                 <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
                 </li>
-          
                 <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
                hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest
                 ">
                 <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
                 </li>
                 <li className="ml-3" onClick={btnUser}>
-                    <FaRegUserCircle  className="md:text-[50px] md:flex md:hover:text-white md:hover:cursor-pointer "></FaRegUserCircle>
+                    <FaRegUserCircle  className="md:text-[50px] md:flex md:hover:text-white md:hover:cursor-pointer hidden "></FaRegUserCircle>
                 </li>
 
             </ul>
 
-            <div id="user" className="absolute md:right-2 md:backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300">
-                <div id="fechar" onClick={btnFechar} className="absolute top-0 right-0 p-5 md:cursor-pointer"><IoMdCloseCircleOutline className="text-[30px]"></IoMdCloseCircleOutline></div>
-                <FaRegUserCircle className="text-[90px]"></FaRegUserCircle>
+            <div id="user" className="absolute md:right-2 backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:bg-transparent md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300
+            bg-transparent	w-full h-[300px] flex flex-col justify-center items-center text-white gap-6
+            
+            ">
+                <div id="fechar" onClick={btnFechar} className="md:absolute md:flex md:top-0 md:right-0 md:p-5 md:cursor-pointer hidden"><IoMdCloseCircleOutline className="text-[30px]"></IoMdCloseCircleOutline></div>
+                <FaRegUserCircle className="md:flex  text-[90px]"></FaRegUserCircle>
                 <p>Matricula : {matricula ? matricula : "carregando..." }</p>
                 <p>Nome : {usuario ? usuario : "carregando..." }</p>
-                <button onClick={sair} className="md:border md:p-2 md:w-[70px] md:rounded-2xl md:hover:bg-slate-500 md:duration-200 md:hover:cursor-pointer text-center">sair</button>
+                <button onClick={sair} className="md:border md:p-2 md:w-[70px] md:rounded-2xl md:hover:bg-slate-500 md:duration-200 md:hover:cursor-pointer text-center
+                
+                ">sair</button>
             </div>
         </div>
     </div>

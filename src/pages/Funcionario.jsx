@@ -22,7 +22,6 @@ import api from "../service/api";
     const {deslogar} = useAppContext()
     useEffect(()=>{
         async function consulta(){
-                
                 try{    
                     setSpin(true)
                         const resposta = await api.get("/v1/funcionario" ,  {
@@ -36,11 +35,8 @@ import api from "../service/api";
                             if (erro.status == 498) {
                                 alert("Sessao Expirada")
                                 deslogar()
-                                return
-   
-                                
+                                return 
                             }
-                
                         }
                     }
                     consulta()
@@ -49,18 +45,15 @@ import api from "../service/api";
                 console.log("conde " + DadosAtualiza.matricula);
  ;
     function btnAtualizar (id){
-        
         const infor = funcionario[id];
         setAt(infor)
         CardFuncionario.classList.remove("hidden")
     }
     function closeCard() {
-        CardFuncionario.classList.add("hidden")
-        
+
+        CardFuncionario.classList.add("hidden") 
     }
     const filtrar = () => {
-      
-        
         return funcionario.filter((e) => {
           const matchesMatriculaNome = e.matricula.includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
           const matchesEmpresa = Emrpesa === 'Todos' || e.empresa === Emrpesa
@@ -100,10 +93,12 @@ import api from "../service/api";
                        
                     </div>
 
-                    <div id="CardFuncionario" className="md:w-[450px] md:h-[350px] md:border md:p-5  flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white hidden">
-                        <div className="flex text-[30px] fixed right-[470px] top-[250px] md:hover:cursor-pointer" onClick={closeCard}><IoMdCloseCircleOutline></IoMdCloseCircleOutline></div>
+                    <div id="CardFuncionario" className="md:w-[450px] md:h-[450px] md:border md:p-5  md:-mt-[100px] flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white
+                    text-white w-[300px] h-[400px] rounded-2xl duration-500 hidden
+                    ">
+                        <div className="md:flex text-[30px]  md:left-[190px] md:top-[0px]  relative left-[100px] top-3 z-[100px]" onClick={closeCard}><IoMdCloseCircleOutline className="hover:cursor-pointer"></IoMdCloseCircleOutline></div>
                         <div id="titulo card" className="text-center">Atualizacao</div>
-                        <div className="border rounded-full overflow-hidden md:p-1"><BsFillPersonFill className="md:text-[100px] md:text-white md:border-none md:p-0 border rounded-full p-5"></BsFillPersonFill></div>
+                        <div className="border rounded-full  md:p-1"><BsFillPersonFill className="md:text-[100px] md:text-white md:border-none md:p-0 border rounded-full p-5 text-white text-[100px]"></BsFillPersonFill></div>
                         <div id="Indeticacao" className="flex flex-col justify-center items-center">
                             <p>Matricula : {DadosAtualiza.matricula} </p>
                             <p>Nome : {DadosAtualiza.nome} </p>
@@ -116,7 +111,7 @@ import api from "../service/api";
                                     <option value="Sim" className="text-black">Sim</option>
                                     <option value="Nao" className="text-black">Nao</option>
                                 </select>
-                                <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600 md:rounded-2xl" />
+                                <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600 rounded-2xl p-3"  />
                             </form>
                         </div>
 
@@ -138,22 +133,26 @@ import api from "../service/api";
                     <th>NOME</th>
                     <th>EMPRESA</th>
                     <th>STATUS</th>
-                    <th>OPCOES</th>
+                    <th colSpan="2">OPCOES</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="">
             {
               
                 
               filtrar().map((e, index) => (
-                <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700 text-[20px]' : "text-[20px] mb-5 "}>
+                <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700 md:text-[20px]' : "md:text-[20px]  "}>
                   <td>{e.matricula}</td>
                   <td>{e.nome}</td>
                   <td>{e.status}</td>
                   <th>ativo</th>
-                  <th rowSpan="1" className="flex items-center justify-center gap-2">
-                    <button onClick={() => btnAtualizar(index)} className="md:border md:p-2 md:bg-slate-600 text-white">Atualizar</button>
-                    <button onClick={console.log("ola mundo")} className="md:border md:p-2 md:bg-slate-600 text-white">Excluir</button>
+                  <th  className="flex md:items-center md:justify-center md:gap-2">
+                    <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
+                  </th>
+                  <th>
+
+
+                    <button onClick={console.log("ola mundo")} className="border p-4" >Excluir</button>
                   </th>
                   
                 </tr>
