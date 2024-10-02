@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAppContext from "../hooks/UseAppContext";
 import { BsFillPersonFill, BsArrowClockwise } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
 
 import api from "../service/api";
 
@@ -17,19 +18,25 @@ import api from "../service/api";
         nome : "",
         matricula : ""
     })
+    const [IdUsuario, setIdUsuario] = useState(null)
+    const [AAtualizaStatus, setAtualizaStatus] = useState("")
     const [isSpin, setSpin] = useState(false)
     const CardFuncionario = document.getElementById("CardFuncionario")
     const {deslogar} = useAppContext()
+    const [atualizaTabela, setAtualizaTabela] = useState(false)
     useEffect(()=>{
+        setSpin(true)
         async function consulta(){
                 try{    
-                    setSpin(true)
+                        console.log("Requisao de chamada");
+                        
                         const resposta = await api.get("/v1/funcionario" ,  {
                             headers: {
                                 ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
                                }
                         })
                         setfuncionario(resposta.data) 
+                        setAtualizaTabela(false)
                     setSpin(false)   
                     }catch(erro){
                             if (erro.status == 498) {
@@ -39,18 +46,18 @@ import api from "../service/api";
                             }
                         }
                     }
-                    consulta()
+                    setTimeout(consulta, 3000)
                    
-                },[])
+                },[atualizaTabela])
                 console.log("conde " + DadosAtualiza.matricula);
  ;
     function btnAtualizar (id){
         const infor = funcionario[id];
+        setIdUsuario(id)
         setAt(infor)
         CardFuncionario.classList.remove("hidden")
     }
     function closeCard() {
-
         CardFuncionario.classList.add("hidden") 
     }
     const filtrar = () => {
@@ -60,7 +67,44 @@ import api from "../service/api";
           const matchesStatus = status === 'Todos' || e.status === status
           return matchesMatriculaNome && matchesEmpresa && matchesStatus;
         });
-      };
+    };
+    async function atualizaStatus(e){
+        e.preventDefault()
+        if (!AAtualizaStatus) return toast.info("Preencha os campo")
+        const dados = {
+            matricula : DadosAtualiza.matricula,
+            status    : AAtualizaStatus
+
+        }
+        console.log(dados);
+        
+
+        try{
+            setSpin(true)
+            console.log("REQUISAO DE ATUALIZACAO ");
+            
+            const resultado =  await api.put("/v1/funcionario", dados, {
+                headers: {
+                    ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
+                   }
+            })
+
+            if(resultado.status == 200){
+                toast.success("Informação atualizada")
+                CardFuncionario.classList.add("hidden") 
+                setAtualizaTabela(true)
+                return
+
+            }
+
+            
+        }catch(erro){
+
+        } finally{
+            setSpin(false)
+        }
+
+    }
 
 
 
@@ -105,14 +149,20 @@ import api from "../service/api";
                             <p>Empresa : maquina do sucesso</p>
                         </div>
                         <div className="">
-                            <form action="" className="flex flex-col gap-2 "> 
+                            <form action="" onSubmit={atualizaStatus} className="flex flex-col gap-2 "> 
                                 <label htmlFor="opt">Optante pelo Refeitorio</label>
-                                <select name="" id="" className="bg-transparent border-b-2 ">
+                                <select name="" id="" onChange={(e) => setAtualizaStatus(e.target.value)} value={AAtualizaStatus} className="bg-transparent border-b-2 ">
                                     <option value="Sim" className="text-black">Sim</option>
                                     <option value="Nao" className="text-black">Nao</option>
                                 </select>
+                                {isSpin ? 
+                                
+                                <div className="flex justify-center animate-spin">
+                                <BsArrowClockwise className="text-[40px]"></BsArrowClockwise>
+                                </div> :
                                 <input type="submit" value="Atualiza" className="border md:p-2 bg-green-600 rounded-2xl p-3"  />
-                            </form>
+                                }
+                                </form>
                         </div>
 
                       
@@ -144,8 +194,8 @@ import api from "../service/api";
                 <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700 md:text-[20px]' : "md:text-[20px]  "}>
                   <td>{e.matricula}</td>
                   <td>{e.nome}</td>
+                  <th>Condo do forro</th>
                   <td>{e.status}</td>
-                  <th>ativo</th>
                   <th  className="flex md:items-center md:justify-center md:gap-2">
                     <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
                   </th>
@@ -170,6 +220,7 @@ import api from "../service/api";
                     </div>
 
                 </div>
+            <ToastContainer></ToastContainer>
             </>
         );
     
