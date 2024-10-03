@@ -22,8 +22,9 @@ const ProviderApp = ({children}) => {
               const tokenDecodicador = jwtDecode(StoreLocalToken)
               setmatricula(tokenDecodicador.matricula)
               setusuario(tokenDecodicador.nome)
+              setnivel(tokenDecodicador.nivel)
               setlogado(true)
-              return 
+          
             }
         } 
     loadingStoreData()
@@ -63,6 +64,7 @@ const ProviderApp = ({children}) => {
         matricula,
         autenticacao,
         isLogado,
+        nivel,
         setlogado,
         deslogar}}>
         {children}

@@ -24,11 +24,14 @@ import api from "../service/api";
     const CardFuncionario = document.getElementById("CardFuncionario")
     const {deslogar} = useAppContext()
     const [atualizaTabela, setAtualizaTabela] = useState(false)
+    const {nivel} = useAppContext()
+    
+
     useEffect(()=>{
         setSpin(true)
-        async function consulta(){
+            async function consulta(){
                 try{    
-                        console.log("Requisao de chamada");
+                        console.log("Requisao de chamada de funcionarios ");
                         
                         const resposta = await api.get("/v1/funcionario" ,  {
                             headers: {
@@ -46,11 +49,11 @@ import api from "../service/api";
                             }
                         }
                     }
-                    setTimeout(consulta, 3000)
+                setTimeout(consulta, 3000)
                    
                 },[atualizaTabela])
-                console.log("conde " + DadosAtualiza.matricula);
- ;
+        console.log("conde do pagina funcionario" + DadosAtualiza.matricula);
+ 
     function btnAtualizar (id){
         const infor = funcionario[id];
         setIdUsuario(id)
@@ -83,10 +86,11 @@ import api from "../service/api";
             setSpin(true)
             console.log("REQUISAO DE ATUALIZACAO ");
             
-            const resultado =  await api.put("/v1/funcionario", dados, {
+            const resultado =  await api.put("/v1/funcionario", {
                 headers: {
                     ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
-                   }
+                   },
+                   data : dados
             })
 
             if(resultado.status == 200){
@@ -105,7 +109,25 @@ import api from "../service/api";
         }
 
     }
+    async function ExcluirUsuario(matricula) {
+        try{
+            const MatriculadaPesta = await funcionario[matricula].matricula;
+            console.log(MatriculadaPesta)
+            const resposta = await api.delete("/v1/funcionario", { headers : { ["x-access-token"]: `${localStorage.getItem("token")}`}, data: {
+                matricula: MatriculadaPesta
+            } })
+            
+        if(resposta.status == 200) {
+            toast.success("Funcionario Excluido")
+            setAtualizaTabela(true)
+        }
 
+        }catch(erro){
+            console.log(erro);
+            
+        }
+        
+    }
 
 
     // Renderiza a página se o usuário estiver logado
@@ -196,14 +218,11 @@ import api from "../service/api";
                   <td>{e.nome}</td>
                   <th>Condo do forro</th>
                   <td>{e.status}</td>
-                  <th  className="flex md:items-center md:justify-center md:gap-2">
+                  <th  className="">
                     <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
+                    <button onClick={() =>ExcluirUsuario(index)} className="border p-4" >Excluir</button>
                   </th>
-                  <th>
-
-
-                    <button onClick={console.log("ola mundo")} className="border p-4" >Excluir</button>
-                  </th>
+                
                   
                 </tr>
               ))
