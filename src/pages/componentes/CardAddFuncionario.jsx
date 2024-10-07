@@ -3,8 +3,10 @@ import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import api from "../../service/api";
 import { ToastContainer, toast } from "react-toastify";
+import { BsArrowClockwise } from "react-icons/bs";
 
-function AddFuncionario({fechar,atualizar}){
+
+function AddFuncionario({fechar,atualiza}){
     const [matriula,setmatricula] = useState("")
     const [nome,setNome] = useState("")
     const [empresa,setEmpresa] = useState("")
@@ -12,6 +14,7 @@ function AddFuncionario({fechar,atualizar}){
     const [cargo,setCargo] = useState("")
     const [optante, setOptante] = useState("")
     const CardAddFuncionarioRef = useRef(null)
+    const [spin,setSpin] = useState(false)
     const CardAddFuncionario = document.getElementById("CardAddFuncionari")
     function FecharCard(params) {
         if (params.target === CardAddFuncionarioRef.current) {
@@ -23,6 +26,7 @@ function AddFuncionario({fechar,atualizar}){
         
     }
     async function cadastra(e){
+        setSpin(true)
         e.preventDefault()
         const dados = {
             matricula : matriula,
@@ -37,18 +41,24 @@ function AddFuncionario({fechar,atualizar}){
             const resultado = await api.post("/v2/funcionario", dados, {
                 headers: { "x-access-token": `${localStorage.getItem("token")}` }
             });
+            console.log(resultado);
+            
             if(resultado.status == 200){
-                atualizar(true)
-
+                console.log("aqui dentro do resultado");
+                
                 toast.success("Funcionario cadastrado!!!!")
+                atualiza(true)
 
             }
             
 
         }catch (erro){
+            if(erro.status == 404){
+                toast.info("Matricula ja cadastrada")
+            }
 
         }finally {
-            console.log("mundo");
+            setSpin(false)
             
         }
         
@@ -58,7 +68,7 @@ function AddFuncionario({fechar,atualizar}){
     return(
         <>
             <div ref={CardAddFuncionarioRef} onClick={(e) => {FecharCard(e)}} className="w-[100%] flex justify-center bg-transparent backdrop-blur-md  bg-black absolute z-10 h-[600px]">
-                <div className="shadow-2xl shadow-blue-500/20 text-white  relative md:w-[450px] md:h-[470px] bg-cardB z-10  md:p-5 md:pt-6 md:top-[40px] rounded-2xl flex flex-col p-5">
+                <div className="shadow-2xl shadow-blue-500/20 text-white  relative md:w-[450px] md:h-[570px] bg-cardB z-10  md:p-5 md:pt-5 md:top-[30px] rounded-2xl flex flex-col p-5">
                     <div id="Fechar-card" className=" flex  justify-end z-20 text-[30px] hover:cursor-pointer" > <IoMdCloseCircleOutline onClick={() => fechar(false)
                     }></IoMdCloseCircleOutline> </div>
                     <div id="titutlo" className="flex justify-center text-[20px] font-bold uppercase"><p>Cadastro de Funcionario Refeitorio</p></div>
@@ -82,7 +92,10 @@ function AddFuncionario({fechar,atualizar}){
                                 <option value="True" className=" text-black ">SIM</option>
                                 <option value="False" className=" text-black">Nao</option>
                             </select>
-                            <input type="submit" value="Cadastra"  className="bg-green-700  rounded-2xl w-24 h-10 self-center"/>
+                            {spin ? 
+                             <div className="animate-spin"><BsArrowClockwise className="text-[40px]"></BsArrowClockwise></div>
+                            : <input type="submit" value="Cadastra"  className="bg-green-700  rounded-2xl w-24 h-10 self-center"/>
+                            }   
                         </form>
                     </div>
                 </div>

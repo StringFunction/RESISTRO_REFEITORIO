@@ -90,8 +90,7 @@ function table({mt,setmt}){
                 <tr>
                     <th>MATRICULA</th>
                     <th>NOME</th>
-                    <th>SETOR</th>
-                    <th>CARGO</th>
+                    <th>EMPRESA</th>
                     <th>STATUS</th>
                 </tr>
             </thead>
@@ -101,8 +100,7 @@ function table({mt,setmt}){
                 <tr key={index}  className={e.Funcionario.Optante ? '' : "text-red-700"}>
                   <td>{e.Funcionario.matricula}</td>
                   <td>{e.Funcionario.nome}</td>
-                  <td>{e.Funcionario.setor}</td>
-                  <td>{e.Funcionario.cargo}</td>
+                  <td>{e.Funcionario.empresa}</td>
                   <td>{e.Funcionario.Optante ? "Sim" : "Nao"}</td>
                 </tr>
               ))
