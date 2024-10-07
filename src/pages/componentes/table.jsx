@@ -32,27 +32,19 @@ function table({mt,setmt}){
     setisatualiza(false)
   
     },3000)
-  
-  
     }
     
-   
-
     useEffect(() => {
         async function dados(){
           setisatualiza(true)
           
             try {
-                const respostaa = await api.get("/v1/passagem", {
+                const respostaa = await api.get("/v2/passagem", {
                   headers: {
                    ["x-access-token"]:  `${localStorage.getItem("token")}` 
                   }
                 });
-               
-
                 setpassagnes(respostaa.data)
-          
-                
               } catch (error) {
                 console.error(error);
               }
@@ -66,7 +58,14 @@ function table({mt,setmt}){
     
     },[mt])
   
-    console.log("Vericando pq disso" + passagens);
+    {
+      console.log(passagens);
+      
+      // passagens.map((e,inedx) => {
+      //   console.log(e.Funcionario);
+        
+      // })
+    }
     
     return (
         <>
@@ -99,12 +98,12 @@ function table({mt,setmt}){
             <tbody className="md:text-[20px]">
             {
               passagens.map((e, index) => (
-                <tr key={index}  className={e.status !== 'ativo' ? 'text-red-700' : ""}>
-                  <td>{e.matricula}</td>
-                  <td>{e.nome}</td>
-                  <td>{e.setor}</td>
-                  <td>{e.cargo}</td>
-                  <td>{e.status}</td>
+                <tr key={index}  className={e.Funcionario.Optante ? '' : "text-red-700"}>
+                  <td>{e.Funcionario.matricula}</td>
+                  <td>{e.Funcionario.nome}</td>
+                  <td>{e.Funcionario.setor}</td>
+                  <td>{e.Funcionario.cargo}</td>
+                  <td>{e.Funcionario.Optante ? "Sim" : "Nao"}</td>
                 </tr>
               ))
             }

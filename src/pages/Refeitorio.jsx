@@ -44,14 +44,14 @@ function Refeitorio() {
 
         setLoading(true);
         try {
-            const resposta = await api.get(`/v1/funcionario/${matricula}`, {
+            const resposta = await api.get(`/v2/funcionario/${matricula}`, {
                 headers: {
                     "x-access-token": `${localStorage.getItem("token")}`,
                 },
             });
 
             if (!!resposta.data) {
-                const registraPassagem = await api.post("/v1/passagem/Registro", resposta.data, {
+                const registraPassagem = await api.post("/v2/passagem", resposta.data, {
                     headers: {
                         "x-access-token": `${localStorage.getItem("token")}`,
                     },
