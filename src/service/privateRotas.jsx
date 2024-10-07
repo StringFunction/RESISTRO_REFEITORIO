@@ -6,7 +6,8 @@ import { Navigate, Outlet } from "react-router-dom";
 function PrivateRota(){
 
   const isLogado = localStorage.getItem("token")
-  console.log("aqui estou mais um" + isLogado);
+  const {nivel} = useContext(Contextapp)
+  console.log("aqui estou mais um" + nivel);
   
   
 

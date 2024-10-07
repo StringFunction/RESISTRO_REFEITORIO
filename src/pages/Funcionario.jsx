@@ -35,11 +35,12 @@ function Funcionario() {
             try {
                 console.log("Requisao de chamada de funcionarios ");
 
-                const resposta = await api.get("/v1/funcionario", {
+                const resposta = await api.get("/v2/funcionario", {
                     headers: {
                         ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization
                     }
                 })
+                console.log(resposta)
                 setfuncionario(resposta.data)
                 setAtualizaTabela(false)
                 setSpin(false)
@@ -61,13 +62,20 @@ function Funcionario() {
         setIdUsuario(id)
         setAt(infor)
         CardFuncionario.classList.remove("hidden")
+
+        CardFuncionario.classList.add("flex")
     }
     function closeCard() {
+        console.log("ola mundo");
+        console.log(CardFuncionario);
+        
+        CardFuncionario.classList.remove("flex")
         CardFuncionario.classList.add("hidden")
+
     }
     const filtrar = () => {
         return funcionario.filter((e) => {
-            const matchesMatriculaNome = e.matricula.includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
+            const matchesMatriculaNome = e.matricula.toString().includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
             const matchesEmpresa = Emrpesa === 'Todos' || e.empresa === Emrpesa
             const matchesStatus = status === 'Todos' || e.status === status
             return matchesMatriculaNome && matchesEmpresa && matchesStatus;
@@ -78,36 +86,37 @@ function Funcionario() {
         if (!AAtualizaStatus) return toast.info("Preencha os campo")
         const dados = {
             matricula: DadosAtualiza.matricula,
-            status: AAtualizaStatus
+            Optante: AAtualizaStatus
 
         }
-        console.log(dados);
-
+        console.log();
 
         try {
-            setSpin(true)
-            console.log("REQUISAO DE ATUALIZACAO ");
-
-            const resultado = await api.put("/v1/funcionario", {
-                headers: {
-                    ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization
-                },
-                data: dados
-            })
-
-            if (resultado.status == 200) {
-                toast.success("Informação atualizada")
-                CardFuncionario.classList.add("hidden")
-                setAtualizaTabela(true)
-                return
-
+            setSpin(true);
+            console.log("REQUISAO DE ATUALIZACAO");
+        
+            const resultado = await api.put(
+                "/v2/funcionario", 
+                 dados , // O corpo da requisição (data)
+                { // As opções, incluindo headers
+                    headers: {
+                        "x-access-token": `${localStorage.getItem("token")}` // Passa o token no header
+                    }
+                }
+            );
+        
+            if (resultado.status === 200) {
+                toast.success("Informação atualizada");
+                CardFuncionario.classList.add("hidden");
+                setAtualizaTabela(true);
+                
+                return;
             }
-
-
+            
         } catch (erro) {
-
+            console.error("Erro na requisição:", erro);
         } finally {
-            setSpin(false)
+            setSpin(false);
         }
 
     }
@@ -115,7 +124,7 @@ function Funcionario() {
         try {
             const MatriculadaPesta = await funcionario[matricula].matricula;
             console.log(MatriculadaPesta)
-            const resposta = await api.delete("/v1/funcionario", {
+            const resposta = await api.delete("/v2/funcionario", {
                 headers: { ["x-access-token"]: `${localStorage.getItem("token")}` }, data: {
                     matricula: MatriculadaPesta
                 }
@@ -162,10 +171,10 @@ function Funcionario() {
                     </select>
 
                 </div>
-                {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario}></AddFuncionario>}
+                {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario} atualiza={setAtualizaTabela}></AddFuncionario>}
 
 
-                <div id="CardFuncionario" className="md:w-[450px] md:h-[450px] md:border md:p-5  md:-mt-[100px] flex flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white
+                <div id="CardFuncionario" className="md:w-[450px] md:h-[450px] md:border md:p-5  md:-mt-[100px]  flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white
                     text-white w-[300px] h-[400px] rounded-2xl duration-500 hidden
                     ">
                     <div className="md:flex text-[30px]  md:left-[190px] md:top-[0px]  relative left-[100px] top-3 z-[100px]" onClick={closeCard}><IoMdCloseCircleOutline className="hover:cursor-pointer"></IoMdCloseCircleOutline></div>
@@ -180,8 +189,8 @@ function Funcionario() {
                         <form action="" onSubmit={atualizaStatus} className="flex flex-col gap-2 ">
                             <label htmlFor="opt">Optante pelo Refeitorio</label>
                             <select name="" id="" onChange={(e) => setAtualizaStatus(e.target.value)} value={AAtualizaStatus} className="bg-transparent border-b-2 ">
-                                <option value="Sim" className="text-black">Sim</option>
-                                <option value="Nao" className="text-black">Nao</option>
+                                <option value="True" className="text-black">Sim</option>
+                                <option value="False" className="text-black">Nao</option>
                             </select>
                             {isSpin ?
 
@@ -204,27 +213,29 @@ function Funcionario() {
                                     <th>MATRICULA</th>
                                     <th>NOME</th>
                                     <th>EMPRESA</th>
-                                    <th>STATUS</th>
+                                    <th>SETOR</th>
+                                    <th>CARGO</th>
+                                    <th>Optante</th>
                                     <th colSpan="2">OPCOES</th>
                                 </tr>
                             </thead>
                             <tbody className="">
                                 {
 
-
-                                    filtrar().map((e, index) => (
-                                        <tr key={index} className={e.status !== 'ativo' ? 'text-red-700 md:text-[20px]' : "md:text-[20px]  "}>
-                                            <td>{e.matricula}</td>
-                                            <td>{e.nome}</td>
-                                            <th>Condo do forro</th>
-                                            <td>{e.status}</td>
-                                            <th className="">
-                                                <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
-                                            </th>
-                                            <th>
-                                                <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
-                                            </th>
-
+filtrar().map((e, index) => (
+    <tr key={index} className={e.Optante ? "md:text-[20px]" : "text-red-700 md:text-[20px] "}>
+        <td>{e.matricula}</td>
+        <td>{e.nome}</td>
+        <th>{e.empresa}</th>
+        <th>{e.setor}</th>
+        <th>{e.cargo}</th>
+        <td>{e.Optante ? "Sim" : "Nao"}</td>
+        <th className="">
+            <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
+        </th>
+        <th>
+            <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
+        </th>
 
                                         </tr>
                                     ))

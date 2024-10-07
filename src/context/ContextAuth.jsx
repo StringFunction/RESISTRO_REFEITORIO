@@ -32,7 +32,7 @@ const ProviderApp = ({children}) => {
    
     async function autenticacao(dados){
       try{
-        const resposta = await api.post("/v1/Login", dados)
+        const resposta = await api.post("/v2/Login", dados)
         
         
         const token = resposta.data.token
@@ -40,6 +40,8 @@ const ProviderApp = ({children}) => {
         const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))
         setmatricula(tokenDecodicador.matricula)
         setusuario(tokenDecodicador.nome)
+        setnivel(tokenDecodicador.nivel)
+
         setlogado(true)
         return(resposta)
         
