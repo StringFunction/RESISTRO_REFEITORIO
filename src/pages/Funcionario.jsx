@@ -229,12 +229,8 @@ function Funcionario() {
                                         </tr>
                                     ))
                                 }
-
                             </tbody>
                         </table>
-
-
-
                     }
 
                 </div>
