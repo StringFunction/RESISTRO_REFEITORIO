@@ -52,7 +52,7 @@ function Funcionario() {
                 }
             }
         }
-        setTimeout(consulta, 3000)
+        consulta()
 
     }, [atualizaTabela])
     console.log("conde do pagina funcionario" + DadosAtualiza.matricula);
@@ -122,6 +122,7 @@ function Funcionario() {
     }
     async function ExcluirUsuario(matricula) {
         try {
+            setSpin(true)
             const MatriculadaPesta = await funcionario[matricula].matricula;
             console.log(MatriculadaPesta)
             const resposta = await api.delete("/v2/funcionario", {
@@ -138,6 +139,8 @@ function Funcionario() {
         } catch (erro) {
             console.log(erro);
 
+        }finally{
+            setSpin(false)
         }
 
     }
@@ -234,6 +237,7 @@ filtrar().map((e, index) => (
             <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
         </th>
         <th>
+            
             <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
         </th>
 
