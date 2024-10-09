@@ -16,8 +16,9 @@ function App() {
     <MenuNavegacao />
     <Container>
     <Routes>
+
       <Route path="/" element={<PrivateRota></PrivateRota>}>
-            <Route index element={<Navigate to="/Home" replace />} />
+            <Route index element={<Navigate to="/Refeitorio" replace />} />
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
             <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>

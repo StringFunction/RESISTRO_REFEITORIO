@@ -26,12 +26,12 @@ function table({mt,setmt}){
     } catch (error) {
       console.log(error);
     }
-    setTimeout(() => {
+    
   
       setLoding(false)
     setisatualiza(false)
   
-    },3000)
+
     }
     
     useEffect(() => {
@@ -52,7 +52,7 @@ function table({mt,setmt}){
               setmt("")
            
         }
-        const timeoutId = setTimeout(dados, 3000); // Aguarda 6 segundos antes de executar
+        dados(); // Aguarda 6 segundos antes de executar
 
         // Limpeza para evitar problemas com múltiplos timeouts quando a dependência [tnc] muda
     

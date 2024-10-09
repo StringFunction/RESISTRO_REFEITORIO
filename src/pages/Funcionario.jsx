@@ -15,10 +15,7 @@ function Funcionario() {
     const [status, setstatus] = useState("Todos")
     const [Matricula_Nome, setMatricua_Nome] = useState("")
     const [Emrpesa, setEmpresa] = useState("Todos")
-    const [DadosAtualiza, setAt] = useState({
-        nome: "",
-        matricula: ""
-    })
+    const [DadosAtualiza, setAt] = useState({nome: "",matricula: ""})
     const [IdUsuario, setIdUsuario] = useState(null)
     const [AAtualizaStatus, setAtualizaStatus] = useState("")
     const [isSpin, setSpin] = useState(false)
@@ -225,21 +222,21 @@ function Funcionario() {
                             <tbody className="">
                                 {
 
-filtrar().map((e, index) => (
-    <tr key={index} className={e.Optante ? "md:text-[20px]" : "text-red-700 md:text-[20px] "}>
-        <td>{e.matricula}</td>
-        <td>{e.nome}</td>
-        <th>{e.empresa}</th>
-        <th>{e.setor}</th>
-        <th>{e.cargo}</th>
-        <td>{e.Optante ? "Sim" : "Nao"}</td>
-        <th className="">
-            <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
-        </th>
-        <th>
-            
-            <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
-        </th>
+                                filtrar().map((e, index) => (
+                                    <tr key={index} className={e.Optante ? "md:text-[20px]" : "text-red-700 md:text-[20px] "}>
+                                        <td>{e.matricula}</td>
+                                        <td>{e.nome}</td>
+                                        <th>{e.empresa}</th>
+                                        <th>{e.setor}</th>
+                                        <th>{e.cargo}</th>
+                                        <td>{e.Optante ? "Sim" : "Nao"}</td>
+                                        <th className="">
+                                            <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
+                                        </th>
+                                        <th>
+                                            
+                                            <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
+                                        </th>
 
                                         </tr>
                                     ))

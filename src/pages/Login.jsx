@@ -20,6 +20,7 @@ const [spin , setspin] = useState(false)
 
 
 if (!!isLogado) {
+   
      
     navigate("/")
     
@@ -71,7 +72,7 @@ const entrar = async (e) =>{
 }
  ;
     
-    if (isLogado) return <Navigate to="/Home"></Navigate> 
+    if (isLogado) return <Navigate to="/"></Navigate> 
 
     return (
       
