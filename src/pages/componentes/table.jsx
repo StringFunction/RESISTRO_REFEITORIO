@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../../service/api"
+import { ToastContainer, toast } from "react-toastify"
 
 
 
@@ -13,7 +14,7 @@ function table({mt,setmt}){
     setLoding(true)
     setisatualiza(true)
     try {
-      const resposta = await api.delete("/v1/passagem/Registro", {
+      const resposta = await api.post("/v2/passagem/finalizar", "mundo", {
         headers: {
          ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
         }
@@ -27,7 +28,7 @@ function table({mt,setmt}){
       console.log(error);
     }
     
-  
+    toast.success("Registro Finalizado")
       setLoding(false)
     setisatualiza(false)
   
@@ -123,7 +124,7 @@ function table({mt,setmt}){
 }
         </div>
 
-                
+        <ToastContainer></ToastContainer>
         </>
     )
 }
