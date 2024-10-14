@@ -1,6 +1,10 @@
+import React from 'react';
+
 import { useEffect, useState } from "react"
 import api from "../../service/api"
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify"
+
 
 
 
@@ -19,18 +23,18 @@ function table({mt,setmt}){
          ["x-access-token"]:  `${localStorage.getItem("token")}` // Passa o token no header Authorization
         }
       });
+      toast.success("Registro Finalizado")
+      
       setpassagnes(resposta.data)
       console.log("vericando que tipo de respostem " + passagens);
-      
-
       setpassagnes("")
     } catch (error) {
-      console.log(error);
-    }
-    
-    toast.success("Registro Finalizado")
+      if(error.status == 404) return toast.info("SEM REGISTRO")
+    } finally{
       setLoding(false)
     setisatualiza(false)
+  }
+    
   
 
     }
@@ -92,7 +96,7 @@ function table({mt,setmt}){
                     <th>MATRICULA</th>
                     <th>NOME</th>
                     <th>EMPRESA</th>
-                    <th>STATUS</th>
+                    <th>OPTANTE</th>
                 </tr>
             </thead>
             <tbody className="md:text-[20px]">
@@ -124,7 +128,7 @@ function table({mt,setmt}){
 }
         </div>
 
-        <ToastContainer></ToastContainer>
+        
         </>
     )
 }

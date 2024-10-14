@@ -6,6 +6,7 @@ import api from "../service/api";
 import { ToastContainer, toast } from 'react-toastify';
 import { BsQrCodeScan } from "react-icons/bs";
 import useAppContext from "../hooks/UseAppContext";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Refeitorio() {
     const { deslogar } = useAppContext();
@@ -57,9 +58,9 @@ function Refeitorio() {
                     },
                 });
                 if (resposta.data.status !== "ativo") {
-                    toast.info("Funcionário sem permissão");
                     setatualizar(matricula); // Atualiza a tabela
                     setLoading(false);
+                    toast.warning("Funcionário sem permissão");
                     return;
                 }
 
@@ -132,7 +133,7 @@ function Refeitorio() {
 
                 <Table mt={atualizar} setmt={setatualizar} />
             </div>
-            <ToastContainer />
+            <ToastContainer></ToastContainer>
         </>
     );
 }

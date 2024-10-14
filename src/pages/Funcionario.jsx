@@ -5,6 +5,8 @@ import { BsFillPersonFill, BsArrowClockwise } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import AddFuncionario from "./componentes/CardAddFuncionario";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import api from "../service/api";
 
