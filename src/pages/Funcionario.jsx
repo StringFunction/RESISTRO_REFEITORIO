@@ -27,7 +27,7 @@ function Funcionario() {
     const { nivel } = useAppContext()
     const [OpenCardFuncionario, setOpenCardFuncionario] = useState(false)
 
-
+   
     useEffect(() => {
         setSpin(true)
         async function consulta() {
@@ -73,13 +73,18 @@ function Funcionario() {
 
     }
     const filtrar = () => {
+        console.log("resultado do status  " + status);
+        
         return funcionario.filter((e) => {
             const matchesMatriculaNome = e.matricula.toString().includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
-            const matchesEmpresa = Emrpesa === 'Todos' || e.empresa === Emrpesa
-            const matchesStatus = status === 'Todos' || e.status === status
+            const matchesEmpresa = Emrpesa === 'Todos' || e.empresa.toString().includes(Emrpesa)
+            const matchesStatus = status === 'Todos' || e.Optante.toString().includes(status)
             return matchesMatriculaNome && matchesEmpresa && matchesStatus;
         });
     };
+
+    console.log(filtrar());
+    
     async function atualizaStatus(e) {
         e.preventDefault()
         if (!AAtualizaStatus) return toast.info("Preencha os campo")
@@ -158,18 +163,19 @@ function Funcionario() {
                     <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Empresa</label>
                     <select name="" id="" value={Emrpesa} onChange={(e) => setEmpresa(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-white text-center">
                         <option className="text-black" value="Todos">Todos</option>
-                        <option className="text-black" value="CDA">CDA</option>
+                        {funcionario.map((e)=> <option className="text-black" value={e.empresa}>{e.empresa}</option>)}
+                        {/* <option className="text-black" value="CDA">CDA</option>
                         <option className="text-black" value="VOUGA">VOUGA</option>
                         <option className="text-black" value="NOSSCAUCAIA">NOSSAMOTO CAUCAIA</option>
                         <option className="text-black" value="NOSSSIQUEIRA">NOSSAMOTO SIQUEIRA</option>
                         <option className="text-black" value="NOSSMATRIZ">NOSSOMOTO MATRIZ</option>
-                        <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option>
+                        <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option> */}
                     </select>
                     <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Status</label>
                     <select name="Status" id="" value={status} onChange={(e) => setstatus(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-center text-white">
                         <option className="text-black" value="Todos">Todos</option>
-                        <option className="text-black" value="Ativo">Ativo</option>
-                        <option className="text-black" value="Nao">Nao Ativo</option>
+                        <option className="text-black" value="true">Ativo</option>
+                        <option className="text-black" value="false">Nao Ativo</option>
                     </select>
 
                 </div>

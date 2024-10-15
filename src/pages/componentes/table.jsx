@@ -4,12 +4,13 @@ import { useEffect, useState } from "react"
 import api from "../../service/api"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify"
+import useAppContext from '../../hooks/UseAppContext';
 
 
 
 
 function table({mt,setmt}){
-
+  const {deslogar} = useAppContext()
   const [isLodinng, setLoding] = useState(false)
   const [passagens, setpassagnes] = useState([])
   const [isatualiza, setisatualiza] = useState(false)
@@ -51,11 +52,13 @@ function table({mt,setmt}){
                 });
                 setpassagnes(respostaa.data)
               } catch (error) {
-                console.error(error);
+                if (error.status == 498) return deslogar()
+              } finally {
+
+                setisatualiza(false)
+                setmt("")
+             
               }
-              setisatualiza(false)
-              setmt("")
-           
         }
         dados(); // Aguarda 6 segundos antes de executar
 
