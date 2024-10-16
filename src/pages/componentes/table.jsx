@@ -30,7 +30,14 @@ function table({mt,setmt}){
       console.log("vericando que tipo de respostem " + passagens);
       setpassagnes("")
     } catch (error) {
-      if(error.status == 404) return toast.info("SEM REGISTRO")
+      if (error.status == 404) {
+        toast.info("SEM REGISTRO")
+        
+      }else if (error.status == 498){
+        alert("Sessao expirada")
+        return deslogar()
+      }
+
     } finally{
       setLoding(false)
     setisatualiza(false)
@@ -52,7 +59,10 @@ function table({mt,setmt}){
                 });
                 setpassagnes(respostaa.data)
               } catch (error) {
-                if (error.status == 498) return deslogar()
+                if (error.status == 498){
+                  alert("OLA MUNDO")
+                   return deslogar()
+                  }
               } finally {
 
                 setisatualiza(false)
@@ -74,7 +84,29 @@ function table({mt,setmt}){
         
       // })
     }
-    
+    //funcao para da style diferenciado para tipo de optantes
+    function optante(params) {
+      if(params == true){
+        return ""
+      } else if (params == "frequentado"){
+        return "text-yellow-500"
+      } else{
+        return "text-red-400"
+      }
+      
+    }
+    function status(params) {
+      if (params == true) {
+        return "Sim"
+
+        
+      }else if(params == "frequentado"){
+        return "frequentado"
+      
+    } else{
+        return "Nao"
+    }
+  }
     return (
         <>
         
@@ -105,11 +137,11 @@ function table({mt,setmt}){
             <tbody className="md:text-[20px]">
             {
               passagens.map((e, index) => (
-                <tr key={index}  className={e.Funcionario.Optante ? '' : "text-red-700"}>
+                <tr key={index}  className={optante(e.Funcionario.Optante)}>
                   <td>{e.Funcionario.matricula}</td>
                   <td>{e.Funcionario.nome}</td>
                   <td>{e.Funcionario.empresa}</td>
-                  <td>{e.Funcionario.Optante ? "Sim" : "Nao"}</td>
+                  <td>{status(e.Funcionario.Optante)}</td>
                 </tr>
               ))
             }

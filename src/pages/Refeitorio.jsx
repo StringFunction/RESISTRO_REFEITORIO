@@ -57,22 +57,27 @@ function Refeitorio() {
                         "x-access-token": `${localStorage.getItem("token")}`,
                     },
                 });
-                if (resposta.data.status !== "ativo") {
-                    setatualizar(matricula); // Atualiza a tabela
+                if (resposta.data.Optante == false) {
                     setLoading(false);
                     toast.warning("Funcionário sem permissão");
                     return;
                 }
 
-
+                if (resposta.data.Optante == "frequentado") {
+                    setLoading(false);
+                    toast.warning("Funcionário  frequentador");
+                    return;
+                }
                 if (registraPassagem.status === 200) {
-                    toast.success("Funcionário registrado com sucesso");
-                    setatualizar(matricula); // Atualiza a tabela
+                    console.log(resposta.data.status);
+                    
+                   return toast.success("Funcionário registrado com sucesso");
                 }
             }
         } catch (erro) {
             handleApiError(erro);
         } finally {
+            setatualizar(matricula); // Atualiza a tabela
             setLoading(false);
         }
     }
