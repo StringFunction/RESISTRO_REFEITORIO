@@ -7,6 +7,7 @@ import Footer from "./Navbar/footer"
 import Container from "./layout/Conteiner"
 import Login from "./pages/Login"
 import PrivateRota from "./service/privateRotas"
+import TelaCadFrequen from "./pages/TelaCadFrequentador"
 function App() {
   
 
@@ -30,7 +31,7 @@ function App() {
 
 
 
-
+      <Route path="/Frequetador" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
     </Routes>
     

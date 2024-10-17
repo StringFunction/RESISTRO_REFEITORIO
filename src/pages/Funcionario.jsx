@@ -148,22 +148,43 @@ function Funcionario() {
         }
 
     }
-
+    function optante(params) {
+        if(params == true){
+          return ""
+        } else if (params == "frequentado"){
+          return "text-yellow-500"
+        } else{
+          return "text-red-400"
+        }
+        
+      }
+      function statuss(params) {
+        if (params == true) {
+          return "Sim"
+  
+          
+        }else if(params == "frequentado"){
+          return "frequentado"
+        
+      } else{
+          return "Nao"
+      }
+    }
 
     // Renderiza a página se o usuário estiver logado
 
     return (
         <>
 
-            <div className="bg-fundoF flex h-[600px] justify-center items-center flex-col">
+            <div className="bg-fundoF flex h-[600px] justify-center items-center flex-col pt-9">
 
-                <div id="Pesquisa" className="border md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px] -mt-28" >
+                <div id="Pesquisa" className="border md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px]" >
                     <label className="text-[17px] text-white md:h-11 flex items-end" htmlFor="Matricula">Matricula ou Nome</label>
                     <input type="text" placeholder="matricula ou nome" onChange={(e) => setMatricua_Nome(e.target.value)} className="md:h-[40px]  text-center bg-transparent border-b-[1px] text-white " />
                     <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Empresa</label>
                     <select name="" id="" value={Emrpesa} onChange={(e) => setEmpresa(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-white text-center">
                         <option className="text-black" value="Todos">Todos</option>
-                        {funcionario.map((e)=> <option className="text-black" value={e.empresa}>{e.empresa}</option>)}
+                        {funcionario.map((e, index)=> <option className="text-black" key={index} value={e.empresa}>{e.empresa}</option>)}
                         {/* <option className="text-black" value="CDA">CDA</option>
                         <option className="text-black" value="VOUGA">VOUGA</option>
                         <option className="text-black" value="NOSSCAUCAIA">NOSSAMOTO CAUCAIA</option>
@@ -171,10 +192,11 @@ function Funcionario() {
                         <option className="text-black" value="NOSSMATRIZ">NOSSOMOTO MATRIZ</option>
                         <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option> */}
                     </select>
-                    <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Status</label>
+                    <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">s</label>
                     <select name="Status" id="" value={status} onChange={(e) => setstatus(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-center text-white">
                         <option className="text-black" value="Todos">Todos</option>
                         <option className="text-black" value="true">Ativo</option>
+                        <option className="text-black" value="frequentado">Frequentador</option>
                         <option className="text-black" value="false">Nao Ativo</option>
                     </select>
 
@@ -197,8 +219,9 @@ function Funcionario() {
                         <form action="" onSubmit={atualizaStatus} className="flex flex-col gap-2 ">
                             <label htmlFor="opt">Optante pelo Refeitorio</label>
                             <select name="" id="" onChange={(e) => setAtualizaStatus(e.target.value)} value={AAtualizaStatus} className="bg-transparent border-b-2 ">
-                                <option value="True" className="text-black">Sim</option>
-                                <option value="False" className="text-black">Nao</option>
+                                <option value="true" className="text-black">Sim</option>
+                                <option value="frequentado" className="text-black">Frequentador</option>
+                                <option value="false" className="text-black">Nao</option>
                             </select>
                             {isSpin ?
 
@@ -212,10 +235,10 @@ function Funcionario() {
                 </div>
 
                 <div className="overflow-scroll bg-cardB gap-5 md:w-f md:h-[350px] md:p-0 md:rounded-md shadow-2xl shadow-black text-red-50 flex flex-col
-                    h-[250px] w-[400px] mt-6">
+                    h-[250px] w-[400px] mt-6 mb-5">
 
                     {!!isSpin ? <div className="flex justify-center items-center  h-96 animate-spin"><BsArrowClockwise className="text-[110px]" ></BsArrowClockwise></div> :
-                        <table className=" md:w-full rounded-t-md  text-center text-white w-auto text-xs h-56 ">
+                        <table className=" md:w-full rounded-t-md  text-center text-white w-auto md:text-xs h-56 p-16 ">
                             <thead className="text-white bg-teal-500 rounded-t-md h-16 sticky top-0 p-12 md:w-auto">
                                 <tr>
                                     <th>MATRICULA</th>
@@ -231,13 +254,13 @@ function Funcionario() {
                                 {
 
                                 filtrar().map((e, index) => (
-                                    <tr key={index} className={e.Optante ? "md:text-[20px]" : "text-red-700 md:text-[20px] "}>
+                                    <tr key={index} className={optante(e.Optante)}>
                                         <td>{e.matricula}</td>
                                         <td>{e.nome}</td>
                                         <th>{e.empresa}</th>
                                         <th>{e.setor}</th>
                                         <th>{e.cargo}</th>
-                                        <td>{e.Optante ? "Sim" : "Nao"}</td>
+                                        <td>{statuss(e.Optante)}</td>
                                         <th className="">
                                             <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
                                         </th>
@@ -255,7 +278,7 @@ function Funcionario() {
 
                 </div>
                 <div className="flex  md:w-[900px] w-[400px] justify-end">
-                    <button className="text-white  bg-green-700 border w-[150px] h-[50px] rounded-2xl" onClick={() => setOpenCardFuncionario(true)}>Adicionar Funcionario</button>
+                    <button className="text-white  bg-green-700 shadow-2xl w-[150px] h-[50px] rounded-2xl" onClick={() => setOpenCardFuncionario(true)}>Adicionar Funcionario</button>
 
                 </div>
             </div>
