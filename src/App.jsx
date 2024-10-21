@@ -31,7 +31,7 @@ function App() {
 
 
 
-      <Route path="/Frequetador" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
+      <Route path="/Fre" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
     </Routes>
     
