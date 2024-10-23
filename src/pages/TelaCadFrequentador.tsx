@@ -38,7 +38,7 @@ export default function TelaCadFrequen() {
     
  
     
-    function CadastroF(params) {
+   async function CadastroF(params) {
         params.preventDefault()
         const inputs = [...params.target.querySelectorAll("input")]
         const select = params.target.querySelector("select");
@@ -63,6 +63,7 @@ export default function TelaCadFrequen() {
             })
         return toast.info("Preencha os Campos")
         }
+
         const dados = {
             matricula : matricula,
             nome : nome,
@@ -72,7 +73,33 @@ export default function TelaCadFrequen() {
             Optante : "frequentado"
 
         }
+        try {
+            const resultado = await toast.promise(api.post("/v1/frequentador", dados), {
+                
+                    pending: 'Aguarde',
+                    success: 'Matricula Cadastrada',
+                    error: 'Matricula ja Cadastrada'
+                  
+            })
+           
+                        
+        } catch (error) {
+           if (error.status == 504) {
+            toast.info("Erro no servidor")
+            
+           }
+            
+        }finally{
+            inputs.forEach((e,index) => { 
+                if(index != 4){
+                    e.value = ""
 
+                }
+            })
+            
+       
+        }
+    
         
         
         console.log("NOME : " + nome);

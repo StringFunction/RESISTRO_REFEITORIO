@@ -9,7 +9,7 @@ import useAppContext from "../hooks/UseAppContext";
 import 'react-toastify/dist/ReactToastify.css';
 
 function Refeitorio() {
-    const { deslogar } = useAppContext();
+    const { deslogar,nivel } = useAppContext();
     const [matricula, setmatricula] = useState(null);
     const [chcuchu, setchuchu] = useState(null);
     const [atualizar, setatualizar] = useState("");
@@ -129,6 +129,7 @@ function Refeitorio() {
                                 <div className="w-10 h-10 border-white border-[10px] rounded-full border-t-transparent animate-spin"></div>
                             </div>
                         ) : (
+                            
                             <button onClick={btnregistra} className="w-36 h-10 bg-green-700 rounded-3xl">
                                 Registrar
                             </button>

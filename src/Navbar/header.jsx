@@ -56,7 +56,7 @@ function MenuNavegacao() {
                 &&
                 <div className="md:flex md:justify-between md:items-center bg-menu md:h-28 md:px-2 md: text-zinc-300 md:relative ">
                     <div className=" flex self-center  md:w-[400px] w-[350px]">
-                        <Link to="/Home"><img src={logo_carmais} alt="" srcset="" /></Link>
+                        <Link to="/Home"><img src={logo_carmais} alt="" /></Link>
                     </div>
 
                     <div id="menuBar">

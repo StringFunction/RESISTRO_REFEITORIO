@@ -10,7 +10,7 @@ import useAppContext from '../../hooks/UseAppContext';
 
 
 function table({mt,setmt}){
-  const {deslogar} = useAppContext()
+  const {deslogar, nivel} = useAppContext()
   const [isLodinng, setLoding] = useState(false)
   const [passagens, setpassagnes] = useState([])
   const [isatualiza, setisatualiza] = useState(false)
@@ -159,6 +159,7 @@ function table({mt,setmt}){
                             <div className="w-10 h-10 border-white border-[10px] rounded-full border-t-transparent animate-spin"></div>
                         </div>
                         :
+                        nivel == 3 &&
                         <button onClick={FINALIZAR} className="w-36  h-10 bg-green-700 rounded-3xl" >Finalizar</button>
 }
         </div>

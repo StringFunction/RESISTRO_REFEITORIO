@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,13 +19,11 @@ const [spin , setspin] = useState(false)
 
 
 
-if (!!isLogado) {
-   
-     
-    navigate("/")
-    
-    
-}
+useEffect(() => {
+    if (isLogado) {
+        navigate("/"); // Faz o redirecionamento após a renderização
+    }
+}, [isLogado, navigate]);
 
 const entrar = async (e) =>{
     e.preventDefault()
