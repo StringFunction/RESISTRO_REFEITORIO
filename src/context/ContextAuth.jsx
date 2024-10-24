@@ -35,6 +35,7 @@ const ProviderApp = ({children}) => {
         const resposta = await api.post("/v2/Login", dados)
         
         
+        
         const token = resposta.data.token
         localStorage.setItem("token", token)
         const tokenDecodicador = await jwtDecode(localStorage.getItem("token"))

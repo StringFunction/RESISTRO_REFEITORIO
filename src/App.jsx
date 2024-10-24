@@ -8,18 +8,22 @@ import Container from "./layout/Conteiner"
 import Login from "./pages/Login"
 import PrivateRota from "./service/privateRotas"
 import TelaCadFrequen from "./pages/TelaCadFrequentador"
+import useAppContext from "./hooks/UseAppContext";
 function App() {
+  const { nivel } = useAppContext()
+  console.log("Nivel dentro do app  " + nivel );
   
 
   return (
     <>
+    
     <BrowserRouter>
     <MenuNavegacao />
     <Container>
     <Routes>
 
-      <Route path="/" element={<PrivateRota></PrivateRota>}>
-            <Route index element={<Navigate to="/Refeitorio" replace />} />
+      <Route path="/" element={<PrivateRota nivel={nivel}></PrivateRota>}>
+            <Route index element={<Navigate to={nivel == 3 ? "/Home" : "/Refeitorio"} replace />} />
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
             <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>

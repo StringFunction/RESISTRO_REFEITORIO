@@ -13,7 +13,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 function MenuNavegacao() {
 
-    const { isLogado, deslogar, usuario, matricula } = useAppContext()
+    const { isLogado, deslogar, usuario, matricula,nivel } = useAppContext()
     const sair = () => {
         deslogar()
 
@@ -67,14 +67,16 @@ function MenuNavegacao() {
                         top-[-600px] transition-all ease-in duration-500  md:transition-none z-50">
                         <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-end md:relative md:gap-0 md:flex-row md:pt-0 
                           flex  flex-col bg-black w-full   pt-10 text-slate-300  ">
-                            {/* <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
-                                 hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl  tracking-widest">
-                                <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
-                            </li>
-                            <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer
-                                 hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
-                                <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
-                            </li> */}
+                            { nivel == 3 && 
+                               <>
+                               <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
+                                 <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
+                               </li>
+                               <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
+                                 <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
+                               </li>
+                             </>
+                            }
                             <li className="ml-3" onClick={btnUser}>
                                 <FaRegUserCircle className="md:text-[50px] md:flex md:hover:text-white md:hover:cursor-pointer hidden "></FaRegUserCircle>
                             </li>

@@ -10,7 +10,13 @@ function PrivateRota(){
   console.log("aqui estou mais um" + nivel);
   
   
-
+  if (!!isLogado) {
+    if (nivel == 3){
+      return <Outlet></Outlet>
+    } else {
+      <Navigate to="/Login"></Navigate>
+    }
+  }
 
   return !!isLogado ? <Outlet /> : <Navigate to="/Login"></Navigate>
 
