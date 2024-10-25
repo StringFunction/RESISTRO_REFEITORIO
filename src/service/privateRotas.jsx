@@ -18,7 +18,7 @@ function PrivateRota(){
       return <Navigate to="Refeitorio"></Navigate>
     }
   } else{
-    console.log("aqui dentro de acessao de token invalido ");
+    console.log("aqui dentro de acessao de token invali ");
     
     return <Navigate to="/Login"></Navigate>
   }
