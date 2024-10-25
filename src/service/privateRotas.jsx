@@ -7,7 +7,7 @@ function PrivateRota(){
 
   const isLogado = localStorage.getItem("token")
   const {nivel} = useContext(Contextapp)
-  console.log("aqui estou mais um" + nivel);
+  console.log("aqui estou mais" + nivel);
   
   
   if (!!isLogado) {
