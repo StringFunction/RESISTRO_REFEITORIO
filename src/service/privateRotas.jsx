@@ -14,11 +14,16 @@ function PrivateRota(){
     if (nivel == 3){
       return <Outlet></Outlet>
     } else {
-      <Navigate to="/Login"></Navigate>
+      alert("aqui estou");
+      return <Navigate to="Refeitorio"></Navigate>
     }
+  } else{
+    console.log("aqui dentro de acessao de token invalido ");
+    
+    return <Navigate to="/Login"></Navigate>
   }
 
-  return !!isLogado ? <Outlet /> : <Navigate to="/Login"></Navigate>
+  // return !!isLogado ? <Outlet /> : <Navigate to="/Login"></Navigate>
 
 }
 
