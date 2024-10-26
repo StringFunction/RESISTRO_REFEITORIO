@@ -6,6 +6,8 @@ import { jwtDecode } from "jwt-decode";
 
 function PrivateRota(){
   const isLogado = localStorage.getItem("token")
+
+
   
 
   
