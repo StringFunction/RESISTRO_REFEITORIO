@@ -3,18 +3,19 @@ import { useContext, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
+
 function PrivateRota(){
-  
   const isLogado = localStorage.getItem("token")
-  const {nivel} = useContext(Contextapp)
-  console.log("aqui estou mais um" + nivel);
+  
+
   
   if (!!isLogado) {
     const dados = jwtDecode(isLogado);
     
 
     if (dados.nivel !== 3) {
-        alert("ola mundo");
+
+       
         return <Navigate to="/Refeitorio"></Navigate>
     }
 
@@ -29,4 +30,21 @@ function PrivateRota(){
 
 }
 
-export default PrivateRota
+function RotaRefeitorio() {
+  const isLogado = localStorage.getItem("token")
+  console.log(isLogado);
+  
+
+   
+  if (!!isLogado) { 
+    return (
+        <Outlet />
+    );
+} else {
+    console.log("Token de acesso inválido");
+    return <Navigate to="/Login" />;
+}
+  
+}
+
+export  {PrivateRota,RotaRefeitorio}

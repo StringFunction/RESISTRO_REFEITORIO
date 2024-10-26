@@ -6,7 +6,9 @@ import Home from "./pages/Home"
 import Footer from "./Navbar/footer"
 import Container from "./layout/Conteiner"
 import Login from "./pages/Login"
-import PrivateRota from "./service/privateRotas"
+
+
+import {PrivateRota,RotaRefeitorio } from "./service/privateRotas"
 import TelaCadFrequen from "./pages/TelaCadFrequentador"
 import useAppContext from "./hooks/UseAppContext";
 import { jwtDecode } from "jwt-decode"
@@ -28,14 +30,10 @@ function App() {
             <Route index element={<Navigate to={nivel == 3 ? "/Home" : "/Refeitorio"}  />} />
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Funcionario" element={<Funcionario></Funcionario>}></Route>
-            <Route path="/Refeitorio" element={<Refeitorio></Refeitorio>}></Route>
       </Route>
-      
-
-
-
-
-
+      <Route path="/Refeitorio" element={<RotaRefeitorio></RotaRefeitorio>}>
+                <Route index element={<Refeitorio></Refeitorio>}></Route>
+      </Route>
 
       <Route path="/Fre" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
