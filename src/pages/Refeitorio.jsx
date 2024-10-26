@@ -45,35 +45,39 @@ function Refeitorio() {
 
         setLoading(true);
         try {
-            const resposta = await api.get(`/v2/funcionario/${matricula}`, {
-                headers: {
-                    "x-access-token": `${localStorage.getItem("token")}`,
-                },
-            });
+            // const resposta = await api.get(`/v2/funcionario/${matricula}`, {
+            //     headers: {
+            //         "x-access-token": `${localStorage.getItem("token")}`,
+            //     },
+            // });
 
-            if (!!resposta.data) {
-                const registraPassagem = await api.post("/v2/passagem", resposta.data, {
+            // if (!!resposta.data) {
+                const registraPassagem = await api.post("/v2/passagem", {matricula : matricula}, {
                     headers: {
                         "x-access-token": `${localStorage.getItem("token")}`,
                     },
                 });
-                if (resposta.data.Optante == false) {
+                console.log(registraPassagem.data.Optante);
+          
+                
+                
+                if (registraPassagem.data.Optante == "False") {
                     setLoading(false);
                     toast.warning("Funcionário sem permissão");
                     return;
                 }
 
-                if (resposta.data.Optante == "frequentado") {
+                if (registraPassagem.data.Optante == "frequentado") {
                     setLoading(false);
                     toast.warning("Funcionário  frequentador");
                     return;
                 }
                 if (registraPassagem.status === 200) {
-                    console.log(resposta.data.status);
+                    console.log(registraPassagem.data.status);
                     
                    return toast.success("Funcionário registrado com sucesso");
                 }
-            }
+            
         } catch (erro) {
             handleApiError(erro);
         } finally {
@@ -97,7 +101,7 @@ function Refeitorio() {
                 deslogar();
                 break;
             default:
-                toast.error("Erro no servidor ao registrar passagem");
+                toast.error("Erro no servidor ao registrar passage");
                 console.error("Erro no servidor:", erro);
         }
     }
