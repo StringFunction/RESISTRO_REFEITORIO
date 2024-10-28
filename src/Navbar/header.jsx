@@ -65,8 +65,9 @@ function MenuNavegacao() {
 
                     <div id="menu" className="md:h-full md:w-[500px] md:flex md:justify-center  md:items-center md:static md:opacity-100 opacity-0 absolute w-full 
                         top-[-600px] transition-all ease-in duration-500  md:transition-none z-50">
+                            
                         <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-end md:relative md:gap-0 md:flex-row md:pt-0 
-                          flex  flex-col bg-black w-full   pt-10 text-slate-300  ">
+                          flex  flex-col bg-gray-900 w-full   pt-10 text-slate-300 h-[400px]   ">
                             { nivel == 3 && 
                                <>
                                <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
@@ -83,8 +84,8 @@ function MenuNavegacao() {
 
                         </ul>
 
-                        <div id="user" className="absolute md:right-2 backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:bg-transparent md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300
-                                bg-transparent	w-full h-[300px] flex flex-col justify-center items-center text-white gap-6
+                        <div id="user" className="absolute md:right-2 md:text-white backdrop-blur-sm  md:-top-[400px] md:flex md:-bottom-52 md:bg-transparent md:border md:backdrop: md:w-[400px] md:h-[210px]  md:flex-col md:justify-center md:items-center tracking-[2px]  md:p-3 z-10 md:gap-3 md:duration-300
+                                bg-black	w-full h-[300px] flex flex-col justify-center items-center text-zinc-300 gap-6
             
             ">
                             <div id="fechar" onClick={btnFechar} className="md:absolute md:flex md:top-0 md:right-0 md:p-5 md:cursor-pointer hidden"><IoMdCloseCircleOutline className="text-[30px]"></IoMdCloseCircleOutline></div>

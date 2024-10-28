@@ -121,7 +121,7 @@ export default function TelaCadFrequen() {
                 <video src={video} autoPlay muted loop className="relative  w-[1500px] h-[760px] object-cover"></video>
                 </div>
 
-                <div id="cardFundoBlack" className="md:w-[450px] md:h-[550px] bg-black/50 absolute flex flex-col justify-center items-center md:top-10 tracking-[4px] backdrop-blur-md rounded-2xl text-white h-[500px] top-32 ">
+                <div id="cardFundoBlack" className="md:w-[450px] md:h-[550px] bg-black/50 absolute  flex flex-col justify-center items-center md:top-10 tracking-[4px] backdrop-blur-md rounded-2xl text-white h-[500px] top-32 ">
                 <div id="tituto" className="md:text-[20px] relative md:-top-3 text-white uppercase text-center text-[15px] text-wrap w-[400px]">Cadastro Funcionario Frequentador</div>
                 <div id="cardForm">
                     <form onSubmit={CadastroF} className="flex flex-col " ref={form}>

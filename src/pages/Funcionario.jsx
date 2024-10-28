@@ -6,6 +6,8 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import AddFuncionario from "./componentes/CardAddFuncionario";
 import 'react-toastify/dist/ReactToastify.css';
+import BtnConfirma from "./componentes/btnConfirma";
+
 
 
 import api from "../service/api";
@@ -26,6 +28,7 @@ function Funcionario() {
     const [atualizaTabela, setAtualizaTabela] = useState(false)
     const { nivel } = useAppContext()
     const [OpenCardFuncionario, setOpenCardFuncionario] = useState(false)
+    const [OpenCardConfirmacao, setOpenCardConfirmacao] = useState(false)
 
    
     useEffect(() => {
@@ -168,15 +171,15 @@ function Funcionario() {
         
       } else{
           return "Nao"
-      }
+        }
     }
-
+    
     // Renderiza a página se o usuário estiver logado
-
+    
     return (
         <>
 
-            <div className="bg-fundoF flex h-[600px] justify-center items-center flex-col pt-9">
+            <div className="bg-fundoF flex h-[700px] justify-center items-center flex-col pt-9">
 
                 <div id="Pesquisa" className="border md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px]" >
                     <label className="text-[17px] text-white md:h-11 flex items-end" htmlFor="Matricula">Matricula ou Nome</label>
@@ -202,7 +205,9 @@ function Funcionario() {
 
                 </div>
                 {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario} atualiza={setAtualizaTabela}></AddFuncionario>}
-
+                {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao-1}></BtnConfirma>}
+                
+                
 
                 <div id="CardFuncionario" className="md:w-[450px] md:h-[450px] md:border md:p-5  md:-mt-[100px]  flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white
                     text-white w-[300px] h-[400px] rounded-2xl duration-500 hidden
@@ -265,8 +270,7 @@ function Funcionario() {
                                             <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
                                         </th>
                                         <th>
-                                            
-                                            <button onClick={() => ExcluirUsuario(index)} className="border p-4" >Excluir</button>
+                                            <button onClick={() => setOpenCardConfirmacao(index+1)} className="border p-4" >Excluir</button>
                                         </th>
 
                                         </tr>

@@ -16,6 +16,7 @@ function AddFuncionario({fechar,atualiza}){
     const CardAddFuncionarioRef = useRef(null)
     const [spin,setSpin] = useState(false)
     const CardAddFuncionario = document.getElementById("CardAddFuncionari")
+    
     function FecharCard(params) {
         if (params.target === CardAddFuncionarioRef.current) {
             fechar(false)
