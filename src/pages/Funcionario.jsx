@@ -147,6 +147,7 @@ function Funcionario() {
             console.log(erro);
 
         }finally{
+            setOpenCardConfirmacao(false)
             setSpin(false)
         }
 
@@ -200,12 +201,12 @@ function Funcionario() {
                         <option className="text-black" value="Todos">Todos</option>
                         <option className="text-black" value="true">Ativo</option>
                         <option className="text-black" value="frequentado">Frequentador</option>
-                        <option className="text-black" value="false">Nao Ativo</option>
+                        <option className="text-black" value="F  alse">Nao Ativo</option>
                     </select>
 
                 </div>
                 {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario} atualiza={setAtualizaTabela}></AddFuncionario>}
-                {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao-1}></BtnConfirma>}
+                {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao}></BtnConfirma>}
                 
                 
 
@@ -270,7 +271,12 @@ function Funcionario() {
                                             <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
                                         </th>
                                         <th>
-                                            <button onClick={() => setOpenCardConfirmacao(index+1)} className="border p-4" >Excluir</button>
+                                            <button onClick={() => setOpenCardConfirmacao({
+                                                matricula : e.matricula,
+                                                nome : e.nome,
+                                                index : index
+
+                                            })} className="border p-4" >Excluir</button>
                                         </th>
 
                                         </tr>

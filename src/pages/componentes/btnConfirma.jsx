@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 
 
-function btnConfirma({fechar,ExcluirUsuario,index}) {
+function btnConfirma({fechar,excluir,index}) {
     const Fundo = useRef(null)
     function Fechar(params) {
         if (params.target == Fundo.current){
@@ -22,10 +22,14 @@ function btnConfirma({fechar,ExcluirUsuario,index}) {
 
         
             <div className="w-[300px] bg-slate-800 h-[150px] rounded-3xl flex flex-col justify-center items-center gap-3 relative -top-[90px]" >
-                <p className="text-[20px]">Deseja Excluir Usuario</p>
+                <p className="text-[20px]">Deseja Excluir Funcionario</p>
+                <div>
+                    <p>Matricula : {index.matricula}</p>
+                    <p>Nome : {index.nome}</p>
+                </div>
                 <div className="w-full flex justify-center gap-4">
-                    <button className=" w-[100px] h-[40px] bg-green-800 rounded-2xl" >Não</button>
-                    <button className=" w-[100px] h-[40px] bg-red-800 rounded-2xl">Sim</button>
+                    <button className=" w-[100px] h-[40px] bg-green-800 rounded-2xl" onClick={() => fechar(false)} >Não</button>
+                    <button className=" w-[100px] h-[40px] bg-red-800 rounded-2xl" onClick={(e) => {excluir(index.index)}}>Sim</button>
                 </div>
             </div>            
             
