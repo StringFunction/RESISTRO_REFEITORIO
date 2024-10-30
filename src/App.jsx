@@ -6,7 +6,7 @@ import Home from "./pages/Home"
 import Footer from "./Navbar/footer"
 import Container from "./layout/Conteiner"
 import Login from "./pages/Login"
-
+import Usuario from "./pages/Usuario"
 
 import {PrivateRota,RotaRefeitorio } from "./service/privateRotas"
 import TelaCadFrequen from "./pages/TelaCadFrequentador"
@@ -34,7 +34,7 @@ function App() {
       <Route path="/Refeitorio" element={<RotaRefeitorio></RotaRefeitorio>}>
                 <Route index element={<Refeitorio></Refeitorio>}></Route>
       </Route>
-
+      <Route path="/Usuario" element={<Usuario></Usuario>}></Route>
       <Route path="/Fre" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
     </Routes>
