@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import useAppContext from "../hooks/UseAppContext";
 import api from "../service/api";
 import { BsArrowClockwise } from "react-icons/bs";
+import AddUsurio from "./componentes/CardAddUsuario";
 
 export default function Usuario(){
     const [DadosUsuario, setDadosUsuario] = useState([])
@@ -19,7 +20,7 @@ export default function Usuario(){
     const { deslogar } = useAppContext()
     const [atualizaTabela, setAtualizaTabela] = useState(false)
     const { nivel } = useAppContext()
-    const [OpenCardFuncionario, setOpenCardFuncionario] = useState(false)
+    const [OpenCardUsuario, setOpenCardUsuario] = useState(false)
     const [OpenCardConfirmacao, setOpenCardConfirmacao] = useState(false)
 
     useEffect(() => {
@@ -85,13 +86,13 @@ export default function Usuario(){
                         <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option>
                     </select>
                 
-                    <button className="text-white  bg-green-700 shadow-2xl w-[100px] h-[40px] rounded-2xl" onClick={() => setOpenCardFuncionario(true)}>Usuario</button>
+                    <button className="text-white  bg-green-700 shadow-2xl w-[100px] h-[40px] rounded-2xl" onClick={() => setOpenCardUsuario(true)}>Usuario</button>
 
           
                  
                    
                 </div>
-                {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario} atualiza={setAtualizaTabela}></AddFuncionario>}
+                {OpenCardUsuario && <AddUsurio fechar={setOpenCardUsuario} atualiza={setAtualizaTabela}></AddUsurio>}
                 {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao}></BtnConfirma>}
                 
                 
