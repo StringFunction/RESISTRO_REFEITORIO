@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import api from "../../service/api";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import { BsArrowClockwise } from "react-icons/bs";
 
 
@@ -12,10 +12,12 @@ function AddUsurio({fechar,atualiza}){
     const [empresa,setEmpresa] = useState("")
     const [setor,setSetor] = useState("")
     const [cargo,setCargo] = useState("")
+    const [senha, setSenha] = useState("")
     const [nivel, setnivel] = useState("")
     const CardAddFuncionarioRef = useRef(null)
     const [spin,setSpin] = useState(false)
     const CardAddFuncionario = document.getElementById("CardAddFuncionari")
+    
     
     function FecharCard(params) {
         if (params.target === CardAddFuncionarioRef.current) {
@@ -32,14 +34,17 @@ function AddUsurio({fechar,atualiza}){
         const dados = {
             matricula : matriula,
             nome : nome,
+            senha : senha,
+            nivel : nivel,
             empresa : empresa,
             setor : setor,
             cargo : cargo,
-            Optante : optante
 
         }
+        console.log(dados);
+        
         try{    
-            const resultado = await api.post("/v2/funcionario", dados, {
+            const resultado = await api.post("/v2/usuario", dados, {
                 headers: { "x-access-token": `${localStorage.getItem("token")}` }
             });
             console.log(resultado);
@@ -47,7 +52,7 @@ function AddUsurio({fechar,atualiza}){
             if(resultado.status == 200){
                 console.log("aqui dentro do resultado");
                 
-                toast.success("Funcionario cadastrado!!!!")
+                toast.success("Usuario Cadastrado!!!!")
                 atualiza(true)
 
             }
@@ -89,7 +94,7 @@ function AddUsurio({fechar,atualiza}){
                             <label htmlFor="Cargo : ">Cargo : </label>
                             <input placeholder="Cargo :" className="border-b-2  bg-transparent" type="text"  onChange={(e) => setCargo(e.target.value)} />
                             <label htmlFor="Senha">Senha :</label>
-                            <input placeholder="Senha :" type="text" className="border-b-2  bg-transparent" />
+                            <input placeholder="Senha :" type="text" className="border-b-2  bg-transparent" onChange={(e)=> {setSenha(e.target.value)}} />
                             <label htmlFor="">Nivel de Acesso : </label>
                             <select name="" id="" className="border-b-2 bg-transparent list-none w-[180px]" value={nivel}  onChange={(e) => setnivel(e.target.value)}>
                                 <option value="1" className=" text-black ">Nivel 1</option>
@@ -104,7 +109,7 @@ function AddUsurio({fechar,atualiza}){
                     </div>
                 </div>
             </div>
-            <ToastContainer></ToastContainer>
+       
 
         </>
     )

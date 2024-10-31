@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import useAppContext from "../hooks/UseAppContext";
 import api from "../service/api";
 import { BsArrowClockwise } from "react-icons/bs";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { BsFillPersonFill } from "react-icons/bs";
 import AddUsurio from "./componentes/CardAddUsuario";
 
 export default function Usuario(){
@@ -12,7 +14,7 @@ export default function Usuario(){
 
     const [Matricula_Nome, setMatricua_Nome] = useState("")
     const [Emrpesa, setEmpresa] = useState("Todos")
-    const [DadosAtualiza, setAt] = useState({nome: "",matricula: ""})
+    const [DadosAtualiza, setAt] = useState({})
     const [IdUsuario, setIdUsuario] = useState(null)
     const [AAtualizaStatus, setAtualizaStatus] = useState("")
     const [isSpin, setSpin] = useState(false)
@@ -27,7 +29,7 @@ export default function Usuario(){
        async function buscarDados() {
         try {
             setSpin(true)
-            const resposta = await api.get("/v1/usuariodb", {
+            const resposta = await api.get("/v2/usuario", {
                 headers: {
                     ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization
                 }
@@ -45,6 +47,7 @@ export default function Usuario(){
             }
 
         } finally{
+            setAtualizaTabela(false)
             setSpin(false)
         }
         
@@ -52,7 +55,7 @@ export default function Usuario(){
        }
        buscarDados()
 
-    },[])
+    },[atualizaTabela])
     const filtrar = () => {
         console.log("resultado do status  " + status);
         
@@ -63,8 +66,59 @@ export default function Usuario(){
         });
     };
 
+    function closeCard (){
+         
+        CardFuncionario.classList.remove("flex")
+        CardFuncionario.classList.add("hidden")
 
+    }
+    function btnAtualizar(id) {
+        const infor = DadosUsuario[id];
+        setAt(infor)
+        CardFuncionario.classList.remove("hidden")
 
+        CardFuncionario.classList.add("flex")
+    }
+    async function atualizaStatus(e) {
+        e.preventDefault()
+        if (!AAtualizaStatus) return toast.info("Preencha os campo")
+        const dados = {
+            matricula: DadosAtualiza.matricula,
+            nivel : AAtualizaStatus
+          
+
+        }
+        console.log();
+
+        try {
+            setSpin(true);
+            console.log("REQUISAO DE ATUALIZACAO");
+        
+            const resultado = await api.put(
+                "/v2/usuario", 
+                 dados , // O corpo da requisição (data)
+                { // As opções, incluindo headers
+                    headers: {
+                        "x-access-token": `${localStorage.getItem("token")}` // Passa o token no header
+                    }
+                }
+            );
+        
+            if (resultado.status === 201) {
+                toast.success("Informação atualizada");
+                CardFuncionario.classList.add("hidden");
+                setAtualizaTabela(true);
+                
+                return;
+            }
+            
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        } finally {
+            setSpin(false);
+        }
+
+    }
 
     return (
         <>
@@ -96,7 +150,7 @@ export default function Usuario(){
                 {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao}></BtnConfirma>}
                 
                 
-{/* 
+
                 <div id="CardFuncionario" className="md:w-[450px] md:h-[450px] md:border md:p-5  md:-mt-[100px]  flex-col justify-center items-center gap-2 absolute z-10 bg-cardB md:text-white
                     text-white w-[300px] h-[400px] rounded-2xl duration-500 hidden
                     ">
@@ -106,15 +160,15 @@ export default function Usuario(){
                     <div id="Indeticacao" className="flex flex-col justify-center items-center">
                         <p>Matricula : {DadosAtualiza.matricula} </p>
                         <p>Nome : {DadosAtualiza.nome} </p>
-                        <p>Empresa : maquina do sucesso</p>
+                        <p>Empresa : {DadosAtualiza.empresa}</p>
                     </div>
                     <div className="">
                         <form action="" onSubmit={atualizaStatus} className="flex flex-col gap-2 ">
-                            <label htmlFor="opt">Optante pelo Refeitorio</label>
+                            <label htmlFor="opt">Nivel de Acesso</label>
                             <select name="" id="" onChange={(e) => setAtualizaStatus(e.target.value)} value={AAtualizaStatus} className="bg-transparent border-b-2 ">
-                                <option value="true" className="text-black">Sim</option>
-                                <option value="frequentado" className="text-black">Frequentador</option>
-                                <option value="false" className="text-black">Nao</option>
+                                <option value="1" className="text-black">NIVEL 1</option>
+                                <option value="2" className="text-black">NIVEL 2</option>
+                                <option value="3" className="text-black">NIVEL 3</option>
                             </select>
                             {isSpin ?
 
@@ -125,7 +179,7 @@ export default function Usuario(){
                             }
                         </form>
                     </div>
-                </div> */}
+                </div>
 
                 <div className="overflow-scroll bg-cardB gap-5 md:w-f md:h-[350px] md:p-0 md:rounded-md shadow-2xl shadow-black text-red-50 flex flex-col
                     h-[250px] w-[400px] mt-6 mb-5">
@@ -156,7 +210,7 @@ export default function Usuario(){
                                         <th>{e.nivel}</th>
                                    
                                         <th className="">
-                                            <button  className="border p-4">Atualizar</button>
+                                            <button  className="border p-4" onClick={() => btnAtualizar(index)}>Atualizar</button>
                                         </th>
                                         <th>
                                             <button  className="border p-4" >Excluir</button>
