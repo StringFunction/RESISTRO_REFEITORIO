@@ -29,7 +29,7 @@ function btnConfirma({fechar,excluir,index}) {
                 </div>
                 <div className="w-full flex justify-center gap-4">
                     <button className=" w-[100px] h-[40px] bg-green-800 rounded-2xl" onClick={() => fechar(false)} >Não</button>
-                    <button className=" w-[100px] h-[40px] bg-red-800 rounded-2xl" onClick={(e) => {excluir(index.index)}}>Sim</button>
+                    <button className=" w-[100px] h-[40px] bg-red-800 rounded-2xl" onClick={(e) => {excluir(index.matricula)}}>Sim</button>
                 </div>
             </div>            
             

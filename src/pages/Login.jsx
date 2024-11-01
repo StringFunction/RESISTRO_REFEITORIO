@@ -18,6 +18,7 @@ const [spin , setspin] = useState(false)
 
 
 
+console.log("aquiiiii dentro mesmo");
 
 useEffect(() => {
     if (isLogado) {
