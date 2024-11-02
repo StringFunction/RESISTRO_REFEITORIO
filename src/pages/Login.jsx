@@ -24,9 +24,11 @@ useEffect(() => {
         navigate("/"); // Faz o redirecionamento após a renderização
     }
 }, [isLogado, navigate]);
-
 const entrar = async (e) =>{
     e.preventDefault()
+   
+    
+    
     setis(false)
 
     if (![...e.target.querySelectorAll('input')].every(input => input.value)) {
