@@ -8,6 +8,7 @@ import { BsArrowClockwise } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
 import AddUsurio from "./componentes/CardAddUsuario";
+import BtnConfirma from "./componentes/btnConfirma";
 
 export default function Usuario(){
     const [DadosUsuario, setDadosUsuario] = useState([])
@@ -35,12 +36,12 @@ export default function Usuario(){
                 }
             }
              )
-
+            
             setDadosUsuario(resposta.data)
 
         } catch(erro){
             if (erro.status == 498) {
-                alert("Sessao Expirada")
+                alert("Sessao Expiradaa")
                 deslogar()
                 return
                 
@@ -118,6 +119,23 @@ export default function Usuario(){
             setSpin(false);
         }
 
+    }
+    async function ExcluirUsuario(matricula){
+        setSpin(true)
+        try{
+            const Excluir =  await api.delete("/v2/usuario/" + matricula, {headers : {
+                ["x-access-token"] : localStorage.getItem("token")
+            }} )
+            if (!!Excluir) {
+                toast.success("Usuario Excluido")
+            }
+        }catch(erro){
+
+        } finally{
+            setOpenCardConfirmacao(false)
+            setSpin(false)
+            setAtualizaTabela(true)
+        }
     }
 
     return (
@@ -213,7 +231,7 @@ export default function Usuario(){
                                             <button  className="border p-4" onClick={() => btnAtualizar(index)}>Atualizar</button>
                                         </th>
                                         <th>
-                                            <button  className="border p-4" >Excluir</button>
+                                            <button  className="border p-4" onClick={() => setOpenCardConfirmacao({id : e.id ,matricula : e.matricula, nome : e.nome})}>Excluir</button>
                                         </th>
 
                                         </tr>
