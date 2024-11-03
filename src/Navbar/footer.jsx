@@ -3,7 +3,7 @@ function footer(){
         <>
 
 
-        <div className="bg-black h-44	 px-2 flex justify-center  text-zinc-300	items-center relative ">
+        <div className="bg-menu h-44	 px-2 flex justify-center  text-zinc-300	items-center relative ">
 
   
 

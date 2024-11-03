@@ -68,7 +68,7 @@ function MenuNavegacao() {
                             
                         <ul className="md:flex md:w-full md:h-28 md:items-center md:bg-transparent md:justify-end md:relative md:gap-0 md:flex-row md:pt-0 
                           flex  flex-col bg-gray-900 w-full   pt-10 text-slate-300 h-[400px]   ">
-                            { nivel == 3 && 
+                            { [2,3].includes(nivel) && 
                                <>
                                <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 md:hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
                                  <Link to="/Funcionario" onClick={btnMenu}>Funcionario</Link>
@@ -76,6 +76,9 @@ function MenuNavegacao() {
                                <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
                                  <Link to="/Refeitorio" onClick={btnMenu}>Refeitorio</Link>
                                </li>
+                               { nivel == 3 && <li className="md:hover:bg-slate-500 md:w-2/4 md:h-full md:flex md:items-center md:justify-center duration-200 hover:cursor-pointer hover:bg-blue-400 hover:text-white w-full text-center h-full flex items-center justify-center text-2xl tracking-widest">
+                                 <Link to="/usuario" onClick={btnMenu}>Usuario</Link>
+                               </li>}
                              </>
                             }
                             <li className="ml-3" onClick={btnUser}>

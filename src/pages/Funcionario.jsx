@@ -201,7 +201,7 @@ function Funcionario() {
                         <option className="text-black" value="Todos">Todos</option>
                         <option className="text-black" value="true">Ativo</option>
                         <option className="text-black" value="frequentado">Frequentador</option>
-                        <option className="text-black" value="F  alse">Nao Ativo</option>
+                        <option className="text-black" value="False">Nao Ativo</option>
                     </select>
 
                 </div>

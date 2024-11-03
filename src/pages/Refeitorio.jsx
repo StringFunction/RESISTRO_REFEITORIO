@@ -134,7 +134,7 @@ function Refeitorio() {
                             </div>
                         ) : (
                             
-                            <button onClick={btnregistra} className="w-36 h-10 bg-green-700 rounded-3xl">
+                            <button onClick={btnregistra}  className="w-36 h-10 bg-green-700 rounded-3xl">
                                 Registrar
                             </button>
                         )}

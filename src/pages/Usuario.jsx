@@ -16,13 +16,11 @@ export default function Usuario(){
     const [Matricula_Nome, setMatricua_Nome] = useState("")
     const [Emrpesa, setEmpresa] = useState("Todos")
     const [DadosAtualiza, setAt] = useState({})
-    const [IdUsuario, setIdUsuario] = useState(null)
     const [AAtualizaStatus, setAtualizaStatus] = useState("")
     const [isSpin, setSpin] = useState(false)
     const CardFuncionario = document.getElementById("CardFuncionario")
     const { deslogar } = useAppContext()
     const [atualizaTabela, setAtualizaTabela] = useState(false)
-    const { nivel } = useAppContext()
     const [OpenCardUsuario, setOpenCardUsuario] = useState(false)
     const [OpenCardConfirmacao, setOpenCardConfirmacao] = useState(false)
 
@@ -57,8 +55,9 @@ export default function Usuario(){
        buscarDados()
 
     },[atualizaTabela])
+    console.log(Emrpesa);
+    
     const filtrar = () => {
-        console.log("resultado do status  " + status);
         
         return DadosUsuario.filter((e) => {
             const matchesMatriculaNome = e.matricula.toString().includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
@@ -152,10 +151,10 @@ export default function Usuario(){
                         {/* {funcionario.map((e, index)=> <option className="text-black" key={index} value={e.empresa}>{e.empresa}</option>)} */}
                         <option className="text-black" value="CDA">CDA</option>
                         <option className="text-black" value="VOUGA">VOUGA</option>
-                        <option className="text-black" value="NOSSCAUCAIA">NOSSAMOTO CAUCAIA</option>
-                        <option className="text-black" value="NOSSSIQUEIRA">NOSSAMOTO SIQUEIRA</option>
-                        <option className="text-black" value="NOSSMATRIZ">NOSSOMOTO MATRIZ</option>
-                        <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option>
+                        <option className="text-black" value="NOSSAMOTO CAUCAIA">NOSSAMOTO CAUCAIA</option>
+                        <option className="text-black" value="NOSSAMOTO SIQUIERA">NOSSAMOTO SIQUIERA</option>
+                        <option className="text-black" value="NOSSAMOTO MATRIZ">NOSSAOMOTO MATRIZ</option>
+                        <option className="text-black" value="NOSSAMOTO BUTURITE">NOSSAMOTO BUTURITE</option>
                     </select>
                 
                     <button className="text-white  bg-green-700 shadow-2xl w-[100px] h-[40px] rounded-2xl" onClick={() => setOpenCardUsuario(true)}>Usuario</button>
