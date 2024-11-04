@@ -129,12 +129,17 @@ function Funcionario() {
     }
     async function ExcluirUsuario(matricula) {
         try {
+            alert("conde do forro")
+            console.log(matricula);
+            console.log(funcionario);
+            
+            
             setSpin(true)
-            const MatriculadaPesta = await funcionario[matricula].matricula;
-            console.log(MatriculadaPesta)
+            // const MatriculadaPesta = await funcionario[matricula].matricula;
+            // console.log(MatriculadaPesta)
             const resposta = await api.delete("/v2/funcionario", {
                 headers: { ["x-access-token"]: `${localStorage.getItem("token")}` }, data: {
-                    matricula: MatriculadaPesta
+                    matricula: matricula
                 }
             })
 
