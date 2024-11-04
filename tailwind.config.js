@@ -17,7 +17,8 @@ export default {
       backgroundColor : {
         menu : "#001220",
         fundoF: "#1A202C",
-        cardB: "#1F2733"
+        cardB: "#1F2733",
+        fundoLogin : "RGB(182, 152, 96)"
       }
     },
   },

@@ -10,6 +10,7 @@ import BtnConfirma from "./componentes/btnConfirma";
 
 
 
+
 import api from "../service/api";
 
 
@@ -187,7 +188,7 @@ function Funcionario() {
 
             <div className="bg-fundoF flex h-[700px] justify-center items-center flex-col pt-9">
 
-                <div id="Pesquisa" className="border md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px]" >
+                <div id="Pesquisa" className=" md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px] rounded-2xl shadow-2xl shadow-black" >
                     <label className="text-[17px] text-white md:h-11 flex items-end" htmlFor="Matricula">Matricula ou Nome</label>
                     <input type="text" placeholder="matricula ou nome" onChange={(e) => setMatricua_Nome(e.target.value)} className="md:h-[40px]  text-center bg-transparent border-b-[1px] text-white " />
                     <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Empresa</label>
@@ -293,7 +294,7 @@ function Funcionario() {
 
                 </div>
                 <div className="flex  md:w-[900px] w-[400px] justify-end">
-                    <button className="text-white  bg-green-700 shadow-2xl w-[150px] h-[50px] rounded-2xl" onClick={() => setOpenCardFuncionario(true)}>Adicionar Funcionario</button>
+                    <button className="text-white   shadow-2xl w-[150px] h-[50px] rounded-2xl shadow-black md:hover:h-[100px] md:hover:w-[160px] duration-500" onClick={() => setOpenCardFuncionario(true)}>Adicionar <br />Funcionario</button>
 
                 </div>
             </div>

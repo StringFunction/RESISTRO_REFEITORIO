@@ -159,7 +159,7 @@ function table({mt,setmt}){
                             <div className="w-10 h-10 border-white border-[10px] rounded-full border-t-transparent animate-spin"></div>
                         </div>
                         :
-                        nivel == 3 &&
+                        [2,3].includes(nivel)  &&
                         <button onClick={FINALIZAR} className="w-36  h-10 bg-green-700 rounded-3xl" >Finalizar</button>
 }
         </div>
