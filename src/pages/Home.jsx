@@ -21,7 +21,7 @@ const d = {
       {
         label: 'FUNCIONARIOS POR EMPRESA',
         data: [12, 19, 3, 5, 2],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        backgroundColor: ["black","red","blue"],
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
