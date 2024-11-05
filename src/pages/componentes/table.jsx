@@ -88,7 +88,7 @@ function table({mt,setmt}){
     function optante(params) {
       if(params == true){
         return ""
-      } else if (params == "frequentado"){
+      } else if (params == "frequentador"){
         return "text-yellow-500"
       } else{
         return "text-red-400"
@@ -100,8 +100,8 @@ function table({mt,setmt}){
         return "Sim"
 
         
-      }else if(params == "frequentado"){
-        return "frequentado"
+      }else if(params == "frequentador"){
+        return "Frequentador"
       
     } else{
         return "Nao"

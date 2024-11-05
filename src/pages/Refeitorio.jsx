@@ -67,7 +67,7 @@ function Refeitorio() {
                     return;
                 }
 
-                if (registraPassagem.data.Optante == "frequentado") {
+                if (registraPassagem.data.Optante == "frequentador") {
                     setLoading(false);
                     toast.warning("Funcionário  frequentador");
                     return;

@@ -130,7 +130,6 @@ function Funcionario() {
     }
     async function ExcluirUsuario(matricula) {
         try {
-            alert("conde do forro")
             console.log(matricula);
             console.log(funcionario);
             
@@ -161,7 +160,7 @@ function Funcionario() {
     function optante(params) {
         if(params == true){
           return ""
-        } else if (params == "frequentado"){
+        } else if (params == "frequentador"){
           return "text-yellow-500"
         } else{
           return "text-red-400"
@@ -173,8 +172,8 @@ function Funcionario() {
           return "Sim"
   
           
-        }else if(params == "frequentado"){
-          return "frequentado"
+        }else if(params == "frequentador"){
+          return "frequentador"
         
       } else{
           return "Nao"

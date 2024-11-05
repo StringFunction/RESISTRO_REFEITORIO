@@ -4,7 +4,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import api from "../../service/api";
 import { ToastContainer, toast } from "react-toastify";
 import { BsArrowClockwise } from "react-icons/bs";
-
+import useAppContext from "../../hooks/UseAppContext";
 
 function AddFuncionario({fechar,atualiza}){
     const [matriula,setmatricula] = useState("")
@@ -16,6 +16,7 @@ function AddFuncionario({fechar,atualiza}){
     const CardAddFuncionarioRef = useRef(null)
     const [spin,setSpin] = useState(false)
     const CardAddFuncionario = document.getElementById("CardAddFuncionari")
+    const {deslogar} = useAppContext()
     
     function FecharCard(params) {
         if (params.target === CardAddFuncionarioRef.current) {
@@ -57,6 +58,9 @@ function AddFuncionario({fechar,atualiza}){
             if(erro.status == 404){
                 toast.info("Matricula ja cadastrada")
             }
+            if (erro.status = 498){
+                return  deslogar()
+            }
 
         }finally {
             setSpin(false)
@@ -65,7 +69,7 @@ function AddFuncionario({fechar,atualiza}){
         
     }
     
-    const ListaEmpresa = ["NOSSAMOTO CAUCAIA","NOSSAMOTO SIQUIERA","NOSSAMOTO BUTURITE","NOSSAMOTO MATRIZ", "NOVALUZ SD","NOVALUZ WS",'NOVALUZ SUL',"NOVALUZ BS","JANGADA AUTOMOTIVE","JANGADA VEICULOS","VOUGA","CDA"]
+    const ListaEmpresa = ["NOSSAMOTO CAUCAIA","NOSSAMOTO SIQUEIRA","NOSSAMOTO BUTURITE","NOSSAMOTO MATRIZ", "NOVALUZ SD","NOVALUZ WS",'NOVALUZ SUL',"NOVALUZ BS","JANGADA AUTOMOTIVE","JANGADA VEICULOS","VOUGA","CDA"]
     return(
         <>
             <div ref={CardAddFuncionarioRef} onClick={(e) => {FecharCard(e)}} className="w-[100%] flex justify-center bg-transparent backdrop-blur-md  bg-black absolute z-10 h-[600px]">
@@ -90,8 +94,9 @@ function AddFuncionario({fechar,atualiza}){
                             <input className="border-b-2  bg-transparent" type="text"  onChange={(e) => setCargo(e.target.value)} />
                             <label htmlFor="">Optante pelo refeitorio : </label>
                             <select name="" id="" className="border-b-2 bg-transparent list-none w-[180px]" value={optante}  onChange={(e) => setOptante(e.target.value)}>
-                                <option value="True" className=" text-black ">SIM</option>
+                                <option value="true" className=" text-black ">SIM</option>
                                 <option value="False" className=" text-black">Nao</option>
+                                <option value="frequentador" className=" text-black">Frequentador</option>
                             </select>
                             {spin ? 
                              <div className="animate-spin"><BsArrowClockwise className="text-[40px]"></BsArrowClockwise></div>
@@ -101,7 +106,7 @@ function AddFuncionario({fechar,atualiza}){
                     </div>
                 </div>
             </div>
-            <ToastContainer></ToastContainer>
+ 
 
         </>
     )
