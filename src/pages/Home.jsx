@@ -11,7 +11,7 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
-import { Bar } from "react-chartjs-2"
+import { Bar,Pie } from "react-chartjs-2"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -36,14 +36,29 @@ function Home(){
     
     return (
         <>
-        <div id="Container" className=" h-[750px] bg-slate-800">
+        <div id="Container" className=" h-[750px] bg-slate-800 p-3 flex flex-col flex-wrap gap-2">
 
-            <div className="w-[700px]">
+            <div className="w-[700px] bg-slate-700 rounded-xl">
 
             <Bar data={d}></Bar>
 
             </div>
-     
+            <div className="w-[700px] bg-slate-700 rounded-xl">
+
+            <Bar data={d}></Bar>
+
+            </div>
+            <div className="w-[700px] bg-slate-700 rounded-xl">
+
+            <Bar data={d}></Bar>
+
+            </div>
+            <div className="w-[700px] bg-slate-700 rounded-xl">
+
+            <Bar data={d}></Bar>
+
+            </div>
+
 
 
 
