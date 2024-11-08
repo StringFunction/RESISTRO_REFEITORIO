@@ -10,10 +10,22 @@ import {
     Title,
     Tooltip,
     Legend,
+    ArcElement
   } from 'chart.js';
 import { Bar,Pie } from "react-chartjs-2"
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement,ArcElement, Title, Tooltip, Legend);
+const data = {
+  labels: ['Categoria A', 'Categoria B', 'Categoria C'],
+  datasets: [
+    {
+      label: 'Distribuição de Categorias',
+      data: [30, 45, 25], // valores para cada categoria
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // cores
+      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+    },
+  ],
+};
 
 const d = {
     labels: ['NOSSAMOTO SIQUEIRA', 'NOSSAMOTO MATRIZ', 'NOSSAMOTO CAUCAIA', 'NOVALUZ WS', 'NOVALUZ SD'],
@@ -54,9 +66,9 @@ function Home(){
             <Bar data={d}></Bar>
 
             </div>
-            <div className="w-[700px] bg-slate-700 rounded-xl">
+            <div className="w-[700px] h-[350px] bg-slate-700 rounded-xl">
 
-            <Bar data={d}></Bar>
+            <Pie data={data}></Pie>
 
             </div>
 
