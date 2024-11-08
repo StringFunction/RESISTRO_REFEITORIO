@@ -38,7 +38,8 @@ function Home(){
         <>
         <div id="Container" className=" h-[750px] bg-slate-800 p-3 flex flex-col flex-wrap gap-2">
 
-            <div className="w-[700px] bg-slate-700 rounded-xl">
+   
+         <div className="w-[700px] bg-slate-700 rounded-xl">
 
             <Bar data={d}></Bar>
 
@@ -58,7 +59,6 @@ function Home(){
             <Bar data={d}></Bar>
 
             </div>
-
 
 
 
