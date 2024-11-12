@@ -15,7 +15,7 @@ function PrivateRota(){
     const dados = jwtDecode(isLogado);
     
 
-    if (dados.nivel !== 3) {
+    if (![2,3].includes(dados.nivel)) {
 
        
         return <Navigate to="/Refeitorio"></Navigate>

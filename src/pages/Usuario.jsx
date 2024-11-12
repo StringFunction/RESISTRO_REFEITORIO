@@ -1,100 +1,91 @@
-
-import { useEffect, useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import useAppContext from "../hooks/UseAppContext";
-import { BsFillPersonFill, BsArrowClockwise } from "react-icons/bs";
+import api from "../service/api";
+import { BsArrowClockwise } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { ToastContainer, toast } from 'react-toastify';
-import AddFuncionario from "./componentes/CardAddFuncionario";
-import 'react-toastify/dist/ReactToastify.css';
+import { BsFillPersonFill } from "react-icons/bs";
+import AddUsurio from "./componentes/CardAddUsuario";
 import BtnConfirma from "./componentes/btnConfirma";
 
+export default function Usuario(){
+    const [DadosUsuario, setDadosUsuario] = useState([])
 
-
-
-import api from "../service/api";
-
-
-
-function Funcionario() {
-    const [funcionario, setfuncionario] = useState([])
-    const [status, setstatus] = useState("Todos")
     const [Matricula_Nome, setMatricua_Nome] = useState("")
     const [Emrpesa, setEmpresa] = useState("Todos")
-    const [DadosAtualiza, setAt] = useState({nome: "",matricula: ""})
-    const [IdUsuario, setIdUsuario] = useState(null)
+    const [DadosAtualiza, setAt] = useState({})
     const [AAtualizaStatus, setAtualizaStatus] = useState("")
     const [isSpin, setSpin] = useState(false)
     const CardFuncionario = document.getElementById("CardFuncionario")
     const { deslogar } = useAppContext()
     const [atualizaTabela, setAtualizaTabela] = useState(false)
-    const { nivel } = useAppContext()
-    const [OpenCardFuncionario, setOpenCardFuncionario] = useState(false)
+    const [OpenCardUsuario, setOpenCardUsuario] = useState(false)
     const [OpenCardConfirmacao, setOpenCardConfirmacao] = useState(false)
 
-   
     useEffect(() => {
-        setSpin(true)
-        async function consulta() {
-            try {
-                console.log("Requisao de chamada de funcionarios ");
-
-                const resposta = await api.get("/v2/funcionario", {
-                    headers: {
-                        ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization
-                    }
-                })
-                console.log(resposta)
-                setfuncionario(resposta.data)
-                setAtualizaTabela(false)
-                setSpin(false)
-            } catch (erro) {
-                if (erro.status == 498) {
-                    alert("Sessao Expirada")
-                    deslogar()
-                    return
+       async function buscarDados() {
+        try {
+            setSpin(true)
+            const resposta = await api.get("/v2/usuario", {
+                headers: {
+                    ["x-access-token"]: `${localStorage.getItem("token")}` // Passa o token no header Authorization
                 }
             }
+             )
+            
+            setDadosUsuario(resposta.data)
+
+        } catch(erro){
+            if (erro.status == 498) {
+                alert("Sessao Expiradaa")
+                deslogar()
+                return
+                
+            }
+
+        } finally{
+            setAtualizaTabela(false)
+            setSpin(false)
         }
-        consulta()
+        
+        
+       }
+       buscarDados()
 
-    }, [atualizaTabela])
-    console.log("conde do pagina funcionario" + DadosAtualiza.matricula);
+    },[atualizaTabela])
+    console.log(Emrpesa);
+    
+    const filtrar = () => {
+        
+        return DadosUsuario.filter((e) => {
+            const matchesMatriculaNome = e.matricula.toString().includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
+            const matchesEmpresa = Emrpesa === 'Todos' || e.empresa.toString().includes(Emrpesa)
+            return matchesMatriculaNome && matchesEmpresa 
+        });
+    };
 
+    function closeCard (){
+         
+        CardFuncionario.classList.remove("flex")
+        CardFuncionario.classList.add("hidden")
+
+    }
     function btnAtualizar(id) {
-        const infor = funcionario[id];
-        setIdUsuario(id)
+        const infor = DadosUsuario[id];
         setAt(infor)
         CardFuncionario.classList.remove("hidden")
 
         CardFuncionario.classList.add("flex")
     }
-    function closeCard() {
-        console.log("ola mundo");
-        console.log(CardFuncionario);
-        
-        CardFuncionario.classList.remove("flex")
-        CardFuncionario.classList.add("hidden")
-
-    }
-    const filtrar = () => {
-        console.log("resultado do status  " + status);
-        
-        return funcionario.filter((e) => {
-            const matchesMatriculaNome = e.matricula.toString().includes(Matricula_Nome) || e.nome.toLowerCase().includes(Matricula_Nome.toLowerCase());
-            const matchesEmpresa = Emrpesa === 'Todos' || e.empresa.toString().includes(Emrpesa)
-            const matchesStatus = status === 'Todos' || e.Optante.toString().includes(status)
-            return matchesMatriculaNome && matchesEmpresa && matchesStatus;
-        });
-    };
-
-    console.log(filtrar());
-    
     async function atualizaStatus(e) {
         e.preventDefault()
         if (!AAtualizaStatus) return toast.info("Preencha os campo")
         const dados = {
             matricula: DadosAtualiza.matricula,
-            Optante: AAtualizaStatus
+            nivel : AAtualizaStatus
+          
 
         }
         console.log();
@@ -104,7 +95,7 @@ function Funcionario() {
             console.log("REQUISAO DE ATUALIZACAO");
         
             const resultado = await api.put(
-                "/v2/funcionario", 
+                "/v2/usuario", 
                  dados , // O corpo da requisição (data)
                 { // As opções, incluindo headers
                     headers: {
@@ -113,7 +104,7 @@ function Funcionario() {
                 }
             );
         
-            if (resultado.status === 200) {
+            if (resultado.status === 201) {
                 toast.success("Informação atualizada");
                 CardFuncionario.classList.add("hidden");
                 setAtualizaTabela(true);
@@ -128,89 +119,51 @@ function Funcionario() {
         }
 
     }
-    async function ExcluirUsuario(matricula) {
-        try {
-            console.log(matricula);
-            console.log(funcionario);
-            
-            
-            setSpin(true)
-            // const MatriculadaPesta = await funcionario[matricula].matricula;
-            // console.log(MatriculadaPesta)
-            const resposta = await api.delete("/v2/funcionario", {
-                headers: { ["x-access-token"]: `${localStorage.getItem("token")}` }, data: {
-                    matricula: matricula
-                }
-            })
-
-            if (resposta.status == 200) {
-                toast.success("Funcionario Excluido")
-                setAtualizaTabela(true)
+    async function ExcluirUsuario(matricula){
+        setSpin(true)
+        try{
+            const Excluir =  await api.delete("/v2/usuario/" + matricula, {headers : {
+                ["x-access-token"] : localStorage.getItem("token")
+            }} )
+            if (!!Excluir) {
+                toast.success("Usuario Excluido")
             }
+        }catch(erro){
 
-        } catch (erro) {
-            console.log(erro);
-
-        }finally{
+        } finally{
             setOpenCardConfirmacao(false)
             setSpin(false)
+            setAtualizaTabela(true)
         }
+    }
 
-    }
-    function optante(params) {
-        if(params == true){
-          return ""
-        } else if (params == "frequentador"){
-          return "text-yellow-500"
-        } else{
-          return "text-red-400"
-        }
-        
-      }
-      function statuss(params) {
-        if (params == true) {
-          return "Sim"
-  
-          
-        }else if(params == "frequentador"){
-          return "frequentador"
-        
-      } else{
-          return "Nao"
-        }
-    }
-    
-    // Renderiza a página se o usuário estiver logado
-    
     return (
         <>
 
             <div className="bg-fundoF flex h-[700px] justify-center items-center flex-col pt-9">
 
-                <div id="Pesquisa" className=" md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px] rounded-2xl shadow-2xl shadow-black" >
+                <div id="Pesquisa" className="border md:w-[900px] flex-wrap md:h-[110px] md:flex md:flex-row gap-3 p-5 md:justify-center md:items-center md:-mt-11 tracking-[1px] flex-col w-[400px]" >
                     <label className="text-[17px] text-white md:h-11 flex items-end" htmlFor="Matricula">Matricula ou Nome</label>
                     <input type="text" placeholder="matricula ou nome" onChange={(e) => setMatricua_Nome(e.target.value)} className="md:h-[40px]  text-center bg-transparent border-b-[1px] text-white " />
                     <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">Empresa</label>
                     <select name="" id="" value={Emrpesa} onChange={(e) => setEmpresa(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-white text-center">
                         <option className="text-black" value="Todos">Todos</option>
-                        {funcionario.map((e, index)=> <option className="text-black" key={index} value={e.empresa}>{e.empresa}</option>)}
-                        {/* <option className="text-black" value="CDA">CDA</option>
+                        {/* {funcionario.map((e, index)=> <option className="text-black" key={index} value={e.empresa}>{e.empresa}</option>)} */}
+                        <option className="text-black" value="CDA">CDA</option>
                         <option className="text-black" value="VOUGA">VOUGA</option>
-                        <option className="text-black" value="NOSSCAUCAIA">NOSSAMOTO CAUCAIA</option>
-                        <option className="text-black" value="NOSSSIQUEIRA">NOSSAMOTO SIQUEIRA</option>
-                        <option className="text-black" value="NOSSMATRIZ">NOSSOMOTO MATRIZ</option>
-                        <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option> */}
+                        <option className="text-black" value="NOSSAMOTO CAUCAIA">NOSSAMOTO CAUCAIA</option>
+                        <option className="text-black" value="NOSSAMOTO SIQUIERA">NOSSAMOTO SIQUIERA</option>
+                        <option className="text-black" value="NOSSAMOTO MATRIZ">NOSSAOMOTO MATRIZ</option>
+                        <option className="text-black" value="NOSSAMOTO BUTURITE">NOSSAMOTO BUTURITE</option>
                     </select>
-                    <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">s</label>
-                    <select name="Status" id="" value={status} onChange={(e) => setstatus(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-center text-white">
-                        <option className="text-black" value="Todos">Todos</option>
-                        <option className="text-black" value="true">Ativo</option>
-                        <option className="text-black" value="frequentado">Frequentador</option>
-                        <option className="text-black" value="False">Nao Ativo</option>
-                    </select>
+                
+                    <button className="text-white  bg-green-700 shadow-2xl w-[100px] h-[40px] rounded-2xl" onClick={() => setOpenCardUsuario(true)}>Usuario</button>
 
+          
+                 
+                   
                 </div>
-                {OpenCardFuncionario && <AddFuncionario fechar={setOpenCardFuncionario} atualiza={setAtualizaTabela}></AddFuncionario>}
+                {OpenCardUsuario && <AddUsurio fechar={setOpenCardUsuario} atualiza={setAtualizaTabela}></AddUsurio>}
                 {!!OpenCardConfirmacao && <BtnConfirma fechar={setOpenCardConfirmacao} excluir={ExcluirUsuario} index={OpenCardConfirmacao}></BtnConfirma>}
                 
                 
@@ -224,15 +177,15 @@ function Funcionario() {
                     <div id="Indeticacao" className="flex flex-col justify-center items-center">
                         <p>Matricula : {DadosAtualiza.matricula} </p>
                         <p>Nome : {DadosAtualiza.nome} </p>
-                        <p>Empresa : maquina do sucesso</p>
+                        <p>Empresa : {DadosAtualiza.empresa}</p>
                     </div>
                     <div className="">
                         <form action="" onSubmit={atualizaStatus} className="flex flex-col gap-2 ">
-                            <label htmlFor="opt">Optante pelo Refeitorio</label>
+                            <label htmlFor="opt">Nivel de Acesso</label>
                             <select name="" id="" onChange={(e) => setAtualizaStatus(e.target.value)} value={AAtualizaStatus} className="bg-transparent border-b-2 ">
-                                <option value="true" className="text-black">Sim</option>
-                                <option value="frequentado" className="text-black">Frequentador</option>
-                                <option value="false" className="text-black">Nao</option>
+                                <option value="1" className="text-black">NIVEL 1</option>
+                                <option value="2" className="text-black">NIVEL 2</option>
+                                <option value="3" className="text-black">NIVEL 3</option>
                             </select>
                             {isSpin ?
 
@@ -257,7 +210,7 @@ function Funcionario() {
                                     <th>EMPRESA</th>
                                     <th>SETOR</th>
                                     <th>CARGO</th>
-                                    <th>Optante</th>
+                                    <th>NIVEL</th>
                                     <th colSpan="2">OPCOES</th>
                                 </tr>
                             </thead>
@@ -265,23 +218,19 @@ function Funcionario() {
                                 {
 
                                 filtrar().map((e, index) => (
-                                    <tr key={index} className={optante(e.Optante)}>
+                                    <tr key={index}>
                                         <td>{e.matricula}</td>
                                         <td>{e.nome}</td>
                                         <th>{e.empresa}</th>
                                         <th>{e.setor}</th>
                                         <th>{e.cargo}</th>
-                                        <td>{statuss(e.Optante)}</td>
+                                        <th>{e.nivel}</th>
+                                   
                                         <th className="">
-                                            <button onClick={() => btnAtualizar(index)} className="border p-4">Atualizar</button>
+                                            <button  className="border p-4" onClick={() => btnAtualizar(index)}>Atualizar</button>
                                         </th>
                                         <th>
-                                            <button onClick={() => setOpenCardConfirmacao({
-                                                matricula : e.matricula,
-                                                nome : e.nome,
-                                                index : index
-
-                                            })} className="border p-4" >Excluir</button>
+                                            <button  className="border p-4" onClick={() => setOpenCardConfirmacao({id : e.id ,matricula : e.matricula, nome : e.nome})}>Excluir</button>
                                         </th>
 
                                         </tr>
@@ -292,18 +241,9 @@ function Funcionario() {
                     }
 
                 </div>
-                <div className="flex  md:w-[900px] w-[400px] justify-end">
-                    <button className="text-white   shadow-2xl w-[150px] h-[50px] rounded-2xl shadow-black md:hover:h-[100px] md:hover:w-[160px] duration-500" onClick={() => setOpenCardFuncionario(true)}>Adicionar <br />Funcionario</button>
-
-                </div>
+              
             </div>
             <ToastContainer></ToastContainer>
         </>
     );
-
-
-    // Caso contrário, retorna null até que o useEffect redirecione para a página de login
-
 }
-
-export default Funcionario;

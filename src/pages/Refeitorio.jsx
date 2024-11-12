@@ -67,7 +67,7 @@ function Refeitorio() {
                     return;
                 }
 
-                if (registraPassagem.data.Optante == "frequentado") {
+                if (registraPassagem.data.Optante == "frequentador") {
                     setLoading(false);
                     toast.warning("Funcionário  frequentador");
                     return;
@@ -109,7 +109,7 @@ function Refeitorio() {
     return (
         <>
             <div className="bg-fundoF flex h-auto justify-center items-center flex-col">
-                <div className="bg-cardB gap-5 md:w-full md:h-[350px] md:rounded-md md:p-16 md:mt-16 shadow-2xl shadow-black text-red-50 flex justify-center items-center flex-col h-auto w-[400px] p-10 mt-6">
+                <div className="bg-cardB gap-5 md:w-[900px] md:h-[350px] md:rounded-md md:p-16 md:mt-16 shadow-2xl shadow-black text-red-50 flex justify-center items-center flex-col h-auto w-[400px] p-10 mt-6">
                     <h1 className="text-4xl">Matricula</h1>
                     <div id="reader" width="600px"></div>
                     <div className="flex flex-col justify-center items-center gap-8">
@@ -134,7 +134,7 @@ function Refeitorio() {
                             </div>
                         ) : (
                             
-                            <button onClick={btnregistra} className="w-36 h-10 bg-green-700 rounded-3xl">
+                            <button onClick={btnregistra}  className="w-36 h-10 bg-green-700 rounded-3xl">
                                 Registrar
                             </button>
                         )}
