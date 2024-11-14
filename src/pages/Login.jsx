@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import useAppContext from "../hooks/UseAppContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import logo_carmais from "/img/carmais-logo.png"
-
+import { Link } from "react-router-dom";
 
 function Login(){
 const [matricula , setmatricula] = useState("")
@@ -109,7 +109,7 @@ const entrar = async (e) =>{
                          <input type="submit" className="mt-10 border p-4    rounded-2xl text-lg cursor-pointer hover:bg-green-400 hover:text-black duration-200 " value="Entra"/> 
                         }
                     </form>
-                    
+                    <Link to="/EsqueceuSenha">Esqueceu a senha</Link>
                 </div>
             </div>
             

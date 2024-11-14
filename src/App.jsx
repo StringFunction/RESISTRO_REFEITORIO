@@ -7,7 +7,7 @@ import Footer from "./Navbar/footer"
 import Container from "./layout/Conteiner"
 import Login from "./pages/Login"
 import Usuario from "./pages/Usuario"
-
+import EsqueceuSenha from "./pages/EsqueceSenha"
 import {PrivateRota,RotaRefeitorio } from "./service/privateRotas"
 import TelaCadFrequen from "./pages/TelaCadFrequentador"
 import useAppContext from "./hooks/UseAppContext";
@@ -39,6 +39,7 @@ function App() {
       
       <Route path="/Fre" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
+      <Route path="/EsqueceuSenha" element={<EsqueceuSenha></EsqueceuSenha>}></Route>
     </Routes>
     
     </Container>
