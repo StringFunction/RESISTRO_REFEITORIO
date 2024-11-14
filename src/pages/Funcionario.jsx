@@ -160,7 +160,7 @@ function Funcionario() {
     function optante(params) {
         if(params == true){
           return ""
-        } else if (params == "frequentador"){
+        } else if (params == "frequentado"){
           return "text-yellow-500"
         } else{
           return "text-red-400"
@@ -172,7 +172,7 @@ function Funcionario() {
           return "Sim"
   
           
-        }else if(params == "frequentador"){
+        }else if(params == "frequentado"){
           return "frequentador"
         
       } else{
@@ -201,12 +201,12 @@ function Funcionario() {
                         <option className="text-black" value="NOSSMATRIZ">NOSSOMOTO MATRIZ</option>
                         <option className="text-black" value="NOSSBATURITE">NOSSOMOTO BATURITE</option> */}
                     </select>
-                    <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor="">s</label>
+                    <label className="text-[20px] text-white md:h-11 flex items-end" htmlFor=""></label>
                     <select name="Status" id="" value={status} onChange={(e) => setstatus(e.target.value)} className="md:h-[40px] bg-transparent border-b-[1px] text-center text-white">
                         <option className="text-black" value="Todos">Todos</option>
                         <option className="text-black" value="true">Ativo</option>
                         <option className="text-black" value="frequentado">Frequentador</option>
-                        <option className="text-black" value="False">Nao Ativo</option>
+                        <option className="text-black" value="false">Nao Ativo</option>
                     </select>
 
                 </div>
