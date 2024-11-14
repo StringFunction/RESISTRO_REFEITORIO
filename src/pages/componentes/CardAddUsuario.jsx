@@ -13,7 +13,7 @@ function AddUsurio({fechar,atualiza}){
     const [setor,setSetor] = useState("")
     const [cargo,setCargo] = useState("")
     const [senha, setSenha] = useState("")
-    const [nivel, setnivel] = useState("")
+    const [nivel, setnivel] = useState("1")
     const CardAddFuncionarioRef = useRef(null)
     const [spin,setSpin] = useState(false)
     const CardAddFuncionario = document.getElementById("CardAddFuncionari")
@@ -22,11 +22,7 @@ function AddUsurio({fechar,atualiza}){
     function FecharCard(params) {
         if (params.target === CardAddFuncionarioRef.current) {
             fechar(false)
-        }
-       
-  
-        
-        
+        }  
     }
     async function cadastra(e){
         setSpin(true)
