@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import api from "../../service/api";
+import api from "../service/api";
 import {  toast } from "react-toastify";
 import { BsArrowClockwise } from "react-icons/bs";
 

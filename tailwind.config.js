@@ -19,7 +19,12 @@ export default {
         fundoF: "#1A202C",
         cardB: "#1F2733",
         fundoLogin : "RGB(182, 152, 96)"
-      }
+      },
+      fontFamily : {
+        boa : ["Noto Sans JP"],
+        boa2 : ["Dosis"]
+
+      },
     },
   },
   plugins: [],

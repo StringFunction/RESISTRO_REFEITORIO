@@ -7,8 +7,8 @@ import api from "../service/api";
 import { BsArrowClockwise } from "react-icons/bs";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
-import AddUsurio from "./componentes/CardAddUsuario";
-import BtnConfirma from "./componentes/btnConfirma";
+import AddUsurio from "../componentes/CardAddUsuario";
+import BtnConfirma from "../componentes/btnConfirma";
 
 export default function Usuario(){
     const [DadosUsuario, setDadosUsuario] = useState([])

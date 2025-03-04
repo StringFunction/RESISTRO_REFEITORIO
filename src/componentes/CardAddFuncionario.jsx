@@ -1,10 +1,10 @@
 import React from "react"
 import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import api from "../../service/api";
+import api from "../service/api";
 import { ToastContainer, toast } from "react-toastify";
 import { BsArrowClockwise } from "react-icons/bs";
-import useAppContext from "../../hooks/UseAppContext";
+import useAppContext from "../hooks/UseAppContext";
 
 function AddFuncionario({fechar,atualiza}){
     const [matriula,setmatricula] = useState("")

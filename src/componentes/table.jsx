@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useEffect, useState } from "react"
-import api from "../../service/api"
+import api from "../service/api"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify"
-import useAppContext from '../../hooks/UseAppContext';
+import useAppContext from '../hooks/UseAppContext';
 
 
 

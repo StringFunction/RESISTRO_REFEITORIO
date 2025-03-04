@@ -10,6 +10,7 @@ import Usuario from "./pages/Usuario"
 import EsqueceuSenha from "./pages/EsqueceSenha"
 import {PrivateRota,RotaRefeitorio } from "./service/privateRotas"
 import TelaCadFrequen from "./pages/TelaCadFrequentador"
+import ResertSenha from "./pages/Resert"
 import useAppContext from "./hooks/UseAppContext";
 import { jwtDecode } from "jwt-decode"
 function App() {
@@ -40,6 +41,8 @@ function App() {
       <Route path="/Fre" element={<TelaCadFrequen></TelaCadFrequen>}></Route>
       <Route path="/Login" element={<Login></Login>}></Route>
       <Route path="/EsqueceuSenha" element={<EsqueceuSenha></EsqueceuSenha>}></Route>
+      <Route path="/ResertSenha/:token" element={<ResertSenha></ResertSenha>}></Route>
+ 
     </Routes>
     
     </Container>

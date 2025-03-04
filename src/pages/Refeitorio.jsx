@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Table from "./componentes/table";
+import Table from "../componentes/table";
 import { Html5QrcodeScanner as qrcode } from "html5-qrcode";
 import api from "../service/api";
 import { ToastContainer, toast } from 'react-toastify';

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import video from "./../assets/video.mp4";
+import video from ".././assets/video.mp4";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import api from "../service/api";
