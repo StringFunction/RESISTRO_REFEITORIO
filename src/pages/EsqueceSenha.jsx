@@ -36,7 +36,7 @@ export default function EsqueceuSenha(){
 
     return (
         <>
-        <div id="Container" className="bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[900px] flex justify-center relative">
+        <div id="Container" className="bg-[url('/public/img/fundo_login.jpg')] bg-cover bg-center h-[900px] flex justify-center relative font-boa2">
             <div className="border w-[400px] h-[600px] relative top-5 text-white flex flex-col  justify-center items-center gap-3 rounded-2xl bg-black/50 backdrop-blur">
                     <div className="">
                         <GoPasskeyFill  className="text-[150px] border rounded-full p-5 text-white"></GoPasskeyFill>
@@ -49,22 +49,22 @@ export default function EsqueceuSenha(){
                         <h2 className="text-center">Insira sua Matricula e seu Email, enviaremos um  link para voce voltar a acessar a sua conta</h2>
                     </div>
                     <div id="formualario">
-                        <form onSubmit={Envia} action="" className="flex flex-col gap-6">
+                        <form onSubmit={Envia} action="" className="flex flex-col gap-6 ">
                             
-                            <input className="bg-transparent border-b-2 w-[250px]  h-9" type="text" placeholder="Digite sua matricula" onChange={(e) => setMatricula(e.target.value)} />
+                            <input className="bg-transparent border-b-2 w-[250px]  h-9 placeholder-white text-center pb-2 " type="text" placeholder="Digite sua matricula" onChange={(e) => setMatricula(e.target.value)} />
 
-                            <input className="bg-transparent border-b-2 w-[250px]  h-9" type="text" placeholder="Digite sue Email" onChange={(e) => setEmail(e.target.value)} />
+                            <input className="bg-transparent border-b-2 w-[250px]  h-9 placeholder-white text-center pb-2" type="text" placeholder="Digite seu Email" onChange={(e) => setEmail(e.target.value)} />
                             {load ? 
                             <div className="flex justify-center  animate-spin ">
                             <div className="border-8  rounded-full w-[50px] h-[50px] border-t-none border-t-transparent"></div>
                         </div>
                             :
-                            <input type="submit" value="Enviar"/>
+                            <input type="submit" value="Enviar" className="tracking-[3px] md:border md:p-3 md:rounded-2xl hover:cursor-pointer hover:bg-green-400/75 hover:text-black"/>
                            
                         }
                         </form>
                     </div>
-                    <div className=""><Link to="/Login">Volta ao Login</Link></div>
+                    <div className=""><Link to="/Login" className="tracking-[3px] underline">Volta ao Login</Link></div>
  
 
             </div>
