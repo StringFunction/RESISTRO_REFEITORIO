@@ -13,6 +13,7 @@ import TelaCadFrequen from "./pages/TelaCadFrequentador"
 import ResertSenha from "./pages/Resert"
 import useAppContext from "./hooks/UseAppContext";
 import { jwtDecode } from "jwt-decode"
+import packageJson from "../package.json"
 function App() {
   const { nivel } = useAppContext()
   console.log("Nivel dentro do app  " + nivel );
@@ -26,6 +27,8 @@ function App() {
     <BrowserRouter>
     <MenuNavegacao />
     <Container>
+
+      
     <Routes>
       <Route path="/" element={<PrivateRota></PrivateRota>}>
             <Route index element={<Navigate to="/Home" />} />
