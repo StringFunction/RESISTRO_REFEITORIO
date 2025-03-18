@@ -27,7 +27,7 @@ function ResertSenha(){
             try{
                 console.log("consultando essa merda");
                 
-                const response = await api.post("/", {token})
+                const response = await api.post("/EsqueceuSenha/validatoken", {token})
                 console.log("mano");
             }catch(erro){
                 if (erro.response.data.resposta == false) {
