@@ -17,19 +17,33 @@ function ResertSenha(){
     const [Spin, setSpin] = useState(true)
     const [ValidadeToken, setValidadeToke] = useState(true)
     const {token} = useParams() 
-    console.log(token);
+
+ 
     
     useEffect(() => {
-
         async function atualizar(){
-            console.log("Ola mundo");
+            console.log("executando validacao ");
+            console.log(token);
+            try{
+                console.log("consultando essa merda");
+                
+                const response = await api.post("/", {token})
+                console.log("mano");
+            }catch(erro){
+                if (erro.response.data.resposta == false) {
+                    toast.error("Token invalido")
+                }   
+            }
+            console.log("vamoso ver aqui");
             
             setSpin(false)
-            setValidadeToke(false)
+      
+            
+    
         }
-        setTimeout(atualizar, 10000);
-
-    }, [])
+    
+    atualizar()
+    })
 
 function Enviar (e){
     e.preventDefault()

@@ -36,7 +36,7 @@ function Funcionario() {
         setSpin(true)
         async function consulta() {
             try {
-                console.log("Requisao de chamada de funcionarios ");
+                console.log("Requisao de chamada de funcionarios");
 
                 const resposta = await api.get("/v2/funcionario", {
                     headers: {

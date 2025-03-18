@@ -14,7 +14,7 @@ export default function EsqueceuSenha(){
         try {
             console.log("FAZENDO REQUISAO HTTP");
             
-            const resquisao = await api.post("http://localhost:10000/EsqueceuSenha", {matricula : matricula, email : email});
+            const resquisao = await api.post("/EsqueceuSenha", {matricula : matricula, email : email});
             if (resquisao.status == 200){
                 toast.success("Email Enviado com sucesso!!!!!")
                 setload(false)
