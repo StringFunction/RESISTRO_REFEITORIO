@@ -28,6 +28,7 @@ function ResertSenha(){
                 console.log("consultando essa merda");
                 
                 const response = await api.post("/EsqueceuSenha/validatoken", {token})
+                setValidadeToke(false)
                 console.log("mano");
             }catch(erro){
                 if (erro.response.data.resposta == false) {
@@ -45,7 +46,7 @@ function ResertSenha(){
     atualizar()
     })
 
-function Enviar (e){
+async function  Enviar (e){
     e.preventDefault()
     if (senha1 !== senha){
         idSenha.current.classList.add("border-red-700")
@@ -53,6 +54,17 @@ function Enviar (e){
         
         return toast.info("Senha n correspondem")
     } 
+    try{
+        const nova = await api.post("EsqueceuSenha/resert", {token : token, senha : senha})
+        if(nova.response.data.resposta == true){
+            toast.success("senha atualizada com sucesso!!!!")
+        }
+    }catch(erro){
+        if (erro.response.data.resposta == false) {
+            toast.error("Token invalido")
+        }   
+
+    }
 
 }
 
