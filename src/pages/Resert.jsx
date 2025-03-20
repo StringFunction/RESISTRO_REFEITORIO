@@ -16,6 +16,7 @@ function ResertSenha(){
     const idSenhaC = useRef(null)
     const [Spin, setSpin] = useState(true)
     const [ValidadeToken, setValidadeToke] = useState(true)
+    const [SpinEnviar, setSpinEnviar] = useState(false)
     const {token} = useParams() 
 
  
@@ -44,19 +45,23 @@ function ResertSenha(){
         }
     
     atualizar()
-    })
+    },[])
 
 async function  Enviar (e){
+    setSpinEnviar(true)
     e.preventDefault()
     if (senha1 !== senha){
         idSenha.current.classList.add("border-red-700")
         idSenhaC.current.classList.add("border-red-700")
+        setSpinEnviar(false)
         
         return toast.info("Senha n correspondem")
     } 
     try{
         const nova = await api.post("EsqueceuSenha/resert", {token : token, senha : senha})
-        if(nova.response.data.resposta == true){
+        console.log(nova);
+        
+        if(nova.status == 200){
             toast.success("senha atualizada com sucesso!!!!")
         }
     }catch(erro){
@@ -65,6 +70,7 @@ async function  Enviar (e){
         }   
 
     }
+    setSpinEnviar(false)
 
 }
 
@@ -100,7 +106,14 @@ async function  Enviar (e){
                         <input ref={idSenha} onClick={(e) => {idSenha.current.classList.remove("border-red-700")}} onChange={(e) => {setsenha(e.target.value)}} type="password"  className="  bg-transparent border  rounded-[20px] w-[200px] h-7 text-center text-white p-5"/>
                         <label htmlFor="" className="p-2">CONFIRME SENHA:</label>
                         <input ref={idSenhaC} onChange={(e) => {setsenha1(e.target.value)}} onClick={(e) => {idSenhaC.current.classList.remove("border-red-700")}} type="password" className="bg-transparent border rounded-[20px] w-[200px] h-7 text-center text-white p-5"/>
+                        {
+                            SpinEnviar ?
+                        <div id="carregar">
+                            <div className="w-[50px] h-[50px] border-[4px] animate-spin rounded-full border-t-transparent"></div>
+                        </div>
+                        :
                         <input type="submit" value="Enviar" className="border relative w-[200px] rounded-[20px] mt-3 p-2 hover:cursor-pointer hover:bg-green-500 duration-500" />
+                        }
 
                     </form>
                     <h2 className="flex justify-center items-center">Certifique-se de que tenha pelo menos 15 caracteres OU pelo menos 8 caracteres, incluindo um número e uma letra minúscula </h2>
